@@ -16,8 +16,8 @@
   - Others: Gammastep, MPVPaper, Waybar, Bemenu and Mako
 
 ## Appearance
-![Gnome](https://github.com/Vonixxx/VonixOS/blob/main/screenshots/gnome.png)
-![Hyprland](https://github.com/Vonixxx/VonixOS/blob/main/screenshots/hyprland.png)
+![Gnome](https://github.com/Vonixxx/Vontoo/blob/main/screenshots/gnome.png)
+![Hyprland](https://github.com/Vonixxx/Vontoo/blob/main/screenshots/hyprland.png)
 
 ## Special Thanks
 - [FireFox Theme](https://codeberg.org/Freeplay/Firefox-Onebar/)
