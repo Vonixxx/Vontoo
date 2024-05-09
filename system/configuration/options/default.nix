@@ -82,7 +82,7 @@ in {
 
    freetube.enable = mkOption {
      type    = bool;
-     default = false;
+     default = true;
    };
 
    firefox.enable = mkOption {

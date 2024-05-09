@@ -52,6 +52,27 @@
      userEmail = "vonixxxwork@tuta.io";
    };
 
+   programs.freetube.settings = {
+     hidePlaylists          = true;
+     useSponsorBlock        = true;
+     hidePopularVideos      = true;
+     hideTrendingVideos     = true;
+     displayVideoPlayButton = false;
+     baseTheme              = "catppuccinMocha";
+     mainColor              = "CatppuccinMochaRed";
+     secColor               = "CatppuccinMochaLavender";
+
+     sponsorBlockSelfPromo = {
+       color = "Yellow";
+       skip  = "autoSkip";
+     };
+
+     sponsorBlockInteraction = {
+       color = "Green";
+       skip  = "autoSkip";
+     };
+   };
+
    gtk = {
      enable = true;
 

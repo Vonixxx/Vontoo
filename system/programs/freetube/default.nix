@@ -5,7 +5,7 @@
 
 let
  inherit (lib)
-  mkIf;
+  mkIf mkDefault;
 in {
  config = mkIf (config.freetube.enable) {
    home-manager.users.vonix.programs = {
@@ -13,37 +13,21 @@ in {
        enable = true;
 
        settings = {
-         proxyVideos             = true;
          useRssFeeds             = true;
-         hidePlaylists           = true;
          hideHeaderLogo          = true;
-         useSponsorBlock         = true;
          hideLabelsSideBar       = true;
-         hidePopularVideos       = true;
          defaultTheatreMode      = true;
-         hideTrendingVideos      = true;
          allowDashAv1Formats     = true;
          commentAutoLoadEnabled  = true;
          expandSideBar           = false;
          checkForUpdates         = false;
          checkForBlogPosts       = false;
-         displayVideoPlayButton  = false;
          hideActiveSubscriptions = false;
          listType                = "list";
          defaultQuality          = "1080";
-         baseTheme               = "catppuccinMocha";
-         mainColor               = "CatppuccinMochaRed";
-         secColor                = "CatppuccinMochaLavender";
-
-         sponsorBlockSelfPromo = {
-           color = "Yellow";
-           skip  = "autoSkip";
-         };
-
-         sponsorBlockInteraction = {
-           color = "Green";
-           skip  = "autoSkip";
-         };
+         mainColor               = mkDefault "Red";
+         baseTheme               = mkDefault "black";
+         secColor                = mkDefault "Indigo";
        };
      };
    };
