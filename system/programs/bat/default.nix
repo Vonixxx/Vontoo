@@ -18,7 +18,7 @@ in {
        config.theme = "Catppuccin-Mocha";
 
        themes.Catppuccin-Mocha = {
-         file = "Catppuccin-mocha.tmTheme";
+         file = "themes/Catppuccin Mocha.tmTheme";
 
          src = fetchFromGitHub {
            repo  = "bat";

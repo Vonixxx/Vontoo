@@ -97,7 +97,7 @@ in {
      f-jarka     = mkSystem ("/f-jarka")               true  []                          [];
      f-libor     = mkSystem ("/f-libor")               true  []                          [];
      u-ofelia    = mkSystem ("/u-ofelia")              true  []                          [];
-     f-stepi     = mkSystem ("/f-stepanka")            true  []                          [];
+     f-stepanka  = mkSystem ("/f-stepanka")            true  []                          [];
      v-laptop    = mkSystem ("/v-systems/v-laptop")    true  []                          [];
      v-steamdeck = mkSystem ("/v-systems/v-steamdeck") true  [ jovian.overlays.default ] [ jovian.nixosModules.jovian ];
    };
