@@ -12,8 +12,9 @@ in {
      mako = {
        borderSize      = 3;
        borderRadius    = 10;
-       defaultTimeout  = 100;
+       maxIconSize     = 32;
        enable          = true;
+       defaultTimeout  = 10000;
        textColor       = "#CDD6F4";
        borderColor     = "#CBA6F7";
        backgroundColor = "#11111B";
