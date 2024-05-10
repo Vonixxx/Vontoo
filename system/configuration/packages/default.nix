@@ -21,17 +21,21 @@ with pkgs;
    game-devices-udev-rules
  ];
 
- home-manager.users.vonix.home = {
-   pointerCursor = {
-     gtk.enable = true;
-     x11.enable = true;
-     package    = catppuccin-cursors.mochaLight;
-     name       = "Catppuccin-Mocha-Light-Cursors";
-   };
- };
-
  fonts.packages = [
    liberation_ttf
    (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
  ];
+
+ home-manager.users.vonix.home = {
+   pointerCursor = {
+     gtk.enable = true;
+     package    = catppuccin-cursors.mochaLight;
+     name       = "Catppuccin-Mocha-Light-Cursors";
+
+     x11 = {
+       enable        = true;
+       defaultCursor = "Catppuccin-Mocha-Light-Cursors";
+     };
+   };
+ };
 }
