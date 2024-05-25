@@ -84,7 +84,6 @@ let
      specialArgs = {
        inherit
        pkgs
-#       jovian
        arkenfox;
      };
 
