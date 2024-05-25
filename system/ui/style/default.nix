@@ -14,8 +14,8 @@ in {
    };
 
    stylix = {
-     opacity.terminal    = 0.9;
      autoEnable          = true;
+     opacity.terminal    = 0.90;
      targets.grub.enable = false;
      image               = ./Space.jpg;
      base16Scheme        = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
@@ -29,28 +29,28 @@ in {
        sizes = {
          popups       = 12;
          desktop      = 12;
-         terminal     = 15;
+         terminal     = 16;
          applications = 12;
        };
 
        emoji = {
-         package = pkgs.fira-code-nerdfont;
-         name    = "FiraCodeNerdFont-Bold";
+         package = pkgs.noto-fonts-color-emoji;
+         name    = "NotoColorEmoji";
        };
 
        serif = {
-         package = pkgs.fira-code-nerdfont;
+         package = pkgs.nerdfonts.override { fonts = ["FiraCode"]; };
          name    = "FiraCodeNerdFont-Retina";
        };
 
        sansSerif = {
-         package = pkgs.fira-code-nerdfont;
+         package = pkgs.nerdfonts.override { fonts = ["FiraCode"]; };
          name    = "FiraCodeNerdFont-Retina";
        };
 
        monospace = {
-         package = pkgs.fira-code-nerdfont;
-         name    = "FiraCodeNerdFontMono-Retina";
+         package = pkgs.nerdfonts.override { fonts = ["Hack"]; };
+         name    = "HackNerdFontPropo-Regular";
        };
      };
 

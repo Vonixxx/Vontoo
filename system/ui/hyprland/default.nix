@@ -52,7 +52,6 @@ in {
          ];
 
          windowrulev2 = [
-           "opacity 0.8 0.8          , class:(foot)$"
            "suppressevent fullscreen , class:(FreeTube)$"
            "float                    , class:(org.gnome.Calculator)$"
          ];

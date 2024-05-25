@@ -99,22 +99,22 @@
         path     = "/";
         interval = 6000;
         tooltip  = false;
-        format   = "<big>󰋊</big> [{percentage_used}%]";
+        format   = "<big></big> [{percentage_used}%]";
       };
 
       "clock" = {
         interval = 60;
         tooltip  = false;
         on-click = "gnome-calendar";
-        format   = "<big>󰃭</big> [{:%d/%m/%y - %H:%M}]";
+        format   = "<big></big> [{:%d/%m/%y - %H:%M}]";
       };
 
       "network" = {
         tooltip             = false;
         on-click            = "foot nmtui connect";
-        format-wifi         = "<big>󰣺</big> [{essid}]";
-        format-ethernet     = "<big>󱤚</big> [{essid}]";
-        format-disconnected = "<big>󰣼</big> [Disconnected]";
+        format-wifi         = "<big>󰤯</big> [{essid}]";
+        format-ethernet     = "<big>󰤬</big> [{essid}]";
+        format-disconnected = "<big>󰤮</big> [Disconnected]";
       };
 
       "battery" = {
