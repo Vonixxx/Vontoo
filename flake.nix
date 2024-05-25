@@ -79,19 +79,18 @@ let
    home-manager.nixosModules.home-manager
  ];
 
- mkSystem = name: bool: overlays: extraModules:
+ mkSystem = name: bool: extraOverlays: extraModules:
    nixpkgs.lib.nixosSystem rec {
      specialArgs = {
        inherit
        pkgs
-       jovian
-       stylix
+#       jovian
        arkenfox;
      };
 
      pkgs = import nixpkgs {
-       overlays           = [];
        config.allowUnfree = bool;
+       overlays           = extraOverlays;
        system             = "x86_64-linux";
      };
 
@@ -99,11 +98,11 @@ let
    };
 in {
  nixosConfigurations = {
-     f-jarka     = mkSystem ("/f-jarka")               true  []                          [];
-     f-libor     = mkSystem ("/f-libor")               true  []                          [];
-     u-ofelia    = mkSystem ("/u-ofelia")              true  []                          [];
-     f-stepanka  = mkSystem ("/f-stepanka")            true  []                          [];
-     v-laptop    = mkSystem ("/v-systems/v-laptop")    true  []                          [];
+#     f-jarka     = mkSystem ("/f-jarka")               true   []                          [];
+#     f-libor     = mkSystem ("/f-libor")               true   []                          [];
+#     u-ofelia    = mkSystem ("/u-ofelia")              true   []                          [];
+#     f-stepanka  = mkSystem ("/f-stepanka")            true   []                          [];
+#     v-laptop    = mkSystem ("/v-systems/v-laptop")    false  []                          [];
      v-steamdeck = mkSystem ("/v-systems/v-steamdeck") true  [ jovian.overlays.default ] [ jovian.nixosModules.jovian ];
    };
  };

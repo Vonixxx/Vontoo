@@ -1,11 +1,8 @@
 { pkgs
-, jovian
 , ...
 }:
 
 {
- imports = [ jovian.nixosModules.jovian ];
-
  freetube.enable = true;
 
  passthru.providedSessions = [

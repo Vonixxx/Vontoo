@@ -82,6 +82,13 @@ in {
          automatic-timezone = true;
        };
 
+       "org/gnome/desktop/interface" = {
+         clock-show-weekday = true;
+         enable-hot-corners = false;
+         font-antialiasing  = "rgba";
+         font-hinting       = "full";
+       };
+
        "org/gnome/desktop/privacy" = {
          recent-files-max-age   = 30;
          remove-old-trash-files = true;
@@ -111,18 +118,6 @@ in {
        "org/gnome/desktop/wm/preferences" = {
          num-workspaces = 3;
          button-layout  = "appmenu:minimize,maximize,close";
-       };
-
-       "org/gnome/desktop/interface" = {
-         clock-show-weekday  = true;
-         enable-hot-corners  = false;
-         font-antialiasing   = "rgba";
-         font-hinting        = "full";
-         monospace-font-name = "Liberation Mono 12";
-         font-name           = "Liberation Serif 12";
-         document-font-name  = "Liberation Serif 12";
-         titlebar-font       = "Liberation Serif Bold 12";
-         cursor-theme        = "Catppuccin-Mocha-Light-Cursors";
        };
 
        "org/gnome/shell" = {

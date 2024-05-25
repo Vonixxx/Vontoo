@@ -11,13 +11,19 @@ in {
  config = mkIf (config.bat.enable) {
    home-manager.users.vonix.programs = {
      bat = {
-       enable        = true;
+       enable = true;
 
        extraPackages = with pkgs.bat-extras; [
-         batdiff
          batman
          batgrep
        ];
+
+       config = {
+         style       = "full";
+         color       = "always";
+         decorations = "always";
+         italic-text = "always";
+       };
      };
    };
  };

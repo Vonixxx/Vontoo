@@ -87,7 +87,7 @@
 
 
       /* Icon Position */
-      #backlight         { margin-right: -4px;  }
+      #backlight         { margin-right: -5px;  }
       #pulseaudio        { margin-right: 10px;  }
       #custom-sleep      { margin-right: 10px;  }
       #custom-nightlight { margin-right: -8px;  }
