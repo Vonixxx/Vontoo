@@ -97,12 +97,12 @@ let
    };
 in {
  nixosConfigurations = {
-#     f-jarka     = mkSystem ("/f-jarka")               true   []                          [];
-#     f-libor     = mkSystem ("/f-libor")               true   []                          [];
-#     u-ofelia    = mkSystem ("/u-ofelia")              true   []                          [];
-#     f-stepanka  = mkSystem ("/f-stepanka")            true   []                          [];
-#     v-laptop    = mkSystem ("/v-systems/v-laptop")    false  []                          [];
-     v-steamdeck = mkSystem ("/v-systems/v-steamdeck") true  [ jovian.overlays.default ] [ jovian.nixosModules.jovian ];
+     f-jarka     = mkSystem ("/f-jarka")               true   []                          [];
+     f-libor     = mkSystem ("/f-libor")               true   []                          [];
+     u-ofelia    = mkSystem ("/u-ofelia")              true   []                          [];
+     f-stepanka  = mkSystem ("/f-stepanka")            true   []                          [];
+     v-laptop    = mkSystem ("/v-systems/v-laptop")    false  []                          [];
+     v-steamdeck = mkSystem ("/v-systems/v-steamdeck") true   [ jovian.overlays.default ] [ jovian.nixosModules.jovian ];
    };
  };
 }
