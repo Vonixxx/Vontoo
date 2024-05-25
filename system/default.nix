@@ -3,6 +3,7 @@
 {
  imports = [
    ./ui/gnome/default.nix
+   ./ui/style/default.nix
    ./ui/hyprland/default.nix
 
    ./programs/bat/default.nix

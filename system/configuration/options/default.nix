@@ -55,6 +55,11 @@ in {
      default = false;
    };
 
+   style.enable = mkOption {
+     type    = bool;
+     default = true;
+   };
+
    amd-cpu.enable = mkOption {
      type    = bool;
      default = false;
