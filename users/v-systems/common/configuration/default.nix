@@ -73,25 +73,25 @@
      };
    };
 
-   gtk = {
-     enable = true;
-
-     iconTheme = {
-       name    = "Adwaita";
-       package = pkgs.gnome.adwaita-icon-theme;
-     };
-
-     theme = {
-       name = "Catppuccin-Mocha-Compact-Mauve-Dark";
-
-       package = pkgs.catppuccin-gtk.override {
-         variant = "mocha";
-         size    = "compact";
-         accents = [ "mauve" ];
-         tweaks  = [ "rimless" ];
-       };
-     };
-   };
+#   gtk = {
+#     enable = true;
+#
+#     iconTheme = {
+#       name    = "Adwaita";
+#       package = pkgs.gnome.adwaita-icon-theme;
+#     };
+#
+#     theme = {
+#       name = "Catppuccin-Mocha-Compact-Mauve-Dark";
+#
+#       package = pkgs.catppuccin-gtk.override {
+#         variant = "mocha";
+#         size    = "compact";
+#         accents = [ "mauve" ];
+#         tweaks  = [ "rimless" ];
+#       };
+#     };
+#   };
 
    programs.firefox = {
      profiles.default.settings = {
@@ -99,7 +99,7 @@
        "browser.urlbar.suggest.history"  = false;
        "browser.urlbar.suggest.openpage" = false;
        "browser.urlbar.suggest.topsites" = false;
-       "extensions.activeThemeID"        = "{76aabc99-c1a8-4c1e-832b-d4f2941d5a7a}";
+#       "extensions.activeThemeID"        = "{76aabc99-c1a8-4c1e-832b-d4f2941d5a7a}";
      };
 
      policies = {
@@ -111,18 +111,18 @@
            install_url       = "https://addons.mozilla.org/firefox/downloads/latest/ether-metamask/latest.xpi";
          };
 
-         "{76aabc99-c1a8-4c1e-832b-d4f2941d5a7a}" = {
-           installation_mode = "force_installed";
-           install_url       = "https://addons.mozilla.org/firefox/downloads/latest/catppuccin-mocha-mauve-git/latest.xpi";
-         };
+#         "{76aabc99-c1a8-4c1e-832b-d4f2941d5a7a}" = {
+#           installation_mode = "force_installed";
+#           install_url       = "https://addons.mozilla.org/firefox/downloads/latest/catppuccin-mocha-mauve-git/latest.xpi";
+#         };
        };
      };
    };
 
-   xdg.configFile = {
-     "gtk-4.0/assets".source       = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
-     "gtk-4.0/gtk.css".source      = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk.css";
-     "gtk-4.0/gtk-dark.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk-dark.css";
-   };
+#   xdg.configFile = {
+#     "gtk-4.0/assets".source       = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
+#     "gtk-4.0/gtk.css".source      = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk.css";
+#     "gtk-4.0/gtk-dark.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk-dark.css";
+#   };
  };
 }

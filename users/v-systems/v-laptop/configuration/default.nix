@@ -6,6 +6,8 @@
  freetube.enable              = true;
  services.getty.autologinUser = "Vonix";
 
+ programs.steam.enable = true;
+
  environment.loginShellInit = ''
     if [ "$(tty)" = "/dev/tty1" ]; then
       exec Hyprland

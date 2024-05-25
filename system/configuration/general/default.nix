@@ -112,17 +112,21 @@ in {
      };
    };
 
+   home-manager.users.vonix = {
+     programs.home-manager.enable                              = true;
+     dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+
+     home = {
+       preferXdgDirectories = true;
+       stateVersion         = "23.11";
+     };
+   };
+
    users.users.vonix = {
      uid            = 1000;
      isNormalUser   = true;
      home           = "/home/vonixos";
      extraGroups    = [ "lp" "audio" "video" "wheel" "scanner" "networkmanager" ];
-   };
-
-   home-manager.users.vonix = {
-     programs.home-manager.enable = true;
-     home.stateVersion            = "23.11";
-     dconf.settings               = { "org/gnome/desktop/interface".color-scheme = "prefer-dark"; };
    };
 
    environment.shellAliases = {

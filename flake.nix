@@ -43,6 +43,7 @@
    ##########################
    disko.inputs.nixpkgs.follows        = "nixpkgs";
    jovian.inputs.nixpkgs.follows       = "nixpkgs";
+   stylix.inputs.nixpkgs.follows       = "nixpkgs";
    arkenfox.inputs.nixpkgs.follows     = "nixpkgs";
    home-manager.inputs.nixpkgs.follows = "nixpkgs";
    #########################
@@ -52,6 +53,7 @@
    ##########################
    # Community Repositories #
    ##########################
+   stylix.url       = "github:danth/stylix";
    disko.url        = "github:nix-community/disko";
    arkenfox.url     = "github:dwarfmaster/arkenfox-nixos";
    home-manager.url = "github:nix-community/home-manager";
@@ -61,6 +63,7 @@
  outputs = {
    disko
  , jovian
+ , stylix
  , nixpkgs
  , arkenfox
  , home-manager
@@ -71,6 +74,7 @@ let
  systemModules = [
    ./system
    disko.nixosModules.disko
+   stylix.nixosModules.stylix
    arkenfox.hmModules.arkenfox
    home-manager.nixosModules.home-manager
  ];

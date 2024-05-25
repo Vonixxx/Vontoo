@@ -14,6 +14,8 @@ in {
        enable = true;
 
        settings = {
+         cursor.inactive_timeout = 5;
+
          decoration = {
            rounding    = 10;
            drop_shadow = false;
@@ -45,11 +47,10 @@ in {
            gaps_in                 = 8;
            gaps_out                = 8;
            border_size             = 3;
-           cursor_inactive_timeout = 5;
            resize_on_border        = true;
            layout                  = "master";
-           "col.active_border"     = "rgb(CBA6F7)";
-           "col.inactive_border"   = "rgb(11111B)";
+#           "col.active_border"     = "rgb(CBA6F7)";
+#           "col.inactive_border"   = "rgb(11111B)";
          };
 
          windowrulev2 = [
@@ -61,7 +62,7 @@ in {
          exec-once = [
            "waybar"
            "wl-gammarelay-rs"
-           "mpvpaper -o '--loop' '*' ~/Pictures/Wallpapers/House.gif"
+#           "mpvpaper -o '--loop' '*' ~/Pictures/Wallpapers/house.gif"
          ];
 
          bind = [

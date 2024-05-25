@@ -15,18 +15,18 @@ in {
    home-manager.users.vonix.programs = {
      bat = {
        enable       = true;
-       config.theme = "Catppuccin-Mocha";
-
-       themes.Catppuccin-Mocha = {
-         file = "themes/Catppuccin Mocha.tmTheme";
-
-         src = fetchFromGitHub {
-           repo  = "bat";
-           rev   = "main";
-           owner = "catppuccin";
-           hash  = "sha256-Q5B4NDrfCIK3UAMs94vdXnR42k4AXCqZz6sRn8bzmf4=";
-         };
-       };
+#       config.theme = "Catppuccin-Mocha";
+#
+#       themes.Catppuccin-Mocha = {
+#         file = "themes/Catppuccin Mocha.tmTheme";
+#
+#         src = fetchFromGitHub {
+#           repo  = "bat";
+#           rev   = "main";
+#           owner = "catppuccin";
+#           hash  = "sha256-Q5B4NDrfCIK3UAMs94vdXnR42k4AXCqZz6sRn8bzmf4=";
+#         };
+#       };
      };
    };
  };

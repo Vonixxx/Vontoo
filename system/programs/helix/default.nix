@@ -20,7 +20,7 @@ in {
        ];
 
        settings = {
-         theme = "catppuccin_mocha";
+#         theme = "catppuccin_mocha";
 
          editor = {
            true-color              = true;

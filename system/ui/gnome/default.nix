@@ -108,6 +108,11 @@ in {
          night-light-enabled            = mkDefault true;
        };
 
+       "org/gnome/desktop/wm/preferences" = {
+         num-workspaces = 3;
+         button-layout  = "appmenu:minimize,maximize,close";
+       };
+
        "org/gnome/desktop/interface" = {
          clock-show-weekday  = true;
          enable-hot-corners  = false;
@@ -117,11 +122,7 @@ in {
          font-name           = "Liberation Serif 12";
          document-font-name  = "Liberation Serif 12";
          titlebar-font       = "Liberation Serif Bold 12";
-       };
-
-       "org/gnome/desktop/wm/preferences" = {
-         num-workspaces = 3;
-         button-layout  = "appmenu:minimize,maximize,close";
+         cursor-theme        = "Catppuccin-Mocha-Light-Cursors";
        };
 
        "org/gnome/shell" = {

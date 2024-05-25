@@ -37,6 +37,7 @@ with gnome;
    fragments
    gnome-calendar
    gnome-calculator
+   gnome-disk-utility
    mpvpaper
    nautilus
    wike

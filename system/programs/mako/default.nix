@@ -12,14 +12,13 @@ in {
      mako = {
        borderSize      = 3;
        borderRadius    = 10;
-       maxIconSize     = 32;
        enable          = true;
        defaultTimeout  = 10000;
-       textColor       = "#CDD6F4";
-       borderColor     = "#CBA6F7";
-       backgroundColor = "#11111B";
+#       textColor       = "#CDD6F4";
+#       borderColor     = "#CBA6F7";
+#       backgroundColor = "#11111B";
        anchor          = "bottom-right";
-       font            = "CascadiaCode 10";
+#       font            = "CascadiaCode 10";
      };
    };
  };
