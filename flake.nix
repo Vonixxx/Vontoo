@@ -85,6 +85,7 @@ let
        inherit
        pkgs
        jovian
+       stylix
        arkenfox;
      };
 

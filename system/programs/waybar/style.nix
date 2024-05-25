@@ -6,7 +6,6 @@
       /* Colors */
       @define-color red      rgba(243,139,168,1);
       @define-color blue     rgba(137,180,250,1);
-      @define-color teal     rgba(148,226,213,1);
       @define-color crust    rgba(17 ,17 ,27 ,1);
       @define-color green    rgba(166,227,161,1);
       @define-color mauve    rgba(203,166,247,1);
@@ -51,8 +50,8 @@
        font-weight:   bold;
        border-radius: 50px;
        background:    @crust;
-       font-family:   CascadiaCode;
        border:        3px solid @mauve;
+       font-family:   FiraCodeNerdFont;
       }
 
       .modules-left {
@@ -60,8 +59,8 @@
        font-weight:   bold;
        border-radius: 50px;
        background:    @crust;
-       font-family:   CascadiaCode;
        border:        3px solid @mauve;
+       font-family:   FiraCodeNerdFont;
       }
 
       .modules-center {
@@ -69,8 +68,8 @@
        font-weight:   bold;
        border-radius: 50px;
        background:    @crust;
-       font-family:   CascadiaCode;
        border:        3px solid @mauve;
+       font-family:   FiraCodeNerdFont;
       }
 
 
@@ -93,7 +92,7 @@
       #custom-sleep      { margin-right: 10px;  }
       #custom-nightlight { margin-right: -8px;  }
       #disk              { margin-right: -10px; }
-      #battery           { margin-right: -12px; }
+      #battery           { margin-right: -14px; }
       #network           { margin-right: -10px; }
 
 
@@ -110,8 +109,8 @@
       }
 
       #workspaces button.active {
-       color:         @teal;
-       border-bottom: 3px solid @teal;
+       color:         @mauve;
+       border-bottom: 3px solid @mauve;
       }
    '';
  };

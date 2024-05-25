@@ -170,15 +170,6 @@ in {
          ]}";
        };
      };
-
-     programs.firefox = {
-       profiles.default.settings."extensions.activeThemeID" = "{f1128560-8b23-46c1-aa6f-fb3e79f23cf3}"; 
-
-       policies.ExtensionSettings."{f1128560-8b23-46c1-aa6f-fb3e79f23cf3}" = {
-         installation_mode = "force_installed";
-         install_url       = "https://addons.mozilla.org/firefox/downloads/latest/gnome-adwaita-gtk4-dark/latest.xpi";
-       };
-     };
    };
  };
 }

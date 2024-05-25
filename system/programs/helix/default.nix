@@ -19,15 +19,11 @@ in {
          nil
        ];
 
-       settings = {
-#         theme = "catppuccin_mocha";
-
-         editor = {
-           true-color              = true;
-           undercurl               = true;
-           whitespace.render.space = "all";
-           line-number             = "relative";
-         };
+       settings.editor = {
+         true-color              = true;
+         undercurl               = true;
+         whitespace.render.space = "all";
+         line-number             = "relative";
        };
      };
    };

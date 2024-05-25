@@ -26,6 +26,14 @@ in {
            accel_profile = "adaptive";
          };
 
+         general = {
+           gaps_in          = 8;
+           gaps_out         = 8;
+           border_size      = 3;
+           resize_on_border = true;
+           layout           = "master";
+         };
+
          bindm = [
            "ALT , mouse:272 , movewindow"
          ];
@@ -43,16 +51,6 @@ in {
            "eDP-1    , 1920x1080@60 , 2560x0 , 1"
          ];
 
-         general = {
-           gaps_in                 = 8;
-           gaps_out                = 8;
-           border_size             = 3;
-           resize_on_border        = true;
-           layout                  = "master";
-#           "col.active_border"     = "rgb(CBA6F7)";
-#           "col.inactive_border"   = "rgb(11111B)";
-         };
-
          windowrulev2 = [
            "opacity 0.8 0.8          , class:(foot)$"
            "suppressevent fullscreen , class:(FreeTube)$"
@@ -62,7 +60,7 @@ in {
          exec-once = [
            "waybar"
            "wl-gammarelay-rs"
-#           "mpvpaper -o '--loop' '*' ~/Pictures/Wallpapers/house.gif"
+           "mpvpaper -o '--loop' '*' ~/Pictures/Wallpapers/house.gif"
          ];
 
          bind = [

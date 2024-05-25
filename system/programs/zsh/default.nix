@@ -31,17 +31,7 @@ in {
        enableZshIntegration = true;
 
        settings = {
-         git_status.deleted = "";
-         add_newline        = false;
-         palette            = "catppuccin";
-
-         palettes.catppuccin = {
-           red    = "#F38BA8";
-           blue   = "#89B4FA";
-           green  = "#A6E3A1";
-           mauve  = "#CBA6F7";
-           yellow = "#F9E2AF";
-         };
+         add_newline = false;
 
          os = {
            disabled = false;
@@ -65,7 +55,6 @@ in {
          '';
 
          directory = {
-           read_only       = "󰷤";
            read_only_style = "bold red";
            style           = "bold green";
            format          = "[$path]($style) [$read_only]($read_only_style)";

@@ -18,7 +18,7 @@ in {
    i18n.defaultLocale               = mkDefault "en_GB.UTF-8";
 
    fonts.fontconfig = {
-     allowBitmaps  = false;
+     allowBitmaps  = true;
      subpixel.rgba = "rgb";
      hinting.style = "full";
    };
@@ -58,6 +58,15 @@ in {
      };
    };
 
+   home-manager.users.vonix = {
+     programs.home-manager.enable = true;
+
+     home = {
+       preferXdgDirectories = true;
+       stateVersion         = "23.11";
+     };
+   };
+
    nix = {
      gc = {
        automatic = true;
@@ -72,8 +81,12 @@ in {
    }; 
 
    boot = {
-     tmp.cleanOnBoot      = true;
-     supportedFilesystems = [ "ntfs" ];
+     plymouth.enable = true;
+     tmp.cleanOnBoot = true;
+
+     supportedFilesystems = [
+       "ntfs"
+     ];
 
      initrd.availableKernelModules = [
        "vmd"
@@ -109,16 +122,6 @@ in {
            withBanner = "Greetings, " + "${config.users.users.vonix.name}";
          };
        };
-     };
-   };
-
-   home-manager.users.vonix = {
-     programs.home-manager.enable                              = true;
-     dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-
-     home = {
-       preferXdgDirectories = true;
-       stateVersion         = "23.11";
      };
    };
 
