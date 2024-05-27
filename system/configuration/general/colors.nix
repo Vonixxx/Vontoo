@@ -21,7 +21,7 @@ in {
        imports = [ catppuccin.homeManagerModules.catppuccin ];
 
        catppuccin.enable                 = true;
-#       gtk.cursor.catppuccin.enable      = false;
+       gtk.catppuccin.cursor.enable      = false;
        programs.waybar.catppuccin.enable = false;
      };
    })

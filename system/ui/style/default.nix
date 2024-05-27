@@ -9,7 +9,7 @@
 
      cursor = {
        size    = 32;
-       enable  = true;
+       enable  = false;
        name    = "Catppuccin-Mocha-Light-Cursors";
        package = pkgs.catppuccin-cursors.mochaLight;
      };
