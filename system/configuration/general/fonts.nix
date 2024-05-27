@@ -49,8 +49,14 @@ in {
      };
    })
 
+   (mkIf cfgHM.bemenu.enable {
+     config.programs.bemenu.settings = {
+       fn = "${cfg.sansSerif.name} ${toString cfg.size.popups}";
+     };
+   })
+
    (mkIf cfgHM.mako.enable {
-     config.services.mako.font = "${cfg.sansSerif.name} ${toString cfg.sizes.popups}";
+     config.services.mako.font = "${cfg.sansSerif.name} ${toString cfg.size.popups}";
    })
 
    (mkIf cfgHM.foot.enable {

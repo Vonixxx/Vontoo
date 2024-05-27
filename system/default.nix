@@ -22,10 +22,14 @@
    ./programs/kdenlive-obs/default.nix
 
    ./configuration/disk/default.nix
-   ./configuration/general/default.nix
-   ./configuration/options/default.nix
+   ./configuration/general/fonts.nix
+   ./configuration/options/fonts.nix
+   ./configuration/general/colors.nix
+   ./configuration/general/system.nix
+   ./configuration/options/colors.nix
    ./configuration/packages/default.nix
    ./configuration/model/amd/default.nix
    ./configuration/model/intel/default.nix
+   ./configuration/options/applications.nix
  ];
 }

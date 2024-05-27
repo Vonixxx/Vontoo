@@ -26,7 +26,7 @@ let
    };
  };
 in {
- cfg.packages = [
+ config.style.fonts.packages = [
    cfg.emoji.name
    cfg.serif.name
    cfg.monospace.name
@@ -93,9 +93,9 @@ in {
    };
 
    targets = {
-     bat.enable = mkOption {
+     gtk.enable = mkOption {
        type    = bool;
-       default = hm.programs.bat.enable;
+       default = hm.gtk.enable;
      };
 
      foot.enable = mkOption {
