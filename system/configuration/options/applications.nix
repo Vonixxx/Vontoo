@@ -20,6 +20,11 @@ in {
      default = false;
    };
 
+   gtk.enable = mkOption {
+     type    = bool;
+     default = true;
+   };
+
    lsd.enable = mkOption {
      type    = bool;
      default = false;

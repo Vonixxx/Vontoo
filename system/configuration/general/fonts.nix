@@ -10,8 +10,7 @@ let
  inherit (builtins)
   toString;
 
- cfg   = config.style.fonts;
- cfgHM = config.style.fonts.targets;
+ cfg = config.style.fonts;
 in {
  config = mkMerge [
    (mkIf cfg.enable {
@@ -33,34 +32,34 @@ in {
      };
    })
 
-   (mkIf cfgHM.gtk.enable {
-     config.gtk.font = {
-       package = "${cfg.sansSerif.name}";
-       name    = "${cfg.sansSerif.package}";
-       size    = "${cfg.size.applications}";
+   (mkIf config.gtk.enable {
+     home-manager.users.vonix.gtk.font = {
+       size    = cfg.size.applications;
+       name    = "${cfg.sansSerif.name}";
+       package = "${cfg.sansSerif.package}";
      };
    })
 
-   (mkIf cfgHM.firefox.enable {
-     config.programs.foot.profiles.default.settings = {
+   (mkIf config.firefox.enable {
+     home-manager.users.vonix.programs.firefox.profiles.default.settings = {
        "font.name.serif.x-western"      = cfg.serif.name;
        "font.name.monospace.x-western"  = cfg.monospace.name;
        "font.name.sans-serif.x-western" = cfg.sansSerif.name;
      };
    })
 
-   (mkIf cfgHM.bemenu.enable {
-     config.programs.bemenu.settings = {
+   (mkIf config.bemenu.enable {
+     home-manager.users.vonix.programs.bemenu.settings = {
        fn = "${cfg.sansSerif.name} ${toString cfg.size.popups}";
      };
    })
 
-   (mkIf cfgHM.mako.enable {
-     config.services.mako.font = "${cfg.sansSerif.name} ${toString cfg.size.popups}";
+   (mkIf config.mako.enable {
+     home-manager.users.vonix.services.mako.font = "${cfg.sansSerif.name} ${toString cfg.size.popups}";
    })
 
-   (mkIf cfgHM.foot.enable {
-     config.programs.foot.settings.main.font = "${cfg.monospace.name}:size=${toString cfg.size.terminal}";
+   (mkIf config.foot.enable {
+     home-manager.users.vonix.programs.foot.settings.main.font = "${cfg.monospace.name}:size=${toString cfg.size.terminal}";
    })
  ];
 }

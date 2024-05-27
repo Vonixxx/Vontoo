@@ -16,24 +16,29 @@ let
 
  fontType = submodule {
    options = {
-     package = mkOption {
-       type = package;
-     };
-
      name = mkOption {
        type = str;
+     };
+
+     package = mkOption {
+       type = package;
      };
    };
  };
 in {
  config.style.fonts.packages = [
-   cfg.emoji.name
-   cfg.serif.name
-   cfg.monospace.name
-   cfg.sansSerif.name
+   cfg.emoji.package
+   cfg.serif.package
+   cfg.monospace.package
+   cfg.sansSerif.package
  ];
 
  options.style.fonts = {
+   enable = mkOption {
+     type    = bool;
+     default = true;
+   };
+
    packages = mkOption {
      type = listOf package;
    };
