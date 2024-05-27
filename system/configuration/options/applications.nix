@@ -3,11 +3,11 @@
 }:
 
 let
- inherit (lib)
-  mkOption;
-
  inherit (lib.types)
   bool;
+
+ inherit (lib)
+  mkOption;
 in {
  options = {
    bat.enable = mkOption {
@@ -53,11 +53,6 @@ in {
    helix.enable = mkOption {
      type    = bool;
      default = false;
-   };
-
-   style.enable = mkOption {
-     type    = bool;
-     default = true;
    };
 
    amd-cpu.enable = mkOption {

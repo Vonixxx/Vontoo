@@ -43,7 +43,6 @@
    ##########################
    disko.inputs.nixpkgs.follows        = "nixpkgs";
    jovian.inputs.nixpkgs.follows       = "nixpkgs";
-   stylix.inputs.nixpkgs.follows       = "nixpkgs";
    arkenfox.inputs.nixpkgs.follows     = "nixpkgs";
    home-manager.inputs.nixpkgs.follows = "nixpkgs";
    #########################
@@ -53,7 +52,7 @@
    ##########################
    # Community Repositories #
    ##########################
-   stylix.url       = "github:danth/stylix";
+   catppuccin.url   = "github:catppuccin/nix";
    disko.url        = "github:nix-community/disko";
    arkenfox.url     = "github:dwarfmaster/arkenfox-nixos";
    home-manager.url = "github:nix-community/home-manager";
@@ -63,9 +62,9 @@
  outputs = {
    disko
  , jovian
- , stylix
  , nixpkgs
  , arkenfox
+ , catppuccin
  , home-manager
  , ...
  }:
@@ -74,8 +73,8 @@ let
  systemModules = [
    ./system
    disko.nixosModules.disko
-   stylix.nixosModules.stylix
    arkenfox.hmModules.arkenfox
+   catppuccin.nixosModules.catppuccin
    home-manager.nixosModules.home-manager
  ];
 
@@ -84,7 +83,8 @@ let
      specialArgs = {
        inherit
        pkgs
-       arkenfox;
+       arkenfox
+       catppuccin;
      };
 
      pkgs = import nixpkgs {
@@ -97,12 +97,12 @@ let
    };
 in {
  nixosConfigurations = {
-     f-jarka     = mkSystem ("/f-jarka")               true   []                          [];
-     f-libor     = mkSystem ("/f-libor")               true   []                          [];
-     u-ofelia    = mkSystem ("/u-ofelia")              true   []                          [];
-     f-stepanka  = mkSystem ("/f-stepanka")            true   []                          [];
-     v-laptop    = mkSystem ("/v-systems/v-laptop")    false  []                          [];
-     v-steamdeck = mkSystem ("/v-systems/v-steamdeck") true   [ jovian.overlays.default ] [ jovian.nixosModules.jovian ];
+     f-jarka     = mkSystem ("/f-jarka")               true  []                          [];
+     f-libor     = mkSystem ("/f-libor")               true  []                          [];
+     u-ofelia    = mkSystem ("/u-ofelia")              true  []                          [];
+     f-stepanka  = mkSystem ("/f-stepanka")            true  []                          [];
+     v-laptop    = mkSystem ("/v-systems/v-laptop")    false []                          [];
+     v-steamdeck = mkSystem ("/v-systems/v-steamdeck") true  [ jovian.overlays.default ] [ jovian.nixosModules.jovian ];
    };
  };
 }

@@ -47,6 +47,8 @@
   config
  , ...
  }: {
+   gtk.enable = true;
+
    programs.git = {
      userName  = "Vonixxx";
      userEmail = "vonixxxwork@tuta.io";
@@ -70,15 +72,6 @@
      sponsorBlockInteraction = {
        color = "Green";
        skip  = "autoSkip";
-     };
-   };
-
-   gtk = {
-     enable = true;
-
-     iconTheme = {
-       name    = "Adwaita";
-       package = pkgs.gnome.adwaita-icon-theme;
      };
    };
 

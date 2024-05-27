@@ -1,5 +1,4 @@
 { lib
-, pkgs
 , config
 , ...
 }:
@@ -16,12 +15,6 @@ in {
    powerManagement.cpuFreqGovernor  = "ondemand";
    nixpkgs.hostPlatform             = "x86_64-linux";
    i18n.defaultLocale               = mkDefault "en_GB.UTF-8";
-
-   fonts.fontconfig = {
-     allowBitmaps  = true;
-     subpixel.rgba = "rgb";
-     hinting.style = "full";
-   };
 
    security = {
      rtkit.enable            = true;
@@ -116,11 +109,6 @@ in {
          copyKernels           = true;
          efiInstallAsRemovable = true;
          device                = "nodev";
-
-         theme = pkgs.sleek-grub-theme.override {
-           withStyle  = "dark";
-           withBanner = "Greetings, " + "${config.users.users.vonix.name}";
-         };
        };
      };
    };

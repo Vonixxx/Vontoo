@@ -31,6 +31,7 @@ with gnome;
    ################
    # Applications #
    ################
+   apostrophe
    celluloid
    eog
    evince
