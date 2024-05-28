@@ -8,6 +8,9 @@ let
   mkIf mkDefault;
 in {
  config = mkIf (config.general-configuration.enable) {
+    hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; #
+  services.blueman.enable = true;
    programs.dconf.enable            = true;
    networking.networkmanager.enable = true;
    documentation.nixos.enable       = false;
