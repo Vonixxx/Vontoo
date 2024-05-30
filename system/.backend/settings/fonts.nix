@@ -57,9 +57,9 @@ in {
    (mkIf config.gnome.enable {
      home-manager.users.vonix.dconf.settings = {
        "org/gnome/desktop/interface" = {
-         document-font-name  = "${cfg.serif.name}";
-         font-name           = "${cfg.sansSerif.name}";
-         monospace-font-name = "${cfg.monospace.name}";
+         monospace-font-name = "${cfg.monospace.name} ${toString cfg.size.terminal}";
+         document-font-name  = "${cfg.serif.name}     ${toString cfg.size.applications}";
+         font-name           = "${cfg.sansSerif.name} ${toString cfg.size.applications}";
        };
      };
    })

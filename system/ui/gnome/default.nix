@@ -79,13 +79,6 @@ in {
          automatic-timezone = true;
        };
 
-       "org/gnome/desktop/interface" = {
-         clock-show-weekday = true;
-         enable-hot-corners = false;
-         font-antialiasing  = "rgba";
-         font-hinting       = "full";
-       };
-
        "org/gnome/desktop/privacy" = {
          recent-files-max-age   = 30;
          remove-old-trash-files = true;
@@ -96,6 +89,10 @@ in {
          sleep-inactive-battery-type = "nothing";
          sleep-inactive-ac-type      = "nothing";
          power-button-action         = "interactive";
+       };
+
+       "org/gnome/shell/extensions/user-theme" = {
+         name = "Catppuccin-Mocha-Standard-Mauve-Dark";
        };
 
        "org/gnome/settings-daemon/plugins/color" = {
@@ -109,17 +106,20 @@ in {
          button-layout  = "appmenu:minimize,maximize,close";
        };
 
+       "org/gnome/desktop/interface" = {
+         clock-show-weekday = true;
+         enable-hot-corners = false;
+         font-antialiasing  = "rgba";
+         font-hinting       = "full";
+         cursor-theme       = "Catppuccin-Mocha-Mauve-Cursors";
+         gtk-theme          = "Catppuccin-Mocha-Standard-Mauve-Dark";
+       };
+
        "org/gnome/shell" = {
          disable-user-extensions = false;
 
-         disabled-extensions = [ 
+         disabled-extensions = [
            ""
-         ];
-
-         favorite-apps = [
-           "org.gnome.Nautilus.desktop"
-           "firefox.desktop"
-           "freetube.desktop"
          ];
 
          enabled-extensions = [ 

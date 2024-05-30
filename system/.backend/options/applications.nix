@@ -22,7 +22,7 @@ in {
 
    gtk.enable = mkOption {
      type    = bool;
-     default = true;
+     default = false;
    };
 
    lsd.enable = mkOption {
@@ -60,16 +60,6 @@ in {
      default = false;
    };
 
-   amd-cpu.enable = mkOption {
-     type    = bool;
-     default = false;
-   };
-
-   amd-gpu.enable = mkOption {
-     type    = bool;
-     default = false;
-   };
-
    bemenu.enable = mkOption {
      type    = bool;
      default = false;
@@ -85,12 +75,22 @@ in {
      default = false;
    };
 
-   freetube.enable = mkOption {
+   amd-cpu.enable = mkOption {
+     type    = bool;
+     default = false;
+   };
+
+   amd-gpu.enable = mkOption {
+     type    = bool;
+     default = false;
+   };
+
+   firefox.enable = mkOption {
      type    = bool;
      default = true;
    };
 
-   firefox.enable = mkOption {
+   freetube.enable = mkOption {
      type    = bool;
      default = true;
    };

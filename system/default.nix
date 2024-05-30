@@ -28,9 +28,8 @@
    ./programs/kdenlive-obs/default.nix
 
    ./configuration/disk/default.nix
+   ./configuration/model/default.nix
    ./configuration/general/default.nix
    ./configuration/packages/default.nix
-   ./configuration/model/amd/default.nix
-   ./configuration/model/intel/default.nix
  ];
 }

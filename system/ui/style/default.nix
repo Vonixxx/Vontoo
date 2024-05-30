@@ -24,22 +24,22 @@
      };
   
      emoji = {
-       name    = "NotoColorEmoji";
+       name    = "Noto Color Emoji";
        package = pkgs.noto-fonts-color-emoji;
      };
   
      monospace = {
-       name    = "HackNerdFontPropo-Regular";
+       name    = "Hack Nerd Font Propo";
        package = pkgs.nerdfonts.override { fonts = [ "Hack" ]; };
      };
   
      serif = {
-       name    = "FiraCodeNerdFont-Retina";
+       name    = "FiraCode Nerd Font";
        package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
      };
   
      sansSerif = {
-       name    = "FiraCodeNerdFont-Retina";
+       name    = "FiraCode Nerd Font";
        package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
      };
    };

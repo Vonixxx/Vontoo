@@ -1,16 +1,10 @@
-{ lib
-,  pkgs
+{ pkgs
 , ...
 }:
 
 with pkgs;
 
-let
- inherit (lib)
-  mkDefault;
-in {
-# boot.kernelPackages = mkDefault linuxPackages_latest;
-
+{
  hardware.opengl.extraPackages = [
    libvdpau-va-gl
    vaapiVdpau
