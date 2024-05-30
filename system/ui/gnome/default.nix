@@ -6,16 +6,14 @@
 
 let
  inherit (lib)
-  mkIf;
+  mkIf mkDefault;
 in {
  config = mkIf (config.gnome.enable) {
    services = {
-    displayManager.defaultSession = "gnome";
-
      xserver = {
        enable                      = true;
-       displayManager.gdm.enable   = true;
        desktopManager.gnome.enable = true;
+       displayManager.gdm.enable   = mkDefault true;
 
        excludePackages = [
          pkgs.xterm
@@ -25,9 +23,6 @@ in {
 
    environment = with pkgs; with gnome; with gnomeExtensions; {
      systemPackages = [
-       arcmenu
-       amberol
-       dash-to-panel
        gnome-tweaks
        user-themes
      ];
@@ -60,6 +55,8 @@ in {
     inherit (lib.hm.gvariant)
      mkUint32;
    in {
+     gtk.enable = true;
+
      dconf.settings = {
        "org/gnome/system/location" = {
          enabled = true;
@@ -95,14 +92,6 @@ in {
          remove-old-temp-files  = true;
        };
 
-       "org/gnome/shell/extensions/arcmenu" = {
-         arc-menu-icon                = 15;
-         custom-menu-button-icon-size = 50.0;
-         hide-overview-on-startup     = true;
-         menu-layout                  = "Budgie";
-         menu-button-icon             = "Menu_Icon";
-       };
-
        "org/gnome/settings-daemon/plugins/power" = {
          sleep-inactive-battery-type = "nothing";
          sleep-inactive-ac-type      = "nothing";
@@ -134,35 +123,8 @@ in {
          ];
 
          enabled-extensions = [ 
-           "arcmenu@arcmenu.com" 
-           "dash-to-panel@jderose9.github.com"
            "user-theme@gnome-shell-extensions.gcampax.github.com"
          ];
-       };
-
-       "org/gnome/shell/extensions/dash-to-panel" = {
-         appicon-margin        = 4;
-         appicon-padding       = 8;
-         animate-appicon-hover = true;
-         dot-position          = "TOP";
-         dot-style-focused     = "METRO";
-         dot-style-unfocused   = "DASHES";
-         panel-sizes           = "{\"0\":56}";
-         panel-lengths         = "{\"0\":100}";
-         panel-positions       = "{\"0\":\"BOTTOM\"}";
-
-         panel-element-positions = "{\"0\":[
-             {\"element\":\"leftBox\"          ,\"visible\":true  ,\"position\":\"stackedTL\"},
-             {\"element\":\"taskbar\"          ,\"visible\":true  ,\"position\":\"stackedTL\"},
-             {\"element\":\"systemMenu\"       ,\"visible\":true  ,\"position\":\"stackedBR\"},
-             {\"element\":\"dateMenu\"         ,\"visible\":true  ,\"position\":\"stackedBR\"},
-
-             {\"element\":\"rightBox\"         ,\"visible\":false ,\"position\":\"stackedTL\"},
-             {\"element\":\"centerBox\"        ,\"visible\":false ,\"position\":\"stackedTL\"},
-             {\"element\":\"desktopButton\"    ,\"visible\":false ,\"position\":\"stackedTL\"},
-             {\"element\":\"showAppsButton\"   ,\"visible\":false ,\"position\":\"stackedTL\"},
-             {\"element\":\"activitiesButton\" ,\"visible\":false ,\"position\":\"stackedTL\"}
-         ]}";
        };
      };
    };

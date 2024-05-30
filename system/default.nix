@@ -6,6 +6,12 @@
    ./ui/style/default.nix
    ./ui/hyprland/default.nix
 
+   ./.backend/options/fonts.nix
+   ./.backend/options/colors.nix
+   ./.backend/settings/fonts.nix
+   ./.backend/settings/colors.nix
+   ./.backend/options/applications.nix
+
    ./programs/bat/default.nix
    ./programs/git/default.nix
    ./programs/lsd/default.nix
@@ -22,14 +28,9 @@
    ./programs/kdenlive-obs/default.nix
 
    ./configuration/disk/default.nix
-   ./configuration/general/fonts.nix
-   ./configuration/options/fonts.nix
-   ./configuration/general/colors.nix
-   ./configuration/general/system.nix
-   ./configuration/options/colors.nix
+   ./configuration/general/default.nix
    ./configuration/packages/default.nix
    ./configuration/model/amd/default.nix
    ./configuration/model/intel/default.nix
-   ./configuration/options/applications.nix
  ];
 }

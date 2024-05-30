@@ -8,9 +8,6 @@ let
   mkIf mkDefault;
 in {
  config = mkIf (config.general-configuration.enable) {
-    hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; #
-  services.blueman.enable = true;
    programs.dconf.enable            = true;
    networking.networkmanager.enable = true;
    documentation.nixos.enable       = false;
@@ -54,12 +51,16 @@ in {
      };
    };
 
-   home-manager.users.vonix = {
-     programs.home-manager.enable = true;
+   home-manager = {
+     backupFileExtension = "backup";
 
-     home = {
-       preferXdgDirectories = true;
-       stateVersion         = "23.11";
+     users.vonix = {
+       programs.home-manager.enable = true;
+
+       home = {
+         preferXdgDirectories = true;
+         stateVersion         = "23.11";
+       };
      };
    };
 

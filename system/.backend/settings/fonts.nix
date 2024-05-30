@@ -54,6 +54,16 @@ in {
      };
    })
 
+   (mkIf config.gnome.enable {
+     home-manager.users.vonix.dconf.settings = {
+       "org/gnome/desktop/interface" = {
+         document-font-name  = "${cfg.serif.name}";
+         font-name           = "${cfg.sansSerif.name}";
+         monospace-font-name = "${cfg.monospace.name}";
+       };
+     };
+   })
+
    (mkIf config.mako.enable {
      home-manager.users.vonix.services.mako.font = "${cfg.sansSerif.name} ${toString cfg.size.popups}";
    })

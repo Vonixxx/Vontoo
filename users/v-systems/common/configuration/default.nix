@@ -1,34 +1,13 @@
-{ pkgs
-, ...
-}:
+{ ... }:
 
 {
- bat.enable      = true;
- git.enable      = true;
- lsd.enable      = true;
- zsh.enable      = true;
- foot.enable     = true;
- mako.enable     = true;
- atuin.enable    = true;
- helix.enable    = true;
- bemenu.enable   = true;
- waybar.enable   = true;
- hyprland.enable = true;
-
- services = {
-   gvfs.enable         = true;
-   getty.autologinUser = "Vonix";
- };
-
- xdg.portal = {
-   enable                = true;
-   config.common.default = [ "gtk" ];
-
-   extraPortals = with pkgs; [
-     xdg-desktop-portal-gtk
-     xdg-desktop-portal-hyprland
-   ];
- };
+ bat.enable                   = true;
+ git.enable                   = true;
+ lsd.enable                   = true;
+ zsh.enable                   = true;
+ atuin.enable                 = true;
+ helix.enable                 = true;
+ services.getty.autologinUser = "Vonix";
 
  environment.variables = {
    NIXOS_OZONE_WL = "1";
@@ -47,32 +26,9 @@
   config
  , ...
  }: {
-   gtk.enable = true;
-
    programs.git = {
      userName  = "Vonixxx";
      userEmail = "vonixxxwork@tuta.io";
-   };
-
-   programs.freetube.settings = {
-     hidePlaylists          = true;
-     useSponsorBlock        = true;
-     hidePopularVideos      = true;
-     hideTrendingVideos     = true;
-     displayVideoPlayButton = false;
-     baseTheme              = "catppuccinMocha";
-     mainColor              = "CatppuccinMochaRed";
-     secColor               = "CatppuccinMochaLavender";
-
-     sponsorBlockSelfPromo = {
-       color = "Yellow";
-       skip  = "autoSkip";
-     };
-
-     sponsorBlockInteraction = {
-       color = "Green";
-       skip  = "autoSkip";
-     };
    };
 
    programs.firefox = {
