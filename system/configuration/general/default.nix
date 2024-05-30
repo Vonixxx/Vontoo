@@ -11,7 +11,7 @@ in {
    programs.dconf.enable            = true;
    networking.networkmanager.enable = true;
    documentation.nixos.enable       = false;
-   system.stateVersion              = "23.11";
+   system.stateVersion              = "24.11";
    powerManagement.cpuFreqGovernor  = "ondemand";
    nixpkgs.hostPlatform             = "x86_64-linux";
    i18n.defaultLocale               = mkDefault "en_GB.UTF-8";
@@ -59,7 +59,7 @@ in {
 
        home = {
          preferXdgDirectories = true;
-         stateVersion         = "23.11";
+         stateVersion         = "24.11";
        };
      };
    };
