@@ -121,7 +121,7 @@ in {
      uid            = 1000;
      isNormalUser   = true;
      home           = "/home/vonixos";
-     extraGroups    = [ "lp" "audio" "video" "wheel" "scanner" "networkmanager" ];
+     extraGroups    = [ "audio" "video" "wheel" "networkmanager" ];
    };
 
    environment.shellAliases = {

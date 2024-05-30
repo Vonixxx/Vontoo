@@ -92,7 +92,7 @@ in {
        };
 
        "org/gnome/shell/extensions/user-theme" = {
-         name = "Catppuccin-Mocha-Standard-Mauve-Dark";
+         name = "Catppuccin-Mocha-Compact-Mauve-Dark";
        };
 
        "org/gnome/settings-daemon/plugins/color" = {
@@ -111,8 +111,9 @@ in {
          enable-hot-corners = false;
          font-antialiasing  = "rgba";
          font-hinting       = "full";
+         icon-theme         = "Papirus-Dark";
          cursor-theme       = "Catppuccin-Mocha-Mauve-Cursors";
-         gtk-theme          = "Catppuccin-Mocha-Standard-Mauve-Dark";
+         gtk-theme          = "Catppuccin-Mocha-Compact-Mauve-Dark";
        };
 
        "org/gnome/shell" = {

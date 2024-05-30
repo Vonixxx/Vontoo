@@ -4,16 +4,7 @@
 
 {
  style = {
-   colors = {
-     enable = true;
-
-     cursor = {
-       size    = 32;
-       enable  = false;
-       name    = "Catppuccin-Mocha-Light-Cursors";
-       package = pkgs.catppuccin-cursors.mochaLight;
-     };
-   };
+   colors.enable = true;
 
    fonts = {
      size = {

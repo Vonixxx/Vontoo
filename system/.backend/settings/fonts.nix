@@ -32,14 +32,6 @@ in {
      };
    })
 
-   (mkIf config.gtk.enable {
-     home-manager.users.vonix.gtk.font = {
-       size    = cfg.size.applications;
-       name    = "${cfg.sansSerif.name}";
-       package = "${cfg.sansSerif.package}";
-     };
-   })
-
    (mkIf config.firefox.enable {
      home-manager.users.vonix.programs.firefox.profiles.default.settings = {
        "font.name.serif.x-western"      = cfg.serif.name;

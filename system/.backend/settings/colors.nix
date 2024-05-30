@@ -8,9 +8,6 @@ let
  inherit (lib)
   mkIf mkMerge;
 
- inherit (builtins)
-  toString;
-
  cfg = config.style.colors;
 in {
  config = mkMerge [
@@ -22,18 +19,7 @@ in {
 
        catppuccin.enable                 = true;
        programs.waybar.catppuccin.enable = false;
-     };
-   })
-
-   (mkIf cfg.cursor.enable {
-     environment.variables.XCURSOR_SIZE = toString cfg.cursor.size;
-
-     home-manager.users.vonix.home.pointerCursor = {
-       gtk.enable = true;
-       x11.enable = true;
-       name       = cfg.cursor.name;
-       size       = cfg.cursor.size;
-       package    = cfg.cursor.package;
+       gtk.catppuccin.size               = "compact";
      };
    })
  ];
