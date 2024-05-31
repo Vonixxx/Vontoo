@@ -15,9 +15,8 @@
          size = "100%";
 
          content = {
-           mountpoint = "/";
-           format     = "xfs";
-           type       = "filesystem";
+           type = "lvm_pv";
+           vg   = "root_vg";
          };
        };
 
@@ -29,6 +28,41 @@
            format     = "vfat";
            mountpoint = "/boot";
            type       = "filesystem";
+         };
+       };
+     };
+   };
+
+   lvm_vg.root_vg = {
+     type = "lvm_vg";
+
+     lvs.root = {
+       size = "100%FREE";
+
+       content = {
+         type = "btrfs";
+         extraArgs = [ "-f" ];
+
+         subvolumes = {
+           "/root".mountpoint = "/";
+
+           "/nix" = {
+             mountpoint = "/nix";
+
+             mountOptions = [
+               "noatime"
+               "subvol=nix"
+             ];
+           };
+
+           "/persist" = {
+             mountpoint = "/persist";
+
+             mountOptions = [
+               "noatime"
+               "subvol=persist"
+             ];
+           };
          };
        };
      };

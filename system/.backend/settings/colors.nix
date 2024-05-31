@@ -15,11 +15,17 @@ in {
      catppuccin.enable = true;
 
      home-manager.users.vonix = {
-       imports = [ catppuccin.homeManagerModules.catppuccin ];
-
        catppuccin.enable                 = true;
        programs.waybar.catppuccin.enable = false;
-       gtk.catppuccin.size               = "compact";
+
+       gtk.catppuccin = {
+         size   = "compact";
+         tweaks = [ "rimless" ];
+       };
+
+       imports = [
+         catppuccin.homeManagerModules.catppuccin
+       ];
      };
    })
  ];

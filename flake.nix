@@ -56,6 +56,7 @@
    disko.url        = "github:nix-community/disko";
    arkenfox.url     = "github:dwarfmaster/arkenfox-nixos";
    home-manager.url = "github:nix-community/home-manager";
+   impermanence.url = "github:nix-community/impermanence";
    jovian.url       = "github:Jovian-Experiments/Jovian-NixOS";
  };
 
@@ -66,6 +67,7 @@
  , arkenfox
  , catppuccin
  , home-manager
+ , impermanence
  , ...
  }:
 
@@ -76,6 +78,7 @@ let
    arkenfox.hmModules.arkenfox
    catppuccin.nixosModules.catppuccin
    home-manager.nixosModules.home-manager
+   impermanence.nixosModules.impermanence
  ];
 
  mkSystem = name: bool: extraOverlays: extraModules:
@@ -84,7 +87,8 @@ let
        inherit
        pkgs
        arkenfox
-       catppuccin;
+       catppuccin
+       impermanence;
      };
 
      pkgs = import nixpkgs {

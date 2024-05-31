@@ -68,11 +68,11 @@ in {
 
        "org/gnome/desktop/peripherals/touchpad" = {
          tap-to-click   = true;
-         natural-scroll = false;
+         natural-scroll = true;
        };
 
        "org/gnome/desktop/session" = {
-         idle-delay = mkUint32 0;
+         idle-delay = mkUint32 60;
        };
 
        "org/gnome/desktop/datetime" = {
@@ -102,13 +102,13 @@ in {
        };
 
        "org/gnome/desktop/wm/preferences" = {
-         num-workspaces = 3;
+         num-workspaces = 5;
          button-layout  = "appmenu:minimize,maximize,close";
        };
 
        "org/gnome/desktop/interface" = {
          clock-show-weekday = true;
-         enable-hot-corners = false;
+         enable-hot-corners = true;
          font-antialiasing  = "rgba";
          font-hinting       = "full";
          icon-theme         = "Papirus-Dark";

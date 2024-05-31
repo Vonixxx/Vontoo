@@ -31,5 +31,6 @@
    ./configuration/model/default.nix
    ./configuration/general/default.nix
    ./configuration/packages/default.nix
+   ./configuration/impermanence/default.nix
  ];
 }
