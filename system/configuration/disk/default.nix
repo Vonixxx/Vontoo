@@ -3,31 +3,33 @@
 }:
 
 {
- disko.devices.disk.vdb = {
-   type = "disk";
-   inherit device;
+ disko.devices = {
+   disk.main = {
+     type = "disk";
+     inherit device;
 
-   content = {
-     type = "gpt";
+     content = {
+       type = "gpt";
 
-     partitions = {
-       root = {
-         size = "100%";
+       partitions = {
+         root = {
+           size = "100%";
 
-         content = {
-           type = "lvm_pv";
-           vg   = "root_vg";
+           content = {
+             type = "lvm_pv";
+             vg   = "root_vg";
+           };
          };
-       };
 
-       ESP = {
-         type = "EF00";
-         size = "512M";
+         esp = {
+           type = "EF00";
+           size = "512M";
 
-         content = {
-           format     = "vfat";
-           mountpoint = "/boot";
-           type       = "filesystem";
+           content = {
+             format     = "vfat";
+             mountpoint = "/boot";
+             type       = "filesystem";
+           };
          };
        };
      };
@@ -40,7 +42,7 @@
        size = "100%FREE";
 
        content = {
-         type = "btrfs";
+         type      = "btrfs";
          extraArgs = [ "-f" ];
 
          subvolumes = {

@@ -41,6 +41,8 @@ in {
  environment.persistence = {
    "/persistent/user" = {
      users.vonix = {
+       home = "/home/vonixos";
+
        files = [
          "*"
        ];

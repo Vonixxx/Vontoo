@@ -125,12 +125,7 @@ in {
    };
 
    environment.shellAliases = {
-     "update-v-laptop"   = "sudo nix flake update 'github:Vonixxx/Vontoo' && sudo nixos-rebuild boot --no-write-lock-file --flake 'github:Vonixxx/Vontoo#v-laptop'";
-     "update-v-desktop"  = "sudo nix flake update 'github:Vonixxx/Vontoo' && sudo nixos-rebuild boot --no-write-lock-file --flake 'github:Vonixxx/Vontoo#v-desktop'";
-     "update-f-libor"    = "sudo nix flake update 'github:Vonixxx/Vontoo' && sudo nixos-rebuild boot --no-write-lock-file --flake 'github:Vonixxx/Vontoo#f-libor'";
-     "update-f-jarka"    = "sudo nix flake update 'github:Vonixxx/Vontoo' && sudo nixos-rebuild boot --no-write-lock-file --flake 'github:Vonixxx/Vontoo#f-jarka'";
-     "update-u-ofelia"   = "sudo nix flake update 'github:Vonixxx/Vontoo' && sudo nixos-rebuild boot --no-write-lock-file --flake 'github:Vonixxx/Vontoo#u-ofelia'";
-     "update-f-stepanka" = "sudo nix flake update 'github:Vonixxx/Vontoo' && sudo nixos-rebuild boot --no-write-lock-file --flake 'github:Vonixxx/Vontoo#f-stepanka'";
+     "update" = "nix-shell -p nixVersions.latest --run 'sudo nixos-rebuild switch --flake github:Vonixxx/Vontoo#" + "v-steamdeck'";
    };
  };
 }
