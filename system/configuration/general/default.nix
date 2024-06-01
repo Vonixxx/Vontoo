@@ -123,7 +123,7 @@ in {
    };
 
    environment.shellAliases = {
-     "update" = "nix-shell -p nixVersions.latest --run 'sudo nixos-rebuild switch --flake github:Vonixxx/Vontoo#" + "${config.users.users.vonix.name}'";
+     "update" = "nix-shell -p nixVersions.latest --run 'sudo nixos-rebuild boot --flake github:Vonixxx/Vontoo#" + "${config.users.users.vonix.name}'";
    };
  };
 }
