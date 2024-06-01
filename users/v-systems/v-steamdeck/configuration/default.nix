@@ -4,6 +4,7 @@
  gnome.enable        = true;
  freetube.enable     = true;
  services.tlp.enable = false;
+ time.timeZone       = "Europe/Prague";
 
  hardware = {
    bluetooth.enable      = true;

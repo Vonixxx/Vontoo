@@ -76,7 +76,7 @@ in {
        timeout = 5;
 
        grub = {
-         configurationLimit    = 10;
+         configurationLimit    = 3;
          enable                = true;
          efiSupport            = true;
          copyKernels           = true;
@@ -89,7 +89,6 @@ in {
    services = {
      udev.enable                  = true;
      fstrim.enable                = true;
-     automatic-timezoned.enable   = true;
      power-profiles-daemon.enable = false;
      logind.lidSwitch             = "poweroff";
      tlp.enable                   = mkDefault true;
@@ -106,7 +105,7 @@ in {
    nix = {
      gc = {
        automatic = true;
-       dates     = "weekly";
+       dates     = "daily";
        options   = "--delete-older-than 7d";
      };
 

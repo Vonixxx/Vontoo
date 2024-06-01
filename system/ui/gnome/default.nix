@@ -6,7 +6,7 @@
 
 let
  inherit (lib)
-  mkIf mkDefault;
+  mkIf;
 in {
  config = mkIf (config.gnome.enable) {
    services = {
@@ -106,16 +106,6 @@ in {
          button-layout  = "appmenu:minimize,maximize,close";
        };
 
-       "org/gnome/desktop/interface" = {
-         clock-show-weekday = true;
-         enable-hot-corners = true;
-         font-antialiasing  = "rgba";
-         font-hinting       = "full";
-         icon-theme         = "Papirus-Dark";
-         cursor-theme       = "Catppuccin-Mocha-Mauve-Cursors";
-         gtk-theme          = "Catppuccin-Mocha-Compact-Mauve-Dark";
-       };
-
        "org/gnome/shell" = {
          disable-user-extensions = false;
 
@@ -126,6 +116,16 @@ in {
          enabled-extensions = [ 
            "user-theme@gnome-shell-extensions.gcampax.github.com"
          ];
+       };
+
+       "org/gnome/desktop/interface" = {
+         enable-hot-corners = true;
+         clock-show-weekday = false;
+         font-antialiasing  = "rgba";
+         font-hinting       = "full";
+         icon-theme         = "Papirus-Dark";
+         cursor-theme       = "Catppuccin-Mocha-Mauve-Cursors";
+         gtk-theme          = "Catppuccin-Mocha-Compact-Mauve-Dark";
        };
      };
    };

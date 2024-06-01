@@ -6,6 +6,7 @@
  intel-cpu.enable   = true;
  intel-gpu.enable   = true;
  i18n.defaultLocale = "cs_CZ.UTF-8";
+ time.timeZone      = "Europe/Prague";
 
  services = {
    xserver.xkb.layout = "cz";

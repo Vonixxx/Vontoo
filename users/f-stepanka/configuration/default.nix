@@ -9,7 +9,7 @@
  intel-gpu.enable            = true;
  kdenlive-obs.enable         = true;
  services.xserver.xkb.layout = "cz";
- impermanence.enable         = false;
+ time.timeZone               = "Europe/Prague";
 
  home-manager.users.vonix = {
    programs.git = {

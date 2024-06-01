@@ -1,12 +1,6 @@
-{ lib
-, config
-, ...
-}:
+{ ... }:
 
-let
- inherit (lib)
-  mkIf;
-in {
+{
  fileSystems."/persist".neededForBoot = true;
 
  environment.persistence."/persist" = {
