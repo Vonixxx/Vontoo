@@ -34,23 +34,6 @@ in {
      };
    };
 
-   services = {
-     udev.enable                  = true;
-     fstrim.enable                = true;
-     automatic-timezoned.enable   = true;
-     power-profiles-daemon.enable = false;
-     logind.lidSwitch             = "poweroff";
-     tlp.enable                   = mkDefault true;
-
-     pipewire = {
-       enable            = true;
-       alsa.enable       = true;
-       jack.enable       = true;
-       pulse.enable      = true;
-       alsa.support32Bit = true;
-     };
-   };
-
    home-manager = {
      backupFileExtension = "backup";
 
@@ -63,19 +46,6 @@ in {
        };
      };
    };
-
-   nix = {
-     gc = {
-       automatic = true;
-       dates     = "weekly";
-       options   = "--delete-older-than 7d";
-     };
-
-     settings = {
-       auto-optimise-store   = true;
-       experimental-features = [ "nix-command" "flakes" ];
-     };
-   }; 
 
    boot = {
      plymouth.enable = true;
@@ -116,10 +86,40 @@ in {
      };
    };
 
+   services = {
+     udev.enable                  = true;
+     fstrim.enable                = true;
+     automatic-timezoned.enable   = true;
+     power-profiles-daemon.enable = false;
+     logind.lidSwitch             = "poweroff";
+     tlp.enable                   = mkDefault true;
+
+     pipewire = {
+       enable            = true;
+       alsa.enable       = true;
+       jack.enable       = true;
+       pulse.enable      = true;
+       alsa.support32Bit = true;
+     };
+   };
+
+   nix = {
+     gc = {
+       automatic = true;
+       dates     = "weekly";
+       options   = "--delete-older-than 7d";
+     };
+
+     settings = {
+       auto-optimise-store   = true;
+       experimental-features = [ "nix-command" "flakes" ];
+     };
+   }; 
+
    users.users.vonix = {
      uid            = 1000;
      isNormalUser   = true;
-     home           = "/home/vonixos";
+     home           = "/home/vontooUserOne";
      extraGroups    = [ "audio" "video" "wheel" "networkmanager" ];
    };
 

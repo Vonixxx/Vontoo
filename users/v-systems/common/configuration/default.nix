@@ -1,13 +1,12 @@
 { ... }:
 
 {
- bat.enable                   = true;
- git.enable                   = true;
- lsd.enable                   = true;
- zsh.enable                   = true;
- atuin.enable                 = true;
- helix.enable                 = true;
- services.getty.autologinUser = "Vonix";
+ bat.enable   = true;
+ git.enable   = true;
+ lsd.enable   = true;
+ zsh.enable   = true;
+ atuin.enable = true;
+ helix.enable = true;
 
  environment.variables = {
    NIXOS_OZONE_WL = "1";
