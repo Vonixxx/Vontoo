@@ -79,7 +79,6 @@ in {
 
    boot = {
      plymouth.enable = true;
-     tmp.cleanOnBoot = true;
 
      supportedFilesystems = [
        "ntfs"
@@ -107,7 +106,7 @@ in {
        timeout = 5;
 
        grub = {
-         configurationLimit    = 5;
+         configurationLimit    = 10;
          enable                = true;
          efiSupport            = true;
          copyKernels           = true;
@@ -125,7 +124,7 @@ in {
    };
 
    environment.shellAliases = {
-     "update" = "nix-shell -p nixVersions.latest --run 'sudo nixos-rebuild switch --flake github:Vonixxx/Vontoo#" + "v-steamdeck'";
+     "update" = "nix-shell -p nixVersions.latest --run 'sudo nixos-rebuild switch --flake github:Vonixxx/Vontoo#" + "${config.users.users.vonix.name}'";
    };
  };
 }

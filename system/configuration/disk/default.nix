@@ -3,7 +3,22 @@
 }:
 
 {
+ zramSwap = {
+   enable = true;
+   memoryPercent = 25; 
+ };
+
  disko.devices = {
+   nodev."/" = {
+     fsType = "tmpfs";
+
+     mountOptions = [
+       "size=4G"
+       "defaults"
+       "mode=755"
+     ];
+   };
+
    disk.main = {
      type = "disk";
      inherit device;
@@ -12,58 +27,44 @@
        type = "gpt";
 
        partitions = {
-         root = {
+         nix = {
+           size = "30G";
+
+           content = {
+             format     = "xfs";
+             mountpoint = "/nix";
+             type       = "filesystem";
+           };
+         };
+
+         home = {
            size = "100%";
 
            content = {
-             type = "lvm_pv";
-             vg   = "root_vg";
+             format     = "xfs";
+             mountpoint = "/home";
+             type       = "filesystem";
+           };
+         };
+
+         persist = {
+           size = "512M";
+
+           content = {
+             format     = "xfs";
+             mountpoint = "/persist";
+             type       = "filesystem";
            };
          };
 
          esp = {
-           type = "EF00";
            size = "512M";
+           type = "EF00";
 
            content = {
              format     = "vfat";
              mountpoint = "/boot";
              type       = "filesystem";
-           };
-         };
-       };
-     };
-   };
-
-   lvm_vg.root_vg = {
-     type = "lvm_vg";
-
-     lvs.root = {
-       size = "100%FREE";
-
-       content = {
-         type      = "btrfs";
-         extraArgs = [ "-f" ];
-
-         subvolumes = {
-           "/root".mountpoint = "/";
-
-           "/nix" = {
-             mountpoint = "/nix";
-
-             mountOptions = [
-               "noatime"
-               "subvol=nix"
-             ];
-           };
-
-           "/persist" = {
-             mountpoint = "/persist";
-
-             mountOptions = [
-               "noatime"
-               "subvol=persist"
-             ];
            };
          };
        };

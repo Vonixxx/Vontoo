@@ -17,11 +17,6 @@
    PF_INFO        = "ascii title uptime pkgs kernel memory os host";
  };
 
- users.users.vonix = {
-   name           = "Vonix";
-   hashedPassword = "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB";
- };
-
  home-manager.users.vonix = {
   config
  , ...
