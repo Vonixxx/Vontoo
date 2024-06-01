@@ -27,8 +27,12 @@
    };
  };
 
- users.users.vonix = {
-   name           = "V-SteamDeck";
-   hashedPassword = "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB";
+ users.users = {
+   root.initialHashedPassword = "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB";
+
+   vonix = {
+     name                  = "V-SteamDeck";
+     initialHashedPassword = "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB";
+   };
  };
 }
