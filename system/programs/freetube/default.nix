@@ -15,6 +15,7 @@ in {
        settings = {
          useRssFeeds             = true;
          hideHeaderLogo          = true;
+         useSponsorBlock         = true;
          hideLabelsSideBar       = true;
          defaultTheatreMode      = true;
          allowDashAv1Formats     = true;
@@ -25,9 +26,9 @@ in {
          hideActiveSubscriptions = false;
          listType                = "list";
          defaultQuality          = "1080";
-         mainColor               = mkDefault "Red";
-         baseTheme               = mkDefault "black";
-         secColor                = mkDefault "Indigo";
+         baseTheme               = "catppuccinMocha";
+         mainColor               = "CatppuccinMochaRed";
+         secColor                = "CatppuccinMochaLavender";
        };
      };
    };

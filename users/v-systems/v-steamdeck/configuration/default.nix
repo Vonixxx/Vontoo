@@ -1,13 +1,9 @@
 { ... }:
 
 {
- gnome.enable    = true;
- freetube.enable = true;
-
- users.users.vonix = {
-   name           = "V-SteamDeck";
-   hashedPassword = "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB";
- };
+ gnome.enable        = true;
+ freetube.enable     = true;
+ services.tlp.enable = false;
 
  hardware = {
    bluetooth.enable      = true;
@@ -19,7 +15,7 @@
 
    steam = {
      enable         = true;
-     autoStart      = true;
+     autoStart      = false;
      user           = "Vonix";
      desktopSession = "gnome";
    };
@@ -31,35 +27,8 @@
    };
  };
 
- services = {
-   tlp.enable = false;
-
-   xserver = {
-     enable                    = true;
-     displayManager.gdm.enable = false;
-   };
- };
-
- home-manager.users.vonix = {
-   programs.freetube.settings = {
-     hidePlaylists          = true;
-     useSponsorBlock        = true;
-     hidePopularVideos      = true;
-     hideTrendingVideos     = true;
-     displayVideoPlayButton = false;
-     baseTheme              = "catppuccinMocha";
-     mainColor              = "CatppuccinMochaRed";
-     secColor               = "CatppuccinMochaLavender";
-
-     sponsorBlockSelfPromo = {
-       color = "Yellow";
-       skip  = "autoSkip";
-     };
-
-     sponsorBlockInteraction = {
-       color = "Green";
-       skip  = "autoSkip";
-     };
-   };
+ users.users.vonix = {
+   name           = "V-SteamDeck";
+   hashedPassword = "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB";
  };
 }

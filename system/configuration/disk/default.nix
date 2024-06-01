@@ -4,8 +4,8 @@
 
 {
  zramSwap = {
-   enable = true;
    memoryPercent = 25; 
+   enable        = true;
  };
 
  disko.devices = {
