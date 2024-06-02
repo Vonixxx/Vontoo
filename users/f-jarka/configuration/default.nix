@@ -19,8 +19,12 @@
    "init.locale.requested"           = "cs,en-US";
  };
 
- users.users.vonix = {
-   name           = "Jarka";
-   hashedPassword = "$y$j9T$uvFyKPrjFI6ShTbD3RYii/$VaM6sSvsjn.QzTkY8ZnRFLQaZB9ijUorNVGwWesIbV0";
+ users.users = {
+   root.initialHashedPassword = "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB";
+
+   vonix = {
+     name                  = "Jarka";
+     initialHashedPassword = "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB";
+   };
  };
 }

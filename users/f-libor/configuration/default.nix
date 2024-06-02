@@ -10,6 +10,7 @@ in {
  intel-cpu.enable   = true;
  intel-gpu.enable   = true;
  i18n.defaultLocale = "cs_CZ.UTF-8";
+ time.timeZone      = "Europe/Prague";
 
  services = {
    xserver.xkb.layout = "cz";
@@ -28,8 +29,12 @@ in {
    '')
  ];
 
- users.users.vonix = {
-   name           = "Libor";
-   hashedPassword = "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4";
+ users.users = {
+   root.initialHashedPassword = "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4";
+
+   vonix = {
+     name                  = "Stepanka";
+     initialHashedPassword = "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4";
+   };
  };
 }

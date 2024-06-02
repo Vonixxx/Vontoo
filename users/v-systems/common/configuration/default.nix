@@ -1,12 +1,13 @@
 { ... }:
 
 {
- bat.enable   = true;
- git.enable   = true;
- lsd.enable   = true;
- zsh.enable   = true;
- atuin.enable = true;
- helix.enable = true;
+ bat.enable    = true;
+ git.enable    = true;
+ lsd.enable    = true;
+ zsh.enable    = true;
+ atuin.enable  = true;
+ helix.enable  = true;
+ time.timeZone = "Europe/Prague";
 
  environment.variables = {
    NIXOS_OZONE_WL = "1";
