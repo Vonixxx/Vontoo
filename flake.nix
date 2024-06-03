@@ -81,10 +81,8 @@ let
    impermanence.nixosModules.impermanence
  ];
 
- mkSystem = user: username: extraModules: extraOverlays:
+ mkSystem = user: username: password: extraModules: extraOverlays:
    nixpkgs.lib.nixosSystem rec {
-#     users.users.${username}.name = username;
-
      specialArgs = {
        inherit
        pkgs
@@ -93,24 +91,72 @@ let
        impermanence;
      };
 
+     user = [(./Users + "${user}")];
+
      pkgs = import nixpkgs {
        config.allowUnfree = true;
        overlays           = extraOverlays;
        system             = "x86_64-linux";
      };
 
-     modules = systemModules ++ [(./Users + "${user}")] ++ extraModules;
+     userConfiguration = [
+       ({ config, name, ...}: {
+         users.users = {
+           root.initialHashedPassword = "${password}";
+           "${username}" = {
+             uid                   = 1000;
+             isNormalUser          = true;
+             name                  = "${username}";
+             initialHashedPassword = "${password}";
+             home                  = "/home/" + "${username}";
+             extraGroups           = [ "audio" "video" "wheel" "networkmanager" ];
+           };
+         };
+       })
+     ];
+
+     modules = user
+               ++ extraModules
+               ++ systemModules
+               ++ userConfiguration;
    };
 in {
  nixosConfigurations = {
-     U_Ofelia = mkSystem ("/U/Ofelia") "Ofelia" [] [];
+     U_Ofelia = mkSystem "/U/Ofelia"
+                         "Ofelia"
+                         "$y$j9T$Bt3YhGYQoALhjeZY7MauX/$jlIcH1JuGjKz2UqTj7CEtwIbNNr8hRpqgRU7CEi0CBA"
+                         []
+                         [];
 
-     F_Jarka    = mkSystem ("/F/Jarka")    "Jarka"   [] [];
-     F_Libor    = mkSystem ("/F/Libor")    "Libor"   [] [];
-     F_Stepanka = mkSystem ("/F/Stepanka") "Bubinka" [] [];
+     F_Jarka = mkSystem "/F/Jarka"
+                        "Jarka"
+                        "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
+                        []
+                        [];
 
-     V_Lenovo    = mkSystem ("/V/Lenovo")    "Luca" []                             [];
-     V_SteamDeck = mkSystem ("/V/SteamDeck") "Luca" [ jovian.nixosModules.jovian ] [ jovian.overlays.default ];
+     F_Libor = mkSystem "/F/Libor"
+                        "Libor"
+                        "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4"
+                        []
+                        [];
+
+     F_Stepanka = mkSystem "/F/Stepanka"
+                           "Bubinka"
+                           "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4"
+                           []
+                           [];
+
+     V_Lenovo = mkSystem "/V/Lenovo"
+                         "Luca"
+                         "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
+                         []
+                         [];
+
+     V_SteamDeck = mkSystem "/V/SteamDeck"
+                            "Luca"
+                            "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
+                            [ jovian.nixosModules.jovian ]
+                            [ jovian.overlays.default ];
    };
  };
 }

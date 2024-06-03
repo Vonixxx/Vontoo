@@ -23,13 +23,4 @@
      };
    };
  };
-
- users.users = {
-   root.initialHashedPassword = "$y$j9T$Bt3YhGYQoALhjeZY7MauX/$jlIcH1JuGjKz2UqTj7CEtwIbNNr8hRpqgRU7CEi0CBA";
-
-   vonix = {
-     name                  = "Ofelia";
-     initialHashedPassword = "$y$j9T$Bt3YhGYQoALhjeZY7MauX/$jlIcH1JuGjKz2UqTj7CEtwIbNNr8hRpqgRU7CEi0CBA";
-   };
- };
 }

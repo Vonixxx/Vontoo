@@ -115,13 +115,6 @@ in {
      };
    }; 
 
-   users.users.vonix = {
-     uid            = 1000;
-     isNormalUser   = true;
-     home           = /home + "${config.users.users.vonix.name}";
-     extraGroups    = [ "audio" "video" "wheel" "networkmanager" ];
-   };
-
    environment.shellAliases = {
      "update" = "nix-shell -p nixVersions.latest --run 'sudo nixos-rebuild boot --flake github:Vonixxx/Vontoo#" + "${config.users.users.vonix.name}'";
    };
