@@ -1,5 +1,6 @@
 { lib
 , config
+, variables
 , ...
 }:
 
@@ -37,7 +38,7 @@ in {
    home-manager = {
      backupFileExtension = "backup";
 
-     users.vonix = {
+     users."${variables.name}" = {
        programs.home-manager.enable = true;
 
        home = {

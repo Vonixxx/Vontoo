@@ -72,6 +72,10 @@
  }:
 
 let
+ variables = {
+   name = "Ofelia";
+ };
+
  systemModules = [
    ./System
    disko.nixosModules.disko
@@ -87,6 +91,8 @@ let
        inherit
        pkgs
        arkenfox
+       username
+       variables
        catppuccin
        impermanence;
      };
