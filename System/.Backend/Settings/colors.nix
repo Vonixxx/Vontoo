@@ -1,5 +1,6 @@
 { lib
 , config
+, username
 , catppuccin
 , ...
 }:
@@ -14,7 +15,7 @@ in {
    (mkIf cfg.enable {
      catppuccin.enable = true;
 
-     home-manager.users.vonix = {
+     home-manager.users."${username}" = {
        catppuccin.enable                 = true;
        programs.waybar.catppuccin.enable = false;
 

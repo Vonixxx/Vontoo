@@ -1,7 +1,9 @@
-{ ... }:
+{ username
+, ... 
+}:
 
 {
- home-manager.users.vonix.programs.firefox.profiles.default.bookmarks = [
+ home-manager.users."${username}".programs.firefox.profiles.default.bookmarks = [
    {
     name = "GitHub";
     url  = "https://github.com";

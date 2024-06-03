@@ -1,4 +1,6 @@
-{ ... }:
+{ username
+, ...
+}:
 
 {
  bat.enable   = true;
@@ -16,7 +18,7 @@
    PF_INFO        = "ascii title uptime pkgs kernel memory os host";
  };
 
- home-manager.users.vonix = {
+ home-manager.users."${username}" = {
   config
  , ...
  }: {

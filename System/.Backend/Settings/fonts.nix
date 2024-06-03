@@ -1,5 +1,6 @@
 { lib
 , config
+, username
 , ...
 }:
 
@@ -33,7 +34,7 @@ in {
    })
 
    (mkIf config.firefox.enable {
-     home-manager.users.vonix.programs.firefox.profiles.default.settings = {
+     home-manager.users."${username}".programs.firefox.profiles.default.settings = {
        "font.name.serif.x-western"      = cfg.serif.name;
        "font.name.monospace.x-western"  = cfg.monospace.name;
        "font.name.sans-serif.x-western" = cfg.sansSerif.name;
@@ -41,13 +42,13 @@ in {
    })
 
    (mkIf config.bemenu.enable {
-     home-manager.users.vonix.programs.bemenu.settings = {
+     home-manager.users."${username}".programs.bemenu.settings = {
        fn = "${cfg.sansSerif.name} ${toString cfg.size.popups}";
      };
    })
 
    (mkIf config.gnome.enable {
-     home-manager.users.vonix.dconf.settings = {
+     home-manager.users."${username}".dconf.settings = {
        "org/gnome/desktop/interface" = {
          monospace-font-name = "${cfg.monospace.name} ${toString cfg.size.terminal}";
          document-font-name  = "${cfg.serif.name}     ${toString cfg.size.applications}";
@@ -57,11 +58,11 @@ in {
    })
 
    (mkIf config.mako.enable {
-     home-manager.users.vonix.services.mako.font = "${cfg.sansSerif.name} ${toString cfg.size.popups}";
+     home-manager.users."${username}".services.mako.font = "${cfg.sansSerif.name} ${toString cfg.size.popups}";
    })
 
    (mkIf config.foot.enable {
-     home-manager.users.vonix.programs.foot.settings.main.font = "${cfg.monospace.name}:size=${toString cfg.size.terminal}";
+     home-manager.users."${username}".programs.foot.settings.main.font = "${cfg.monospace.name}:size=${toString cfg.size.terminal}";
    })
  ];
 }

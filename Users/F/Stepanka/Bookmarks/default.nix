@@ -1,7 +1,9 @@
-{ ... }:
+{ username
+, ...
+}:
 
 {
- home-manager.users.vonix = {
+ home-manager.users."${username}" = {
    programs.firefox = {
      policies = {
        ManagedBookmarks = [
