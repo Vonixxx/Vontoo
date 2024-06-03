@@ -25,6 +25,7 @@ in {
      systemPackages = [
        gnome-tweaks
        user-themes
+       zenity
      ];
 
      gnome.excludePackages = [

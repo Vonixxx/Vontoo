@@ -20,5 +20,6 @@ with gnome;
    mediainfo
    pfetch-rs
    tldr
+   wget
  ];
 }
