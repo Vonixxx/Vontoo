@@ -73,7 +73,7 @@
 
 let
  systemModules = [
-   ./system
+   ./System
    disko.nixosModules.disko
    arkenfox.hmModules.arkenfox
    catppuccin.nixosModules.catppuccin
@@ -83,7 +83,7 @@ let
 
  mkSystem = user: username: extraModules: extraOverlays:
    nixpkgs.lib.nixosSystem rec {
-     users.users.${username}.name = username;
+#     users.users.${username}.name = username;
 
      specialArgs = {
        inherit
@@ -99,7 +99,7 @@ let
        system             = "x86_64-linux";
      };
 
-     modules = systemModules ++ [(./users + "${user}")] ++ extraModules;
+     modules = systemModules ++ [(./Users + "${user}")] ++ extraModules;
    };
 in {
  nixosConfigurations = {
