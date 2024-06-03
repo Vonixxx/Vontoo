@@ -91,34 +91,30 @@ let
        impermanence;
      };
 
-     user = [(./Users + "${user}")];
-
      pkgs = import nixpkgs {
        config.allowUnfree = true;
        overlays           = extraOverlays;
        system             = "x86_64-linux";
      };
 
-     userConfiguration = [
-       ({ config, name, ...}: {
-         users.users = {
-           root.initialHashedPassword = "${password}";
-           "${username}" = {
-             uid                   = 1000;
-             isNormalUser          = true;
-             name                  = "${username}";
-             initialHashedPassword = "${password}";
-             home                  = "/home/" + "${username}";
-             extraGroups           = [ "audio" "video" "wheel" "networkmanager" ];
-           };
-         };
-       })
-     ];
-
-     modules = user
-               ++ extraModules
+     modules = extraModules
                ++ systemModules
-               ++ userConfiguration;
+               ++ [ (./Users + "${user}") ]
+               ++ [ ({ config, name, ...}: {
+                      users.users = {
+                        root.initialHashedPassword = "${password}";
+
+                        "${username}" = {
+                          uid                   = 1000;
+                          isNormalUser          = true;
+                          name                  = "${username}";
+                          initialHashedPassword = "${password}";
+                          home                  = "/home/" + "${username}";
+                          extraGroups           = [ "audio" "video" "wheel" "networkmanager" ];
+                        };
+                      };
+                    })
+                  ];
    };
 in {
  nixosConfigurations = {
