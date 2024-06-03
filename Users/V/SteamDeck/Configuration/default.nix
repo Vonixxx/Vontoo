@@ -2,7 +2,6 @@
 
 {
  gnome.enable        = true;
- freetube.enable     = true;
  services.tlp.enable = false;
 
  hardware = {

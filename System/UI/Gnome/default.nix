@@ -1,6 +1,7 @@
 { lib
 , pkgs
 , config
+, username
 , ...
 }:
 
@@ -47,7 +48,9 @@ in {
      ];
    };
 
-   home-manager.users.vonix = { lib, ... }:
+   home-manager.users."${username}" = { lib
+                                      , ...
+                                      }:
 
    let
     inherit (lib)

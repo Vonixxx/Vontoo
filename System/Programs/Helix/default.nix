@@ -1,6 +1,7 @@
 { lib
 , pkgs
 , config
+, username
 , ...
 }:
 
@@ -9,7 +10,7 @@ let
   mkIf;
 in {
  config = mkIf (config.helix.enable) {
-   home-manager.users.vonix.programs = {
+   home-manager.users."${username}".programs = {
      helix = {
        enable = true;
 

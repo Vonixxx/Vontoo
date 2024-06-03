@@ -1,5 +1,6 @@
 { lib
 , config
+, username
 , ...
 }:
 
@@ -13,7 +14,7 @@ in {
  ];
 
  config = mkIf (config.firefox.enable) {
-   home-manager.users.vonix = {
+   home-manager.users."${username}" = {
      programs.firefox = {
        enable = true;
 
@@ -26,6 +27,7 @@ in {
          settings = {
            "ui.systemUsesDarkTheme"                              = 1;
            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+           "browser.urlbar.suggest.history"                      = false;
            "browser.newtabpage.activity-stream.feeds.topsites"   = false;
          };
        };

@@ -1,7 +1,9 @@
-{ ... }:
+{ username
+, ...
+}:
 
 {
- home-manager.users.vonix.programs.firefox.profiles.default = {
+ home-manager.users."${username}".programs.firefox.profiles.default = {
    userChrome = ''
       /* 1.6.2
       - Fixed bookmarks being indented when window controls are on the left

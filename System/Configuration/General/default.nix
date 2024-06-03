@@ -1,12 +1,13 @@
 { lib
 , config
-, variables
+, username
 , ...
 }:
 
 let
  inherit (lib)
   mkIf mkDefault;
+
 in {
  config = mkIf (config.general-configuration.enable) {
    programs.dconf.enable            = true;
@@ -15,7 +16,6 @@ in {
    system.stateVersion              = "24.11";
    powerManagement.cpuFreqGovernor  = "ondemand";
    nixpkgs.hostPlatform             = "x86_64-linux";
-   i18n.defaultLocale               = mkDefault "en_GB.UTF-8";
 
    security = {
      rtkit.enable            = true;
@@ -38,7 +38,7 @@ in {
    home-manager = {
      backupFileExtension = "backup";
 
-     users."${variables.name}" = {
+     users."${username}" = {
        programs.home-manager.enable = true;
 
        home = {
@@ -116,8 +116,8 @@ in {
      };
    }; 
 
-   environment.shellAliases = {
-     "update" = "nix-shell -p nixVersions.latest --run 'sudo nixos-rebuild boot --flake github:Vonixxx/Vontoo#" + "${config.users.users.vonix.name}'";
-   };
+#   environment.shellAliases = {
+#     "update" = "nix-shell -p nixVersions.latest --run 'sudo nixos-rebuild boot --flake github:Vonixxx/Vontoo#" + "${config.users.users.vonix.name}'";
+#   };
  };
 }

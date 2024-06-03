@@ -1,14 +1,15 @@
 { lib
 , config
+, username
 , ...
 }:
 
 let
  inherit (lib)
-  mkIf mkDefault;
+  mkIf;
 in {
  config = mkIf (config.freetube.enable) {
-   home-manager.users.vonix.programs = {
+   home-manager.users."${username}".programs = {
      freetube = {
        enable = true;
 

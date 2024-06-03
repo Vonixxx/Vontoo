@@ -1,18 +1,15 @@
-{ ... }:
+{ username
+, ...
+}:
 
 {
- gnome.enable     = true;
- printing.enable  = true;
- intel-cpu.enable = true;
- intel-gpu.enable = true;
- time.timeZone    = "Europe/Brussels";
+ gnome.enable        = true;
+ printing.enable     = true;
+ intel-cpu.enable    = true;
+ intel-gpu.enable    = true;
+ services.tlp.enable = false;
 
- services = { 
-   xserver.xkb.layout = "be";
-   tlp.enable         = false;
- };
-
- home-manager.users.vonix = {
+ home-manager.users."${username}" = {
    dconf.settings = {
      "org/gnome/desktop/interface" = {
        text-scaling-factor = 1.5;

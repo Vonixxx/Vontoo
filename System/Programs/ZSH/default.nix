@@ -1,6 +1,7 @@
 { lib
 , pkgs
 , config
+, username
 , ...
 }:
 
@@ -25,7 +26,7 @@ in {
      ];
    };
 
-   home-manager.users.vonix.programs = {
+   home-manager.users."${username}".programs = {
      starship = {
        enable               = true;
        enableZshIntegration = true;

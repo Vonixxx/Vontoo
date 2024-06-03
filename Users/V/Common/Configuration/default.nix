@@ -1,13 +1,12 @@
 { ... }:
 
 {
- bat.enable    = true;
- git.enable    = true;
- lsd.enable    = true;
- zsh.enable    = true;
- atuin.enable  = true;
- helix.enable  = true;
- time.timeZone = "Europe/Prague";
+ bat.enable   = true;
+ git.enable   = true;
+ lsd.enable   = true;
+ zsh.enable   = true;
+ atuin.enable = true;
+ helix.enable = true;
 
  environment.variables = {
    NIXOS_OZONE_WL = "1";
@@ -29,7 +28,6 @@
    programs.firefox = {
      profiles.default.settings = {
        "browser.urlbar.suggest.bookmark" = true;
-       "browser.urlbar.suggest.history"  = false;
        "browser.urlbar.suggest.openpage" = false;
        "browser.urlbar.suggest.topsites" = false;
      };

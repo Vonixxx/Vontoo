@@ -1,5 +1,6 @@
 { lib
 , config
+, username
 , ...
 }:
 
@@ -8,7 +9,7 @@ let
   mkIf;
 in {
  config = mkIf (config.git.enable) {
-   home-manager.users.vonix.programs = {
+   home-manager.users."${username}".programs = {
      git.enable                  = true;
      git-credential-oauth.enable = true;
    };

@@ -1,6 +1,7 @@
 { lib
 , pkgs
 , config
+, username
 , ...
 }:
 
@@ -9,7 +10,7 @@ let
   mkIf;
 in {
  config = mkIf (config.printing.enable) {
-   users.users.vonix.extraGroups = [ "lp" "scanner" ];
+   users.users."${username}".extraGroups = [ "lp" "scanner" ];
 
    services = {
      ipp-usb.enable = true;

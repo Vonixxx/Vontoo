@@ -1,9 +1,10 @@
 { arkenfox
+, username
 , ...
 }:
 
 {
- home-manager.users.vonix = {
+ home-manager.users."${username}" = {
    imports = [ arkenfox.hmModules.arkenfox ];
 
    programs.firefox = {
