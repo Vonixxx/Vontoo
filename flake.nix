@@ -81,8 +81,10 @@ let
    impermanence.nixosModules.impermanence
  ];
 
- mkSystem = name: bool: extraOverlays: extraModules:
+ mkSystem = user: username: extraModules: extraOverlays:
    nixpkgs.lib.nixosSystem rec {
+     users.users.${username}.name = username;
+
      specialArgs = {
        inherit
        pkgs
@@ -92,21 +94,23 @@ let
      };
 
      pkgs = import nixpkgs {
-       config.allowUnfree = bool;
+       config.allowUnfree = true;
        overlays           = extraOverlays;
        system             = "x86_64-linux";
      };
 
-     modules = systemModules ++ [(./users + "${name}")] ++ extraModules;
+     modules = systemModules ++ [(./users + "${user}")] ++ extraModules;
    };
 in {
  nixosConfigurations = {
-     Jarka       = mkSystem ("/f-jarka")               true  []                          [];
-     Libor       = mkSystem ("/f-libor")               true  []                          [];
-     Ofelia      = mkSystem ("/u-ofelia")              true  []                          [];
-     Stepanka    = mkSystem ("/f-stepanka")            true  []                          [];
-     V-Lenovo    = mkSystem ("/v-systems/v-laptop")    false []                          [];
-     V-SteamDeck = mkSystem ("/v-systems/v-steamdeck") true  [ jovian.overlays.default ] [ jovian.nixosModules.jovian ];
+     U_Ofelia = mkSystem ("/U/Ofelia") "Ofelia" [] [];
+
+     F_Jarka    = mkSystem ("/F/Jarka")    "Jarka"   [] [];
+     F_Libor    = mkSystem ("/F/Libor")    "Libor"   [] [];
+     F_Stepanka = mkSystem ("/F/Stepanka") "Bubinka" [] [];
+
+     V_Lenovo    = mkSystem ("/V/Lenovo")    "Luca" []                             [];
+     V_SteamDeck = mkSystem ("/V/SteamDeck") "Luca" [ jovian.nixosModules.jovian ] [ jovian.overlays.default ];
    };
  };
 }
