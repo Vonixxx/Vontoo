@@ -85,7 +85,9 @@ let
    impermanence.nixosModules.impermanence
  ];
 
- language = keymap: locale: timezone: [
+ language = keymap:
+            locale:
+            timezone: [
    ({ config, ...}: {
      i18n.defaultLocale          = "${locale}";
      services.xserver.xkb.layout = "${keymap}";
@@ -93,7 +95,8 @@ let
    })
  ];
 
- userConfiguration = username: password: [
+ userConfiguration = username:
+                     password: [
    ({ config, ...}: {
      users.users = {
        root.initialHashedPassword = "${password}";
@@ -110,7 +113,14 @@ let
    })
  ];
 
- mkSystem = keymap: locale: timezone: username: profile: password: extraModules: extraOverlays:
+ mkSystem = keymap:
+            locale:
+            timezone:
+            username:
+            profile:
+            password:
+            extraModules:
+            extraOverlays:
    nixpkgs.lib.nixosSystem rec {
      specialArgs = {
        inherit
