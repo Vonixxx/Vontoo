@@ -89,6 +89,10 @@ in {
          remove-old-temp-files  = true;
        };
 
+       "org/gnome/desktop/a11y" = {
+         always-show-universal-access-status = true;
+       };
+
        "org/gnome/settings-daemon/plugins/power" = {
          sleep-inactive-battery-type = "nothing";
          sleep-inactive-ac-type      = "nothing";
