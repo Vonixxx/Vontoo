@@ -4,7 +4,7 @@
 
 {
  zramSwap = {
-   memoryPercent = 25;
+   memoryPercent = 10;
    enable        = true;
  };
 
@@ -13,7 +13,7 @@
      fsType = "tmpfs";
 
      mountOptions = [
-       "size=4G"
+       "size=6G"
        "defaults"
        "mode=755"
      ];
@@ -28,7 +28,7 @@
 
        partitions = {
          nix = {
-           size = "30G";
+           size = "40G";
 
            content = {
              format     = "xfs";

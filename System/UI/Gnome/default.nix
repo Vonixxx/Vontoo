@@ -131,6 +131,7 @@ in {
          clock-show-weekday = false;
          font-antialiasing  = "rgba";
          font-hinting       = "full";
+         color-scheme       = "prefer-dark";
          icon-theme         = "Papirus-Dark";
          cursor-theme       = "Catppuccin-Mocha-Mauve-Cursors";
          gtk-theme          = "Catppuccin-Mocha-Compact-Mauve-Dark";
