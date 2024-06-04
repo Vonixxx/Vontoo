@@ -24,6 +24,10 @@ in {
 
    environment = with pkgs; with gnome; with gnomeExtensions; {
      systemPackages = [
+       amberol
+       celluloid
+       fragments
+       impression
        gnome-tweaks
        user-themes
        zenity
@@ -44,6 +48,7 @@ in {
        iagno
        seahorse
        tali
+       totem
        yelp
      ];
    };

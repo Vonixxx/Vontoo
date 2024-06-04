@@ -17,9 +17,10 @@ in {
      shells = [ pkgs.zsh ];
 
      systemPackages = with pkgs; [
-       gzip
        gnutar
+       pigz
        p7zip
+       pbzip2
        unar
        unzip
        xz
@@ -73,7 +74,8 @@ in {
        };
 
        prezto = {
-         enable = true;
+         enable        = true;
+         caseSensitive = false;
 
          pmodules = [
            "environment"
