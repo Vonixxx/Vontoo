@@ -173,7 +173,7 @@ in {
                         [];
 
      F_Stepanka = mkSystem "cz"
-                           "cs_CZ.UTF-8"
+                           "en_GB.UTF-8"
                            "Europe/Prague"
                            "Bubinka"
                            "/F/Stepanka"
