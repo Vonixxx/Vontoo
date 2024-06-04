@@ -1,6 +1,4 @@
-{ device ? throw
-, ...
-}:
+{ ... }:
 
 {
  zramSwap = {
@@ -20,8 +18,8 @@
    };
 
    disk.main = {
-     type = "disk";
-     inherit device;
+     type   = "disk";
+     device = "/dev/nvme0n1";
 
      content = {
        type = "gpt";
