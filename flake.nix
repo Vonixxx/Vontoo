@@ -181,7 +181,7 @@ in {
                            []
                            [];
 
-     V_Lenovo = mkSystem "en"
+     V_Lenovo = mkSystem "us"
                          "en_GB.UTF-8"
                          "Europe/Prague"
                          "Luca"
@@ -190,7 +190,7 @@ in {
                          []
                          [];
 
-     V_SteamDeck = mkSystem "en"
+     V_SteamDeck = mkSystem "us"
                             "en_GB.UTF-8"
                             "Europe/Prague"
                             "Luca"
