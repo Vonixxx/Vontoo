@@ -7,7 +7,6 @@
 let
  inherit (lib)
   mkIf mkDefault;
-
 in {
  config = mkIf (config.general-configuration.enable) {
    programs.dconf.enable            = true;
@@ -115,9 +114,5 @@ in {
        experimental-features = [ "nix-command" "flakes" ];
      };
    }; 
-
-#   environment.shellAliases = {
-#     "update" = "nix-shell -p nixVersions.latest --run 'sudo nixos-rebuild boot --flake github:Vonixxx/Vontoo#" + "${config.users.users.vonix.name}'";
-#   };
  };
 }
