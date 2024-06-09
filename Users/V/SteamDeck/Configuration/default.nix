@@ -4,11 +4,6 @@
  gnome.enable        = true;
  services.tlp.enable = false;
 
- hardware = {
-   bluetooth.enable      = true;
-   bluetooth.powerOnBoot = true;
- };
-
  jovian = {
    hardware.has.amd.gpu = true;
 

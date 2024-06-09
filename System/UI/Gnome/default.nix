@@ -7,7 +7,7 @@
 
 let
  inherit (lib)
-  mkIf;
+  mkIf mkForce;
 in {
  config = mkIf (config.gnome.enable) {
    services = {
@@ -138,8 +138,8 @@ in {
          font-hinting       = "full";
          color-scheme       = "prefer-dark";
          icon-theme         = "Papirus-Dark";
-         cursor-theme       = "catppuccin-mocha-mauve-cursors";
          gtk-theme          = "Catppuccin-Mocha-Compact-Mauve-Dark";
+         cursor-theme       = mkForce "catppuccin-mocha-mauve-cursors";
        };
      };
    };
