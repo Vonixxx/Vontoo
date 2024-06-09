@@ -138,7 +138,7 @@ in {
          font-hinting       = "full";
          color-scheme       = "prefer-dark";
          icon-theme         = "Papirus-Dark";
-         cursor-theme       = "Catppuccin-Mocha-Mauve-Cursors";
+         cursor-theme       = "catppuccin-mocha-mauve-cursors";
          gtk-theme          = "Catppuccin-Mocha-Compact-Mauve-Dark";
        };
      };
