@@ -1,7 +1,6 @@
 { ... }:
 
 {
- gnome.enable        = true;
  services.tlp.enable = false;
 
  jovian = {

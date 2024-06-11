@@ -22,7 +22,9 @@ in {
      };
    };
 
-   environment = with pkgs; with gnome; with gnomeExtensions; {
+   environment = with pkgs;
+                 with gnome;
+                 with gnomeExtensions; {
      systemPackages = [
        amberol
        celluloid
@@ -38,6 +40,7 @@ in {
        epiphany
        geary
        gnome-tour
+       gnome-maps
        gnome-music
        gnome-contacts
        gnome-characters
@@ -67,25 +70,15 @@ in {
      gtk.enable = true;
 
      dconf.settings = {
-       "org/gnome/system/location" = {
-         enabled = true;
-       };
-
-       "org/gnome/mutter" = {
-         edge-tiling = true;
-       };
+       "org/gnome/mutter".edge-tiling                               = true;
+       "org/gnome/system/location".enabled                          = true;
+       "org/gnome/desktop/datetime".automatic-timezone              = true;
+       "org/gnome/desktop/a11y".always-show-universal-access-status = true;
+       "org/gnome/desktop/session".idle-delay                       = mkUint32 0;
 
        "org/gnome/desktop/peripherals/touchpad" = {
          tap-to-click   = true;
          natural-scroll = true;
-       };
-
-       "org/gnome/desktop/session" = {
-         idle-delay = mkUint32 60;
-       };
-
-       "org/gnome/desktop/datetime" = {
-         automatic-timezone = true;
        };
 
        "org/gnome/desktop/privacy" = {
@@ -94,18 +87,16 @@ in {
          remove-old-temp-files  = true;
        };
 
-       "org/gnome/desktop/a11y" = {
-         always-show-universal-access-status = true;
+       "org/gnome/desktop/interface" = {
+         enable-hot-corners = true;
+         clock-show-weekday = false;
+         color-scheme       = "prefer-dark";
        };
 
        "org/gnome/settings-daemon/plugins/power" = {
          sleep-inactive-battery-type = "nothing";
          sleep-inactive-ac-type      = "nothing";
          power-button-action         = "interactive";
-       };
-
-       "org/gnome/shell/extensions/user-theme" = {
-         name = "Catppuccin-Mocha-Compact-Mauve-Dark";
        };
 
        "org/gnome/settings-daemon/plugins/color" = {
@@ -129,17 +120,6 @@ in {
          enabled-extensions = [ 
            "user-theme@gnome-shell-extensions.gcampax.github.com"
          ];
-       };
-
-       "org/gnome/desktop/interface" = {
-         enable-hot-corners = true;
-         clock-show-weekday = false;
-         font-antialiasing  = "rgba";
-         font-hinting       = "full";
-         color-scheme       = "prefer-dark";
-         icon-theme         = "Papirus-Dark";
-         gtk-theme          = "Catppuccin-Mocha-Compact-Mauve-Dark";
-         cursor-theme       = mkForce "catppuccin-mocha-mauve-cursors";
        };
      };
    };

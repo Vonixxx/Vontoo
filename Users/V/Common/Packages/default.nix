@@ -7,13 +7,10 @@ with gnome;
 
 {
  environment.systemPackages = [
-   ###############
-   # Programming #
-   ###############
-   ghc
    ######################
    # Terminal Utilities #
    ######################
+   curl
    du-dust
    efibootmgr
    ffmpeg

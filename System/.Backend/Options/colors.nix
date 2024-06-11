@@ -5,7 +5,7 @@
 
 let
  inherit (lib.types)
-  int str bool package;
+  bool;
 
  inherit (lib)
   mkOption;
@@ -14,28 +14,6 @@ in {
    enable = mkOption {
      type    = bool;
      default = false;
-   };
-
-   cursor = {
-     enable = mkOption {
-       type    = bool;
-       default = false;
-     };
-
-     size = mkOption {
-       default = 32;
-       type    = int;
-     };
-
-     name = mkOption {
-       type    = str;
-       default = "Vanilla-DMZ";
-     };
-
-     package = mkOption {
-       default = package;
-       type    = pkgs.vanilla-dmz;
-     };
    };
  };
 }

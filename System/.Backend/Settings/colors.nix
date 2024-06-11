@@ -7,7 +7,7 @@
 
 let
  inherit (lib)
-  mkIf mkMerge;
+  mkIf mkForce mkMerge;
 
  cfg = config.style.colors;
 in {
@@ -16,17 +16,26 @@ in {
      catppuccin.enable = true;
 
      home-manager.users."${username}" = {
-       catppuccin.enable                 = true;
-       programs.waybar.catppuccin.enable = false;
+       imports = [
+         catppuccin.homeManagerModules.catppuccin
+       ];
+
+       catppuccin.enable = true;
 
        gtk.catppuccin = {
          size   = "compact";
          tweaks = [ "rimless" ];
        };
 
-       imports = [
-         catppuccin.homeManagerModules.catppuccin
-       ];
+       dconf.settings = {
+         "org/gnome/shell/extensions/user-theme".name = "Catppuccin-Mocha-Compact-Mauve-Dark";
+
+         "org/gnome/desktop/interface" = {
+           icon-theme   = "Papirus-Dark";
+           gtk-theme    = "Catppuccin-Mocha-Compact-Mauve-Dark";
+           cursor-theme = mkForce "catppuccin-mocha-mauve-cursors";
+         };
+       };
      };
    })
  ];

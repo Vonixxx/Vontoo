@@ -103,29 +103,9 @@ in {
        default = hm.gtk.enable;
      };
 
-     foot.enable = mkOption {
-       type    = bool;
-       default = hm.programs.foot.enable;
-     };
-
-     mako.enable = mkOption {
-       type    = bool;
-       default = hm.programs.mako.enable;
-     };
-
      helix.enable = mkOption {
        type    = bool;
        default = hm.programs.helix.enable;
-     };
-
-     bemenu.enable = mkOption {
-       type    = bool;
-       default = hm.programs.bemenu.enable;
-     };
-
-     waybar.enable = mkOption {
-       type    = bool;
-       default = hm.programs.waybar.enable;
      };
    };
  };

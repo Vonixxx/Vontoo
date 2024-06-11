@@ -1,41 +1,16 @@
-{ pkgs
-, ... 
-}:
+{ ... }:
 
 {
- foot.enable          = true;
- mako.enable          = true;
- bemenu.enable        = true;
- waybar.enable        = true;
- amd-cpu.enable       = true;
- amd-gpu.enable       = true;
- hyprland.enable      = true;
- services.gvfs.enable = true;
-
- xdg.portal = {
-   enable = true;
-
-   config.common.default = [
-     "gtk"
-   ];
-
-   extraPortals = with pkgs; [
-     xdg-desktop-portal-gtk
-     xdg-desktop-portal-hyprland
-   ];
- };
+ amd-cpu.enable = true;
+ amd-gpu.enable = true;
 
  services = {
+   tlp.enable = false;
+
    nginx = {
      enable = true;
    };
  };
-
- environment.loginShellInit = ''
-    if [ "$(tty)" = "/dev/tty1" ]; then
-      exec Hyprland
-    fi
- '';
 
  networking = {
    useDHCP                          = false;

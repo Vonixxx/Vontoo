@@ -6,7 +6,6 @@ let
  inherit (pkgs)
   runCommandNoCC;
 in {
- gnome.enable        = true;
  intel-cpu.enable    = true;
  intel-gpu.enable    = true;
  services.tlp.enable = false;

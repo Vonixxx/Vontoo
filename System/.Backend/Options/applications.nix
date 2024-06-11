@@ -30,16 +30,6 @@ in {
      default = false;
    };
 
-   foot.enable = mkOption {
-     type    = bool;
-     default = false;
-   };
-
-   mako.enable = mkOption {
-     type    = bool;
-     default = false;
-   };
-
    atuin.enable = mkOption {
      type    = bool;
      default = false;
@@ -47,25 +37,10 @@ in {
 
    gnome.enable = mkOption {
      type    = bool;
-     default = false;
+     default = true;
    };
 
    helix.enable = mkOption {
-     type    = bool;
-     default = false;
-   };
-
-   bemenu.enable = mkOption {
-     type    = bool;
-     default = false;
-   };
-
-   sioyek.enable = mkOption {
-     type    = bool;
-     default = false;
-   };
-
-   waybar.enable = mkOption {
      type    = bool;
      default = false;
    };
@@ -87,11 +62,6 @@ in {
 
    freetube.enable = mkOption {
      type    = bool;
-     default = true;
-   };
-
-   hyprland.enable = mkOption {
-     type    = bool;
      default = false;
    };
 
@@ -106,11 +76,6 @@ in {
    };
 
    intel-gpu.enable = mkOption {
-     type    = bool;
-     default = false;
-   };
-
-   kdenlive-obs.enable = mkOption {
      type    = bool;
      default = false;
    };

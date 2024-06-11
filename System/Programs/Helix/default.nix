@@ -14,8 +14,9 @@ in {
      helix = {
        enable = true;
 
-       extraPackages = with pkgs; [
-         haskell-language-server
+       extraPackages = with pkgs;
+                       with nodePackages_latest; [
+         bash-language-server
          marksman
          nil
        ];

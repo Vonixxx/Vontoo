@@ -16,6 +16,11 @@ in {
    powerManagement.cpuFreqGovernor  = "ondemand";
    nixpkgs.hostPlatform             = "x86_64-linux";
 
+   environment.variables = {
+     NIXOS_OZONE_WL = "1";
+     BROWSER        = "firefox";
+   };
+
    security = {
      rtkit.enable            = true;
      polkit.enable           = true;

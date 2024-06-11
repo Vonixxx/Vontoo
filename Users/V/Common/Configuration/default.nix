@@ -11,11 +11,9 @@
  helix.enable = true;
 
  environment.variables = {
-   NIXOS_OZONE_WL = "1";
-   EDITOR         = "hx";
-   VISUAL         = "hx";
-   BROWSER        = "firefox";
-   PF_INFO        = "ascii title uptime pkgs kernel memory os host";
+   EDITOR  = "hx";
+   VISUAL  = "hx";
+   PF_INFO = "ascii title uptime pkgs kernel memory os host";
  };
 
  home-manager.users."${username}" = {
