@@ -7,9 +7,11 @@
 
 let
  inherit (lib)
-  mkIf mkForce;
+  mkIf;
 in {
  config = mkIf (config.gnome.enable) {
+   programs.dconf.enable = true;
+
    services = {
      xserver = {
        enable                      = true;
@@ -74,6 +76,7 @@ in {
        "org/gnome/system/location".enabled                          = true;
        "org/gnome/desktop/datetime".automatic-timezone              = true;
        "org/gnome/desktop/a11y".always-show-universal-access-status = true;
+       "org/gnome/Console".audible-bell                             = false;
        "org/gnome/desktop/session".idle-delay                       = mkUint32 0;
 
        "org/gnome/desktop/peripherals/touchpad" = {
@@ -106,7 +109,7 @@ in {
        };
 
        "org/gnome/desktop/wm/preferences" = {
-         num-workspaces = 5;
+         num-workspaces = 4;
          button-layout  = "appmenu:minimize,maximize,close";
        };
 
@@ -115,6 +118,12 @@ in {
 
          disabled-extensions = [
            ""
+         ];
+
+         favorite-apps = [
+           "firefox.desktop"
+           "startcenter.desktop"
+           "org.gnome.Nautilus.desktop"
          ];
 
          enabled-extensions = [ 

@@ -9,12 +9,9 @@ let
   mkIf mkDefault;
 in {
  config = mkIf (config.general-configuration.enable) {
-   programs.dconf.enable            = true;
-   networking.networkmanager.enable = true;
-   documentation.nixos.enable       = false;
-   system.stateVersion              = "24.11";
-   powerManagement.cpuFreqGovernor  = "ondemand";
-   nixpkgs.hostPlatform             = "x86_64-linux";
+   documentation.nixos.enable      = false;
+   system.stateVersion             = "24.11";
+   powerManagement.cpuFreqGovernor = "ondemand";
 
    environment.variables = {
      NIXOS_OZONE_WL = "1";
@@ -25,6 +22,11 @@ in {
      rtkit.enable            = true;
      polkit.enable           = true;
      sudo.wheelNeedsPassword = false;
+   };
+
+   networking = {
+     networkmanager.enable = true;
+     hostName              = "vontoo";
    };
 
    hardware = {
