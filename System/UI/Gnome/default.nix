@@ -13,6 +13,8 @@ in {
    programs.dconf.enable = true;
 
    services = {
+     power-profiles-daemon.enable = false;
+
      xserver = {
        enable                      = true;
        desktopManager.gnome.enable = true;
@@ -84,16 +86,15 @@ in {
          natural-scroll = true;
        };
 
+       "org/gnome/desktop/interface" = {
+         enable-hot-corners = true;
+         clock-show-weekday = false;
+       };
+
        "org/gnome/desktop/privacy" = {
          recent-files-max-age   = 30;
          remove-old-trash-files = true;
          remove-old-temp-files  = true;
-       };
-
-       "org/gnome/desktop/interface" = {
-         enable-hot-corners = true;
-         clock-show-weekday = false;
-         color-scheme       = "prefer-dark";
        };
 
        "org/gnome/settings-daemon/plugins/power" = {

@@ -18,13 +18,6 @@ in {
          batman
          batgrep
        ];
-
-       config = {
-         style       = "full";
-         color       = "always";
-         decorations = "always";
-         italic-text = "always";
-       };
      };
    };
  };

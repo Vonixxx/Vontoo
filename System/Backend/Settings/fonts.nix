@@ -24,10 +24,21 @@ in {
          hinting.style = "full";
 
          defaultFonts = {
-           emoji     = [ cfg.emoji.name     ];
-           serif     = [ cfg.serif.name     ];
-           sansSerif = [ cfg.sansSerif.name ];
-           monospace = [ cfg.monospace.name ];
+           emoji = [
+             cfg.emoji.name
+           ];
+
+           serif = [
+             cfg.serif.name
+           ];
+
+           sansSerif = [
+             cfg.sansSerif.name
+           ];
+
+           monospace = [
+             cfg.monospace.name
+           ];
          };
        };
      };

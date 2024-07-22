@@ -34,10 +34,24 @@ in {
      enableRedistributableFirmware = true;
      pulseaudio.enable             = false;
 
-     opengl = {
-       enable          = true;
-       driSupport      = true;
-       driSupport32Bit = true;
+     graphics = {
+       enable      = true;
+       enable32Bit = true;
+     };
+   };
+
+   services = {
+     udev.enable      = true;
+     fstrim.enable    = true;
+     logind.lidSwitch = "poweroff";
+     tlp.enable       = mkDefault true;
+
+     pipewire = {
+       enable            = true;
+       alsa.enable       = true;
+       jack.enable       = true;
+       pulse.enable      = true;
+       alsa.support32Bit = true;
      };
    };
 
@@ -93,22 +107,6 @@ in {
      };
    };
 
-   services = {
-     udev.enable                  = true;
-     fstrim.enable                = true;
-     power-profiles-daemon.enable = false;
-     logind.lidSwitch             = "poweroff";
-     tlp.enable                   = mkDefault true;
-
-     pipewire = {
-       enable            = true;
-       alsa.enable       = true;
-       jack.enable       = true;
-       pulse.enable      = true;
-       alsa.support32Bit = true;
-     };
-   };
-
    nix = {
      gc = {
        automatic = true;
@@ -117,8 +115,12 @@ in {
      };
 
      settings = {
-       auto-optimise-store   = true;
-       experimental-features = [ "nix-command" "flakes" ];
+       auto-optimise-store = true;
+
+       experimental-features = [
+         "flakes"
+         "nix-command"
+       ];
      };
    }; 
  };

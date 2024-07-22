@@ -1,41 +1,36 @@
 ##########
 # Vontoo #
-########################
-# A Flake-based NixOS  #
-# System Configuration #
-########################
+####################################
+# NixOS Flake System Configuration #
+####################################
 # flake.nix
 # │
-# ├/users
+# ├/Users
 # │ └<user>
 # │
-# └/system
-#   ├/ui
-#   │ ├/gnome
-#   │ └/hyprland
+# └/System
+#   ├/UI
+#   │ ├/Gnome
+#   │ └/Hyprland
 #   │
-#   ├/configuration
-#   │ ├/disk
-#   │ ├/model
-#   │ ├/general
-#   │ ├/options
-#   │ └/packages
+#   ├/Configuration
+#   │ ├/Disk
+#   │ ├/Model
+#   │ ├/General
+#   │ ├/Packages
+#   │ └/Impermanence
 #   │
-#   └/programs
-#     ├/bat
-#     ├/lsd
-#     ├/git
-#     ├/zsh
-#     ├/foot
-#     ├/mako
-#     ├/atuin
-#     ├/helix
-#     ├/bemenu
-#     ├/waybar
-#     ├/firefox
-#     ├/freetube
-#     ├/printing
-#     └/kdenlive-obs
+#   └/Programs
+#     ├/Bat
+#     ├/LSD
+#     ├/Git
+#     ├/ZSH
+#     ├/Foot
+#     ├/Atuin
+#     ├/Helix
+#     ├/Firefox
+#     ├/Freetube
+#     ├/Printing
 {
  inputs = {
    ##########################
@@ -52,7 +47,6 @@
    ##########################
    # Community Repositories #
    ##########################
-   catppuccin.url   = "github:catppuccin/nix";
    disko.url        = "github:nix-community/disko";
    arkenfox.url     = "github:dwarfmaster/arkenfox-nixos";
    home-manager.url = "github:nix-community/home-manager";
@@ -65,7 +59,6 @@
  , jovian
  , nixpkgs
  , arkenfox
- , catppuccin
  , home-manager
  , impermanence
  , ...
@@ -75,12 +68,11 @@ let
  userModules = profile: [
    (./Users + "${profile}")
  ];
- 
+
  systemModules = [
    ./System
    disko.nixosModules.disko
    arkenfox.hmModules.arkenfox
-   catppuccin.nixosModules.catppuccin
    home-manager.nixosModules.home-manager
    impermanence.nixosModules.impermanence
  ];
@@ -127,7 +119,6 @@ let
        pkgs
        arkenfox
        username
-       catppuccin
        impermanence;
      };
 

@@ -26,7 +26,7 @@ let
    };
  };
 in {
- config.style.fonts.packages = [
+ cfg.packages = [
    cfg.emoji.package
    cfg.serif.package
    cfg.monospace.package
@@ -67,6 +67,7 @@ in {
 
    serif = mkOption {
      type = fontType;
+
      default = {
        name    = "DejaVu Serif";
        package = pkgs.dejavu_fonts;
@@ -83,6 +84,7 @@ in {
 
    monospace = mkOption {
      type = fontType;
+
      default = {
        name    = "DejaVu Mono";
        package = pkgs.dejavu_fonts;
@@ -91,6 +93,7 @@ in {
 
    emoji = mkOption {
      type = fontType;
+
      default = {
        name    = "NotoColorEmoji";
        package = pkgs.noto-fonts-color-emoji;

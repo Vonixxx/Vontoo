@@ -27,9 +27,6 @@ in {
          hideActiveSubscriptions = false;
          defaultQuality          = "720";
          listType                = "list";
-         baseTheme               = "catppuccinMocha";
-         mainColor               = "CatppuccinMochaRed";
-         secColor                = "CatppuccinMochaLavender";
        };
      };
    };

@@ -25,7 +25,6 @@ in {
          };
 
          settings = {
-           "ui.systemUsesDarkTheme"                              = 1;
            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
            "browser.urlbar.suggest.history"                      = false;
            "browser.newtabpage.activity-stream.feeds.topsites"   = false;
