@@ -26,7 +26,7 @@ let
    };
  };
 in {
- cfg.packages = [
+ config.style.fonts.packages = [
    cfg.emoji.package
    cfg.serif.package
    cfg.monospace.package
