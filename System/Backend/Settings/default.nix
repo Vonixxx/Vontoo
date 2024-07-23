@@ -12,8 +12,8 @@ let
   toString;
 
  cfgFonts   = config.style.fonts;
- cfgAdwaita = config.style.cursor;
- cfgCursor  = config.style.adwaita;
+ cfgCursor  = config.style.colors.cursor;
+ cfgAdwaita = config.style.colors.adwaita;
 in {
  config = mkMerge [
    (mkIf cfgFonts.enable {
@@ -56,14 +56,14 @@ in {
        home.pointerCursor = {
          x11.enable = true;
          gtk.enable = true;
-         name       = config.style.cursor.settings.name;
-         size       = config.style.cursor.settings.size;
-         package    = config.style.cursor.settings.package;
+         name       = cfgCursor.settings.name;
+         size       = cfgCursor.settings.size;
+         package    = cfgCursor.settings.package;
        };
      };
    })
 
-   (mkIf cfgFonts.enable && config.firefox.enable {
+   (mkIf (cfgFonts.enable && config.firefox.enable) {
      home-manager.users."${username}".programs.firefox.profiles.default.settings = {
        "font.name.serif.x-western"      = cfgFonts.serif.name;
        "font.name.monospace.x-western"  = cfgFonts.monospace.name;
@@ -71,7 +71,7 @@ in {
      };
    })
 
-   (mkIf cfgFonts.enable && config.gnome.enable {
+   (mkIf (cfgFonts.enable && config.gnome.enable) {
      home-manager.users."${username}".dconf.settings = {
        "org/gnome/desktop/interface" = {
          font-hinting        = "full";
@@ -83,7 +83,7 @@ in {
      };
    })
 
-   (mkIf cfgAdwaita.enable && config.freetube.enable {
+   (mkIf (cfgAdwaita.enable && config.freetube.enable) {
      home-manager.users."${username}" = {
        programs.freetube.settings = {
          mainColor = "Red";
@@ -93,7 +93,7 @@ in {
      };
    })
 
-   (mkIf cfgAdwaita.enable && config.bat.enable {
+   (mkIf (cfgAdwaita.enable && config.bat.enable) {
      home-manager.users."${username}" = {
        programs.bat.config = {
          style       = "full";
@@ -105,7 +105,7 @@ in {
      };
    })
 
-   (mkIf cfgAdwaita.enable && config.helix.enable {
+   (mkIf (cfgAdwaita.enable && config.helix.enable) {
      home-manager.users."${username}" = {
        programs.helix.settings = {
          editor.true-color = true;
@@ -118,12 +118,12 @@ in {
      home-manager.users."${username}" = {
        dconf.settings."org/gnome/desktop/interface" = {
          color-scheme = "prefer-dark";
-         cursor-theme = config.style.cursor.settings.name;
+         cursor-theme = cfgCursor.settings.name;
        };
      };
    })
 
-   (mkIf cfgAdwaita.enable && config.firefox.enable {
+   (mkIf (cfgAdwaita.enable && config.firefox.enable) {
      home-manager.users."${username}" = {
        programs.firefox = {
          profiles.default.settings."ui.systemUsesDarkTheme" = 1;

@@ -1,8 +1,8 @@
 { ... }:
 
 {
- amd-cpu.enable = true;
- amd-gpu.enable = true;
+ amd_cpu.enable = true;
+ amd_gpu.enable = true;
 
  services = {
    tlp.enable = false;

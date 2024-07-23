@@ -4,8 +4,8 @@
 
 {
  printing.enable     = true;
- intel-cpu.enable    = true;
- intel-gpu.enable    = true;
+ intel_cpu.enable    = true;
+ intel_gpu.enable    = true;
  services.tlp.enable = false;
 
  home-manager.users."${username}" = {

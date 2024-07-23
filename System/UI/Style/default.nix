@@ -4,7 +4,7 @@
 
 {
  style = {
-   cursor = {
+   colors.cursor = {
      settings = {
        size    = 32;
        name    = "Bibata-Modern-Ice";
