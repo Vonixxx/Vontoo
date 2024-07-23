@@ -28,6 +28,37 @@ in {
    };
 
    home-manager.users."${username}".programs = {
+     zsh = {
+       enable         = true;
+       initExtraFirst = "pfetch";
+
+       prezto = {
+         enable        = true;
+         caseSensitive = false;
+
+         pmodules = [
+           "environment"
+
+           "syntax-highlighting"
+           "autosuggestions"
+
+           "helper"
+           "editor"
+           "history"
+           "utility"
+           "directory"
+
+           "archive"
+           "completion"
+         ];
+
+         editor = {
+           keymap       = "vi";
+           dotExpansion = true;
+         };
+       };
+     };
+
      starship = {
        enable               = true;
        enableZshIntegration = true;
@@ -60,42 +91,6 @@ in {
            read_only_style = "bold red";
            style           = "bold green";
            format          = "[$path]($style) [$read_only]($read_only_style)";
-         };
-       };
-     };
-
-     zsh = {
-       enable         = true;
-       initExtraFirst = "pfetch";
-
-       shellAliases = {
-         ls  = "lsd";
-         cat = "bat";
-       };
-
-       prezto = {
-         enable        = true;
-         caseSensitive = false;
-
-         pmodules = [
-           "environment"
-
-           "syntax-highlighting"
-           "autosuggestions"
-
-           "helper"
-           "editor"
-           "history"
-           "utility"
-           "directory"
-
-           "archive"
-           "completion"
-         ];
-
-         editor = {
-           keymap       = "vi";
-           dotExpansion = true;
          };
        };
      };

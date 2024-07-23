@@ -9,6 +9,10 @@ let
   mkIf;
 in {
  config = mkIf (config.lsd.enable) {
+   environment.shellAliases = {
+     ls = "lsd";
+   };
+
    home-manager.users."${username}".programs = {
      lsd = {
        enable = true;

@@ -10,9 +10,8 @@ let
   mkIf;
 in {
  config = mkIf (config.printing.enable) {
-   users.users."${username}".extraGroups = [ "lp" "scanner" ];
-
    services = {
+     saned.enable   = true;
      ipp-usb.enable = true;
 
      avahi = {
@@ -29,31 +28,33 @@ in {
        startWhenNeeded = false;
 
        drivers = with pkgs; [
-         brlaser
-         brgenml1lpr
-         brgenml1cupswrapper
+         hplip
          gutenprint
          gutenprintBin
-         hplip
-         postscript-lexmark
        ];
      };
    };
 
    hardware.sane = {
-     enable                  = true;
-     openFirewall            = true;
-     brscan4.enable          = true;
-     brscan5.enable          = true;
-     dsseries.enable         = true;
-     disabledDefaultBackends = [ "escl" ];
+     enable          = true;
+     openFirewall    = true;
+     brscan4.enable  = true;
+     brscan5.enable  = true;
+     dsseries.enable = true;
+
+     disabledDefaultBackends = [
+       "escl"
+     ];
 
      extraBackends = with pkgs; [
-       epkowa
-       hplipWithPlugin
        sane-airscan
-       utsushi
+       sane-backends
      ];
    };
+
+   users.users."${username}".extraGroups = [
+     "lp"
+     "scanner"
+   ];
  };
 }

@@ -10,6 +10,12 @@ let
   mkIf;
 in {
  config = mkIf (config.bat.enable) {
+   environment.shellAliases = {
+     cat  = "bat";
+     man  = "batman";
+     grep = "batgrep";
+   };
+
    home-manager.users."${username}".programs = {
      bat = {
        enable = true;

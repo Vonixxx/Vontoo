@@ -1,9 +1,11 @@
-{ ... }:
+{ device ? throw
+, ...
+}:
 
 {
  zramSwap = {
    enable    = true;
-   memoryMax = 2147483648;
+   memoryMax = 4294967296;
  };
 
  disko.devices = {
@@ -18,15 +20,15 @@
    };
 
    disk.main = {
-     type   = "disk";
-     device = "/dev/nvme0n1";
+     type = "disk";
+     inherit device;
 
      content = {
        type = "gpt";
 
        partitions = {
          nix = {
-           size = "40G";
+           size = "80G";
 
            content = {
              format     = "xfs";
