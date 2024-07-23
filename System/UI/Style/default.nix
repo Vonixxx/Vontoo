@@ -5,9 +5,11 @@
 {
  style = {
    cursor = {
-     size    = 32;
-     name    = "Bibata Modern Ice";
-     package = pkgs.bibata-cursors;
+     settings = {
+       size    = 32;
+       name    = "Bibata-Modern-Ice";
+       package = pkgs.bibata-cursors;
+     };
    };
 
    fonts = {

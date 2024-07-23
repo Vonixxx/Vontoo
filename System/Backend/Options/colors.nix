@@ -17,12 +17,12 @@ let
        type = str;
      };
 
-     size = mkOption {
-       type = ints.unsigned;
-     };
-
      package = mkOption {
        type = package;
+     };
+
+     size = mkOption {
+       type = ints.unsigned;
      };
    };
  };
@@ -33,13 +33,20 @@ in {
      default = config.gnome.enable;
    };
 
-   cursor = mkOption {
-     type = cursorType;
+   cursor = {
+     enable = mkOption {
+       type    = bool;
+       default = true;
+     };
 
-     default = {
-       size    = 16;
-       package = pkgs.bibata-cursors;
-       name    = "Bibata Modern Classic";
+     settings = mkOption {
+       type = cursorType;
+
+       default = {
+         size    = 16;
+         package = pkgs.bibata-cursors;
+         name    = "Bibata Modern Classic";
+       };
      };
    };
  };

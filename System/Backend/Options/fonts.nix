@@ -76,6 +76,7 @@ in {
 
    sansSerif = mkOption {
      type = fontType;
+
      default = {
        name    = "DejaVu Sans";
        package = pkgs.dejavu_fonts;
@@ -97,18 +98,6 @@ in {
      default = {
        name    = "NotoColorEmoji";
        package = pkgs.noto-fonts-color-emoji;
-     };
-   };
-
-   targets = {
-     gtk.enable = mkOption {
-       type    = bool;
-       default = hm.gtk.enable;
-     };
-
-     helix.enable = mkOption {
-       type    = bool;
-       default = hm.programs.helix.enable;
      };
    };
  };
