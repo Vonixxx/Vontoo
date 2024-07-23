@@ -9,7 +9,7 @@ let
   mkIf mkMerge;
 in {
 config = mkMerge [
-   (mkIf config.amd-cpu.enable {
+   (mkIf config.amd_cpu.enable {
      hardware.cpu.amd.updateMicrocode = true;
 
      boot.kernelModules = [
@@ -17,7 +17,7 @@ config = mkMerge [
      ];
    })
 
-   (mkIf config.amd-gpu.enable {
+   (mkIf config.amd_gpu.enable {
      boot.kernelModules = [
        "amdgpu"
      ];
@@ -27,7 +27,7 @@ config = mkMerge [
      ];
    })
 
-   (mkIf config.intel-cpu.enable {
+   (mkIf config.intel_cpu.enable {
      hardware.cpu.intel.updateMicrocode = true;
 
      boot.kernelModules = [
@@ -35,7 +35,7 @@ config = mkMerge [
      ];
    })
 
-   (mkIf config.intel-gpu.enable {
+   (mkIf config.intel_gpu.enable {
      boot.kernelModules = [
        "i915"
      ];

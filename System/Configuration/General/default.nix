@@ -8,7 +8,7 @@ let
  inherit (lib)
   mkIf mkDefault;
 in {
- config = mkIf (config.general-configuration.enable) {
+ config = mkIf (config.general_configuration.enable) {
    documentation.nixos.enable      = false;
    system.stateVersion             = "24.11";
    powerManagement.cpuFreqGovernor = "ondemand";
