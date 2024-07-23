@@ -17,9 +17,9 @@ in {
        home.pointerCursor = {
          x11.enable = true;
          gtk.enable = true;
-         name       = cfgAdwaita.settings.name;
-         size       = cfgAdwaita.settings.size;
-         package    = cfgAdwaita.settings.package;
+         name       = cfgCursor.settings.name;
+         size       = cfgCursor.settings.size;
+         package    = cfgCursor.settings.package;
        };
      };
    })

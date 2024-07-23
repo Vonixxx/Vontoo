@@ -11,7 +11,7 @@ let
  inherit (lib)
   mkOption;
 
- cursorType = submodule {
+ cursorSettings = submodule {
    options = {
      name = mkOption {
        type = str;
@@ -40,7 +40,7 @@ in {
      };
 
      settings = mkOption {
-       type = cursorType;
+       type = cursorSettings;
 
        default = {
          size    = 16;

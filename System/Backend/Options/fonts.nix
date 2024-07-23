@@ -12,7 +12,6 @@ let
   str bool ints listOf package submodule;
 
  cfg = config.style.fonts;
- hm  = config.home-manager.users.vonix;
 
  fontType = submodule {
    options = {
