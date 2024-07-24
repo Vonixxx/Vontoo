@@ -42,7 +42,7 @@ The `System` and `Users` folders each have a default.nix file at their base, the
 that lie within the subfolders, which then get imported back to flake.nix in order to instantiate the system. The structure
 is arbitrary and is simply meant to provide clarity.
 
-### User-specific configurations, which can be found in Users/default.nix are done as such:
+### User-specific configuration can be done as such:
 
 ```
 <user> = mkSystem <bool> toggle TLP.
@@ -61,6 +61,7 @@ is arbitrary and is simply meant to provide clarity.
                   <list> overlays for nixpkgs.
 ```
 
+Users are configured in `Users/default.nix`, each also imports their respective user folders further down the directory tree.
 These options are provided as such, and not in their respective user folders, simply because I deemed it more convenient.
 These are basic settings each user needs to have setup for a functional system. The configuration within the respective
 user directories consists of bookmarks (for FireFox) and highly specific configuration when deemed necessary by the given user.
