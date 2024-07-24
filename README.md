@@ -29,12 +29,11 @@ flake.nix
     ├/LSD
     ├/Git
     ├/ZSH
-    ├/Foot
     ├/Atuin
     ├/Helix
     ├/Firefox
     ├/Freetube
-    ├/Printing
+    └/Printing
 ```
 
 flake.nix lies at the root of this directory, and each / represents a subfolder. Within each subfolder
