@@ -4,7 +4,13 @@
 }:
 
 {
- U_Ofelia = mkSystem "be"
+ U_Ofelia = mkSystem false
+                     true
+                     false
+                     false
+                     true
+                     true
+                     "be"
                      "en_GB.UTF-8"
                      "Europe/Brussels"
                      "Ofelia"
@@ -13,7 +19,13 @@
                      []
                      [];
 
- F_Jarka = mkSystem "cz"
+ F_Jarka = mkSystem false
+                    true
+                    false
+                    false
+                    true
+                    true
+                    "cz"
                     "cs_CZ.UTF-8"
                     "Europe/Prague"
                     "Jarka"
@@ -22,7 +34,13 @@
                     []
                     [];
 
- F_Libor = mkSystem "cz"
+ F_Libor = mkSystem false
+                    false
+                    false
+                    false
+                    true
+                    true
+                    "cz"
                     "cs_CZ.UTF-8"
                     "Europe/Prague"
                     "Libor"
@@ -31,7 +49,13 @@
                     []
                     [];
 
- F_Stepanka = mkSystem "us"
+ F_Stepanka = mkSystem true
+                       true
+                       false
+                       false
+                       true
+                       true
+                       "us"
                        "en_GB.UTF-8"
                        "Europe/Prague"
                        "Bubinka"
@@ -40,7 +64,13 @@
                        []
                        [];
 
- V_Lenovo = mkSystem "us"
+ V_Lenovo = mkSystem false
+                     false
+                     true
+                     true
+                     false
+                     false
+                     "us"
                      "en_GB.UTF-8"
                      "Europe/Brussels"
                      "Luca"
@@ -49,7 +79,13 @@
                      []
                      [];
 
- V_SteamDeck = mkSystem "us"
+ V_SteamDeck = mkSystem false
+                        false
+                        false
+                        false
+                        false
+                        false
+                        "us"
                         "en_GB.UTF-8"
                         "Europe/Brussels"
                         "Luca"

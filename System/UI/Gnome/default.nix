@@ -1,6 +1,7 @@
 { lib
 , pkgs
 , config
+, keymap
 , username
 , ...
 }:
@@ -61,9 +62,10 @@ in {
      ];
    };
 
-   home-manager.users."${username}" = { lib
-                                      , ...
-                                      }:
+   home-manager.users."${username}" =
+   { lib
+   , ...
+   }:
 
    let
     inherit (lib)
@@ -82,9 +84,10 @@ in {
        "org/gnome/Console".audible-bell                             = false;
        "org/gnome/desktop/session".idle-delay                       = mkUint32 0;
 
-       "org/gnome/desktop/peripherals/touchpad" = {
-         tap-to-click   = true;
-         natural-scroll = true;
+       "org/gnome/desktop/privacy" = {
+         recent-files-max-age   = 30;
+         remove-old-trash-files = true;
+         remove-old-temp-files  = true;
        };
 
        "org/gnome/desktop/interface" = {
@@ -92,11 +95,14 @@ in {
          clock-show-weekday = false;
        };
 
-       "org/gnome/desktop/privacy" = {
-         recent-files-max-age   = 30;
-         remove-old-trash-files = true;
-         remove-old-temp-files  = true;
+       "org/gnome/desktop/peripherals/touchpad" = {
+         tap-to-click   = true;
+         natural-scroll = true;
        };
+
+       "org/gnome/desktop/input-sources".sources = [
+         "('xkb', '${keymap}')"
+       ];
 
        "org/gnome/settings-daemon/plugins/power" = {
          sleep-inactive-battery-type = "nothing";

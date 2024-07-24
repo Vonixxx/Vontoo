@@ -1,8 +1,6 @@
 { ... }:
 
 {
- services.tlp.enable = false;
-
  jovian = {
    hardware.has.amd.gpu = true;
 

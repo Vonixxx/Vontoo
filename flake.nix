@@ -65,87 +65,63 @@
  }:
 
 let
+ userProfile =
+ profile: [
+   (./Users + profile)
+ ];
+
  defaultModules =
- extraModules: [
-   ./System
-   disko.nixosModules.disko
-   arkenfox.hmModules.arkenfox
-   home-manager.nixosModules.home-manager
-   impermanence.nixosModules.impermanence
+ extraModules:[
+  ./System
+  disko.nixosModules.disko
+  arkenfox.hmModules.arkenfox
+  home-manager.nixosModules.home-manager
+  impermanence.nixosModules.impermanence
  ] ++ extraModules;
 
- userConfiguration =
+ mkSystem =
+ tlp:
+ printing:
+ amd_cpu:
+ amd_gpu:
+ intel_cpu:
+ intel_gpu:
  keymap:
  locale:
  timezone:
  username:
  profile:
- password: [
-   (./Users + "${profile}")
-
-   ({ config, ...}: {
-     i18n.defaultLocale          = "${locale}";
-     services.xserver.xkb.layout = "${keymap}";
-     time.timeZone               = "${timezone}";
-
-     home-manager.users."${username}" = {
-       dconf.settings."org/gnome/desktop/input-sources".sources = [
-         "('xkb', '${keymap}')"
-       ];
-     };
-
-     users.users = {
-       root.initialHashedPassword = "${password}";
-
-       "${username}" = {
-         uid                   = 1000;
-         isNormalUser          = true;
-         name                  = "${username}";
-         initialHashedPassword = "${password}";
-         home                  = "/home/" + "${username}";
-
-         extraGroups = [
-           "audio"
-           "video"
-           "wheel"
-           "networkmanager"
-         ];
-       };
-     };
-   })
- ];
-
- mkSystem = keymap:
-            locale:
-            timezone:
-            username:
-            profile:
-            password:
-            extraModules:
-            extraOverlays:
-   nixpkgs.lib.nixosSystem rec {
-     specialArgs = {
-       inherit
-       pkgs
-       arkenfox
-       username
-       impermanence;
-     };
-
-     pkgs = import nixpkgs {
-       config.allowUnfree = true;
-       overlays           = extraOverlays;
-       system             = "x86_64-linux";
-     };
-
-     modules = (defaultModules extraModules)
-               ++ (userConfiguration keymap
-                                     locale
-                                     timezone
-                                     username
-                                     profile
-                                     password);
+ password:
+ extraModules:
+ extraOverlays:
+ nixpkgs.lib.nixosSystem rec {
+   specialArgs = {
+     inherit
+     tlp
+     pkgs
+     keymap
+     locale
+     amd_cpu
+     amd_gpu
+     arkenfox
+     password
+     printing
+     timezone
+     username
+     intel_cpu
+     intel_gpu
+     impermanence;
    };
+
+   pkgs = import nixpkgs {
+     config.allowUnfree = true;
+     overlays           = extraOverlays;
+     system             = "x86_64-linux";
+   };
+
+   modules = (userProfile profile)
+             ++ (defaultModules extraModules);
+ };
 in {
    nixosConfigurations = (
      import ./Users {

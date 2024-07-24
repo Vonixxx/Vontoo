@@ -1,6 +1,11 @@
 { lib
 , pkgs
 , config
+, amd_cpu
+, amd_gpu
+, printing
+, intel_cpu
+, intel_gpu
 , ...
 }:
 
@@ -78,12 +83,12 @@ in {
 
    amd_cpu.enable = mkOption {
      type    = bool;
-     default = false;
+     default = amd_cpu;
    };
 
    amd_gpu.enable = mkOption {
      type    = bool;
-     default = false;
+     default = amd_gpu;
    };
 
    firefox.enable = mkOption {
@@ -98,17 +103,17 @@ in {
 
    printing.enable = mkOption {
      type    = bool;
-     default = false;
+     default = printing;
    };
 
    intel_cpu.enable = mkOption {
      type    = bool;
-     default = false;
+     default = intel_cpu;
    };
 
    intel_gpu.enable = mkOption {
      type    = bool;
-     default = false;
+     default = intel_gpu;
    };
 
    general_configuration.enable = mkOption {

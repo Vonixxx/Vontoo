@@ -1,17 +1,24 @@
 { lib
+, tlp
 , config
+, keymap
+, locale
+, password
+, timezone
 , username
 , ...
 }:
 
 let
  inherit (lib)
-  mkIf mkDefault;
+  mkIf;
 in {
  config = mkIf (config.general_configuration.enable) {
    documentation.nixos.enable      = false;
    system.stateVersion             = "24.11";
    powerManagement.cpuFreqGovernor = "ondemand";
+   i18n.defaultLocale              = "${locale}";
+   time.timeZone                   = "${timezone}";
 
    environment.variables = {
      NIXOS_OZONE_WL = "1";
@@ -40,9 +47,10 @@ in {
    };
 
    services = {
-     fstrim.enable    = true;
-     logind.lidSwitch = "poweroff";
-     tlp.enable       = mkDefault true;
+     tlp.enable         = tlp;
+     fstrim.enable      = true;
+     logind.lidSwitch   = "poweroff";
+     xserver.xkb.layout = "${keymap}";
 
      pipewire = {
        enable            = true;
@@ -119,6 +127,25 @@ in {
        experimental-features = [
          "flakes"
          "nix-command"
+       ];
+     };
+   };
+
+   users.users = {
+     root.initialHashedPassword = "${password}";
+
+     "${username}" = {
+       uid                   = 1000;
+       isNormalUser          = true;
+       name                  = "${username}";
+       initialHashedPassword = "${password}";
+       home                  = "/home/" + "${username}";
+
+       extraGroups = [
+         "audio"
+         "video"
+         "wheel"
+         "networkmanager"
        ];
      };
    };

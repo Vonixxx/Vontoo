@@ -1,15 +1,8 @@
 { ... }:
 
 {
- amd_cpu.enable = true;
- amd_gpu.enable = true;
-
- services = {
-   tlp.enable = false;
-
-   nginx = {
-     enable = true;
-   };
+ services.nginx = {
+   enable = true;
  };
 
  networking = {
