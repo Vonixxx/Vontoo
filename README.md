@@ -5,6 +5,7 @@
 
 ### The structure of the configuration is as such:
 
+```
 flake.nix
 │
 ├/Users
@@ -34,6 +35,7 @@ flake.nix
     ├/Firefox
     ├/Freetube
     ├/Printing
+```
 
 flake.nix lies at the root of this directory, and each / represents a subfolder. Within each subfolder
 lies a default.nix, wherein lies the configuration for the given aspect of the system as described in the parent directory.
