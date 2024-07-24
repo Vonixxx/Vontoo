@@ -31,7 +31,7 @@
                     []
                     [];
 
- F_Stepanka = mkSystem "cz"
+ F_Stepanka = mkSystem "us"
                        "en_GB.UTF-8"
                        "Europe/Prague"
                        "Bubinka"
@@ -42,7 +42,7 @@
 
  V_Lenovo = mkSystem "us"
                      "en_GB.UTF-8"
-                     "Europe/Prague"
+                     "Europe/Brussels"
                      "Luca"
                      "/V/Lenovo"
                      "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
@@ -51,7 +51,7 @@
 
  V_SteamDeck = mkSystem "us"
                         "en_GB.UTF-8"
-                        "Europe/Prague"
+                        "Europe/Brussels"
                         "Luca"
                         "/V/SteamDeck"
                         "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
