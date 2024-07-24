@@ -42,7 +42,7 @@ The `System` and `Users` folders each have a default.nix file at their base, the
 that lie within the subfolders, which then get imported back to flake.nix in order to instantiate the system. The structure
 is arbitrary and is simply meant to provide clarity.
 
-### User-specific configuration can be done as such:
+### User-specific configuration is as such:
 
 ```
 <user> = mkSystem <bool> toggle TLP.
