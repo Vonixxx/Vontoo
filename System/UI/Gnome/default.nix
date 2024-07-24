@@ -10,7 +10,8 @@ let
   mkIf;
 in {
  config = mkIf (config.gnome.enable) {
-   programs.dconf.enable = true;
+   programs.dconf.enable      = true;
+   hardware.pulseaudio.enable = false;
 
    services = {
      power-profiles-daemon.enable = false;
@@ -127,7 +128,7 @@ in {
            "org.gnome.Nautilus.desktop"
          ];
 
-         enabled-extensions = [ 
+         enabled-extensions = [
            "user-theme@gnome-shell-extensions.gcampax.github.com"
          ];
        };

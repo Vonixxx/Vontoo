@@ -32,7 +32,6 @@ in {
    hardware = {
      uinput.enable                 = true;
      enableRedistributableFirmware = true;
-     pulseaudio.enable             = false;
 
      graphics = {
        enable      = true;
@@ -41,7 +40,6 @@ in {
    };
 
    services = {
-     udev.enable      = true;
      fstrim.enable    = true;
      logind.lidSwitch = "poweroff";
      tlp.enable       = mkDefault true;
@@ -90,6 +88,7 @@ in {
 
      kernelParams = [
        "quiet"
+       "splash"
        "mitigations=off"
      ];
 

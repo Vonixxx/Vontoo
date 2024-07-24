@@ -65,31 +65,35 @@
  }:
 
 let
- userModules = profile: [
-   (./Users + "${profile}")
- ];
-
- systemModules = [
+ defaultModules =
+ extraModules: [
    ./System
    disko.nixosModules.disko
    arkenfox.hmModules.arkenfox
    home-manager.nixosModules.home-manager
    impermanence.nixosModules.impermanence
- ];
+ ] ++ extraModules;
 
- language = keymap:
-            locale:
-            timezone: [
+ userConfiguration =
+ keymap:
+ locale:
+ timezone:
+ username:
+ profile:
+ password: [
+   (./Users + "${profile}")
+
    ({ config, ...}: {
      i18n.defaultLocale          = "${locale}";
      services.xserver.xkb.layout = "${keymap}";
      time.timeZone               = "${timezone}";
-   })
- ];
 
- userConfiguration = username:
-                     password: [
-   ({ config, ...}: {
+     home-manager.users."${username}" = {
+       dconf.settings."org/gnome/desktop/input-sources".sources = [
+         "('xkb', '${keymap}')"
+       ];
+     };
+
      users.users = {
        root.initialHashedPassword = "${password}";
 
@@ -99,7 +103,13 @@ let
          name                  = "${username}";
          initialHashedPassword = "${password}";
          home                  = "/home/" + "${username}";
-         extraGroups           = [ "audio" "video" "wheel" "networkmanager" ];
+
+         extraGroups = [
+           "audio"
+           "video"
+           "wheel"
+           "networkmanager"
+         ];
        };
      };
    })
@@ -128,11 +138,13 @@ let
        system             = "x86_64-linux";
      };
 
-     modules = extraModules
-               ++ systemModules
-               ++ (userModules profile)
-               ++ (language keymap locale timezone)
-               ++ (userConfiguration username password);
+     modules = (defaultModules extraModules)
+               ++ (userConfiguration keymap
+                                     locale
+                                     timezone
+                                     username
+                                     profile
+                                     password);
    };
 in {
    nixosConfigurations = (
