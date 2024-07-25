@@ -1,5 +1,6 @@
 { pkgs
 , userPackages
+, extraOverlays
 , ...
 }:
 
@@ -20,9 +21,14 @@ let
     fi
  '';
 in {
- hardware.graphics.extraPackages = with pkgs; [
-   libvdpau-va-gl
-   vaapiVdpau
+ nixpkgs = {
+   overlays = extraOverlays;
+   system   = "x86_64-linux";
+ };
+
+ services.udev.packages = with pkgs; [
+   android-udev-rules
+   game-devices-udev-rules
  ];
 
  environment.systemPackages = with pkgs; [
@@ -30,8 +36,8 @@ in {
    update
  ] ++ userPackages;
 
- services.udev.packages = with pkgs; [
-   android-udev-rules
-   game-devices-udev-rules
+ hardware.graphics.extraPackages = with pkgs; [
+   libvdpau-va-gl
+   vaapiVdpau
  ];
 }

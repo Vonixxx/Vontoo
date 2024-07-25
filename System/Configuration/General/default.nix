@@ -64,7 +64,7 @@ in {
    home-manager = {
      backupFileExtension = "backup";
 
-     users."${username}" = {
+     users.${username} = {
        programs.home-manager.enable = true;
 
        home = {
@@ -134,7 +134,7 @@ in {
    users.users = {
      root.initialHashedPassword = "${password}";
 
-     "${username}" = {
+     ${username} = {
        uid                   = 1000;
        isNormalUser          = true;
        name                  = "${username}";

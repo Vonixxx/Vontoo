@@ -37,13 +37,18 @@
  }:
 
 let
+ pkgs = import nixpkgs {
+   config.allowUnfree = true;
+   system             = "x86_64-linux";
+ };
+
  userProfile =
  profile: [
    (./Users + profile)
  ];
 
  defaultModules =
- extraModules:[
+ extraModules: [
   ./System
   disko.nixosModules.disko
   arkenfox.hmModules.arkenfox
@@ -67,7 +72,7 @@ let
  extraModules:
  extraOverlays:
  userPackages:
- nixpkgs.lib.nixosSystem rec {
+ nixpkgs.lib.nixosSystem {
    specialArgs = {
      inherit
      tlp
@@ -81,16 +86,11 @@ let
      printing
      timezone
      username
-     userPackages
      intel_cpu
      intel_gpu
-     impermanence;
-   };
-
-   pkgs = import nixpkgs {
-     config.allowUnfree = true;
-     overlays           = extraOverlays;
-     system             = "x86_64-linux";
+     userPackages
+     impermanence
+     extraOverlays;
    };
 
    modules = (userProfile profile)
@@ -100,6 +100,7 @@ in {
    nixosConfigurations = (
      import ./Users {
       inherit
+       pkgs
        jovian
        mkSystem;
      }
