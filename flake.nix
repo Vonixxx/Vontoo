@@ -66,6 +66,7 @@ let
  password:
  extraModules:
  extraOverlays:
+ userPackages:
  nixpkgs.lib.nixosSystem rec {
    specialArgs = {
      inherit
@@ -80,6 +81,7 @@ let
      printing
      timezone
      username
+     userPackages
      intel_cpu
      intel_gpu
      impermanence;

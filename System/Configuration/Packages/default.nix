@@ -1,4 +1,5 @@
 { pkgs
+, userPackages
 , ...
 }:
 
@@ -27,7 +28,7 @@ in {
  environment.systemPackages = with pkgs; [
    libreoffice-fresh
    update
- ];
+ ] ++ userPackages;
 
  services.udev.packages = with pkgs; [
    android-udev-rules
