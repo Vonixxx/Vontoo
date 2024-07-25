@@ -8,9 +8,6 @@
    ##########################
    # Synchronizing Packages #
    ##########################
-   disko.inputs.nixpkgs.follows        = "nixpkgs";
-   jovian.inputs.nixpkgs.follows       = "nixpkgs";
-   arkenfox.inputs.nixpkgs.follows     = "nixpkgs";
    home-manager.inputs.nixpkgs.follows = "nixpkgs";
    #########################
    # Official Repositories #
@@ -39,22 +36,8 @@
 let
  pkgs = import nixpkgs {
    config.allowUnfree = true;
-   system             = "x86_64-linux";
+   localSystem.system = "x86_64-linux";
  };
-
- userProfile =
- profile: [
-   (./Users + profile)
- ];
-
- defaultModules =
- extraModules: [
-  ./System
-  disko.nixosModules.disko
-  arkenfox.hmModules.arkenfox
-  home-manager.nixosModules.home-manager
-  impermanence.nixosModules.impermanence
- ] ++ extraModules;
 
  mkSystem =
  tlp:
@@ -72,7 +55,7 @@ let
  extraModules:
  extraOverlays:
  userPackages:
- nixpkgs.lib.nixosSystem {
+ nixpkgs.lib.nixosSystem rec {
    specialArgs = {
      inherit
      tlp
@@ -93,8 +76,21 @@ let
      extraOverlays;
    };
 
-   modules = (userProfile profile)
-             ++ (defaultModules extraModules);
+   pkgs = import nixpkgs {
+     config.allowUnfree = true;
+     overlays           = extraOverlays;
+     localSystem.system = "x86_64-linux";
+   };
+
+   modules = [
+    (./Users + profile)
+   ] ++ [
+    ./System
+    disko.nixosModules.disko
+    arkenfox.hmModules.arkenfox
+    home-manager.nixosModules.home-manager
+    impermanence.nixosModules.impermanence
+   ] ++ extraModules;
  };
 in {
    nixosConfigurations = (

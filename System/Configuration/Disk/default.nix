@@ -48,7 +48,7 @@
          };
 
          persist = {
-           size = "512M";
+           size = "2G";
 
            content = {
              format     = "xfs";

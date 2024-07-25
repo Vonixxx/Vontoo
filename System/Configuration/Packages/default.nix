@@ -1,6 +1,5 @@
 { pkgs
 , userPackages
-, extraOverlays
 , ...
 }:
 
@@ -21,11 +20,6 @@ let
     fi
  '';
 in {
- nixpkgs = {
-   overlays = extraOverlays;
-   system   = "x86_64-linux";
- };
-
  services.udev.packages = with pkgs; [
    android-udev-rules
    game-devices-udev-rules
