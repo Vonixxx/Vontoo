@@ -57,15 +57,13 @@
 
          "2800" = {
            "2811" = {
-             "privacy.clearOnShutdown.formdata".value  = true;
-             "privacy.clearOnShutdown.downloads".value = true;
-             "privacy.clearOnShutdown.cache".value     = false;
-             "privacy.clearOnShutdown.history".value   = false;
+             "privacy.clearOnShutdown.formdata".value                 = true;
+             "privacy.clearOnShutdown_v2.cache".value                 = false;
+             "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
            };
 
            "2815" = {
-             "privacy.clearOnShutdown.cookies".value     = false;
-             "privacy.clearOnShutdown.offlineApps".value = false;
+             "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
            };
          };
 
