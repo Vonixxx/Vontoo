@@ -56,6 +56,8 @@ let
  extraOverlays:
  userPackages:
  nixpkgs.lib.nixosSystem rec {
+   system = "x86_64-linux";
+
    specialArgs = {
      inherit
      tlp

@@ -23,92 +23,92 @@
 #
 
 with pkgs; {
- U_Ofelia = mkSystem false
-                     true
-                     false
-                     false
-                     true
-                     true
-                     "be"
-                     "en_GB.UTF-8"
-                     "Europe/Brussels"
-                     "Ofelia"
-                     "/U/Ofelia"
-                     "$y$j9T$Bt3YhGYQoALhjeZY7MauX/$jlIcH1JuGjKz2UqTj7CEtwIbNNr8hRpqgRU7CEi0CBA"
-                     []
-                     []
-                     [];
-
- F_Jarka = mkSystem false
-                    true
-                    false
-                    false
-                    true
-                    true
-                    "cz"
-                    "cs_CZ.UTF-8"
-                    "Europe/Prague"
-                    "Jarka"
-                    "/F/Jarka"
-                    "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
-                    []
-                    []
-                    [];
-
- F_Libor = mkSystem false
-                    false
-                    false
-                    false
-                    true
-                    true
-                    "cz"
-                    "cs_CZ.UTF-8"
-                    "Europe/Prague"
-                    "Libor"
-                    "/F/Libor"
-                    "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4"
-                    []
-                    []
-                    [];
-
- F_Stepanka = mkSystem true
-                       true
-                       false
-                       false
-                       true
-                       true
-                       "us"
-                       "en_GB.UTF-8"
-                       "Europe/Prague"
-                       "Bubinka"
-                       "/F/Stepanka"
-                       "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4"
-                       []
-                       []
-                       [
-                         freecad
-                         gimp
-                         inkscape
-                         krita
-                         obs-studio
-                       ];
-
- V_Lenovo = mkSystem false
-                     false
-                     true
-                     true
-                     false
-                     false
-                     "us"
-                     "en_GB.UTF-8"
-                     "Europe/Brussels"
-                     "Luca"
-                     "/V/Lenovo"
-                     "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
-                     []
-                     []
-                     [];
-
+# U_Ofelia = mkSystem false
+#                     true
+#                     false
+#                     false
+#                     true
+#                     true
+#                     "be"
+#                     "en_GB.UTF-8"
+#                     "Europe/Brussels"
+#                     "Ofelia"
+#                     "/U/Ofelia"
+#                     "$y$j9T$Bt3YhGYQoALhjeZY7MauX/$jlIcH1JuGjKz2UqTj7CEtwIbNNr8hRpqgRU7CEi0CBA"
+#                     []
+#                     []
+#                     [];
+#
+# F_Jarka = mkSystem false
+#                    true
+#                    false
+#                    false
+#                    true
+#                    true
+#                    "cz"
+#                    "cs_CZ.UTF-8"
+#                    "Europe/Prague"
+#                    "Jarka"
+#                    "/F/Jarka"
+#                    "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
+#                    []
+#                    []
+#                    [];
+#
+# F_Libor = mkSystem false
+#                    false
+#                    false
+#                    false
+#                    true
+#                    true
+#                    "cz"
+#                    "cs_CZ.UTF-8"
+#                    "Europe/Prague"
+#                    "Libor"
+#                    "/F/Libor"
+#                    "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4"
+#                    []
+#                    []
+#                    [];
+#
+# F_Stepanka = mkSystem true
+#                       true
+#                       false
+#                       false
+#                       true
+#                       true
+#                       "us"
+#                       "en_GB.UTF-8"
+#                       "Europe/Prague"
+#                       "Bubinka"
+#                       "/F/Stepanka"
+#                       "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4"
+#                       []
+#                       []
+#                       [
+#                         freecad
+#                         gimp
+#                         inkscape
+#                         krita
+#                         obs-studio
+#                       ];
+#
+# V_Lenovo = mkSystem false
+#                     false
+#                     true
+#                     true
+#                     false
+#                     false
+#                     "us"
+#                     "en_GB.UTF-8"
+#                     "Europe/Brussels"
+#                     "Luca"
+#                     "/V/Lenovo"
+#                     "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
+#                     []
+#                     []
+#                     [];
+#
  V_SteamDeck = mkSystem false
                         false
                         false
