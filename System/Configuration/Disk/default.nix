@@ -5,7 +5,7 @@
 {
  zramSwap = {
    enable    = true;
-   memoryMax = 4294967296;
+   memoryMax = 8589934592;
  };
 
  disko.devices = {
@@ -48,7 +48,7 @@
          };
 
          persist = {
-           size = "2G";
+           size = "512M";
 
            content = {
              format     = "xfs";
