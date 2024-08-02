@@ -25,6 +25,7 @@ in {
          bash-language-server
          marksman
          nil
+         ols
        ];
      };
    };
