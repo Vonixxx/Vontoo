@@ -5,7 +5,7 @@
 {
  zramSwap = {
    enable    = true;
-   memoryMax = 8589934592;
+   memoryMax = 25769803776;
  };
 
  disko.devices = {
@@ -13,7 +13,7 @@
      fsType = "tmpfs";
 
      mountOptions = [
-       "size=8G"
+       "size=32G"
        "defaults"
        "mode=755"
      ];
