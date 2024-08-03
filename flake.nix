@@ -19,7 +19,6 @@
    disko.url        = "github:nix-community/disko";
    arkenfox.url     = "github:dwarfmaster/arkenfox-nixos";
    home-manager.url = "github:nix-community/home-manager";
-   impermanence.url = "github:nix-community/impermanence";
    jovian.url       = "github:Jovian-Experiments/Jovian-NixOS";
  };
 
@@ -29,7 +28,6 @@
  , nixpkgs
  , arkenfox
  , home-manager
- , impermanence
  , ...
  }:
 
@@ -74,7 +72,6 @@ let
      intel_cpu
      intel_gpu
      userPackages
-     impermanence
      extraOverlays;
    };
 
@@ -91,7 +88,6 @@ let
     disko.nixosModules.disko
     arkenfox.hmModules.arkenfox
     home-manager.nixosModules.home-manager
-    impermanence.nixosModules.impermanence
    ] ++ extraModules;
  };
 in {

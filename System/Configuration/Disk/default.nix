@@ -5,20 +5,10 @@
 {
  zramSwap = {
    enable    = true;
-   memoryMax = 25769803776;
+   memoryMax = 8589934592;
  };
 
  disko.devices = {
-   nodev."/" = {
-     fsType = "tmpfs";
-
-     mountOptions = [
-       "size=32G"
-       "defaults"
-       "mode=755"
-     ];
-   };
-
    disk.main = {
      type = "disk";
      inherit device;
@@ -27,6 +17,16 @@
        type = "gpt";
 
        partitions = {
+         root = {
+           size = "40G";
+
+           content = {
+             mountpoint = "/";
+             format     = "xfs";
+             type       = "filesystem";
+           };
+         };
+
          nix = {
            size = "80G";
 
@@ -43,16 +43,6 @@
            content = {
              format     = "xfs";
              mountpoint = "/home";
-             type       = "filesystem";
-           };
-         };
-
-         persist = {
-           size = "512M";
-
-           content = {
-             format     = "xfs";
-             mountpoint = "/persist";
              type       = "filesystem";
            };
          };

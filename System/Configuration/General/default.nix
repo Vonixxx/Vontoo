@@ -23,7 +23,6 @@ in {
    environment.variables = {
      NIXOS_OZONE_WL = "1";
      BROWSER        = "firefox";
-     KBUILD_OUTPUT  = "/home/${username}";
    };
 
    security = {

@@ -22,6 +22,5 @@
    ./Configuration/Model/default.nix
    ./Configuration/General/default.nix
    ./Configuration/Packages/default.nix
-   ./Configuration/Impermanence/default.nix
  ];
 }
