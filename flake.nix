@@ -13,10 +13,10 @@
    # Official Repositories #
    #########################
    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-   # nixpkgs.url = "/home/Luca/GitHub/nixpkgs";
    ##########################
    # Community Repositories #
    ##########################
+   polymc.url       = "github:fn2006/PollyMC";
    disko.url        = "github:nix-community/disko";
    arkenfox.url     = "github:dwarfmaster/arkenfox-nixos";
    home-manager.url = "github:nix-community/home-manager";
@@ -27,6 +27,7 @@
  outputs = {
    disko
  , jovian
+ , polymc
  , nixpkgs
  , arkenfox
  , mailserver
@@ -99,6 +100,7 @@ in {
       inherit
        pkgs
        jovian
+       polymc
        mkSystem
        mailserver;
      }

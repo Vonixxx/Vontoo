@@ -1,5 +1,6 @@
 { pkgs
 , jovian
+, polymc
 , mkSystem
 , mailserver
 , ...
@@ -128,6 +129,7 @@ with pkgs; {
                         ]
                         [
                          jovian.overlays.default
+                         polymc.overlays.default
                         ]
                         [
                           asdf-vm
@@ -143,5 +145,8 @@ with pkgs; {
                           rpcs3
                           tldr
                           wget
+                          qemu
+                          polymc
+                          ps3iso-utils
                         ];
 }

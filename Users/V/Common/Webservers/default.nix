@@ -43,7 +43,25 @@ in {
          forceSSL   = true;
          enableACME = true;
          serverName = "vontoo.xyz";
-         root       = "/var/www/Vontoo_Website";
+         root       = "/var/www/nutrition";
+
+         locations = {
+           "/" = {
+             return = "301 /home";
+           };
+
+           "/home" = {
+             index  = "main.html";
+           };
+
+           "/about/me" = {
+             index = "main.html cooki.jpeg";
+           };
+
+           "/services/nutrition" = {
+             index = "main.html";
+           };
+         };
        };
      };
    };
