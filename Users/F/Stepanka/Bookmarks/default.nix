@@ -11,13 +11,13 @@
           toplevel_name = "Bookmarks";
          }
          {
-     	    name = "ChatGPT";
-     	    url  = "https://chat.openai.com";
-     	   }
+          name = "ChatGPT";
+          url  = "https://chat.openai.com";
+         }
          {
-     	    name = "Tutanota";
-     	    url  = "https://app.tuta.com/login";
-     	   }
+          name = "Tutanota";
+          url  = "https://app.tuta.com/login";
+         }
        ];
      };
    };

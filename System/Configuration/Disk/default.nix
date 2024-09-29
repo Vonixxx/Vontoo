@@ -5,7 +5,7 @@
 {
  zramSwap = {
    enable    = true;
-   memoryMax = 8589934592;
+   memoryMax = 4294967296;
  };
 
  disko.devices = {

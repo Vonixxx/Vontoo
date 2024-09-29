@@ -15,8 +15,8 @@ in {
      ipp-usb.enable = true;
 
      avahi = {
-       enable   = true;
-       nssmdns4 = true;
+       enable       = true;
+       nssmdns4     = true;
        openFirewall = true;
      };
 

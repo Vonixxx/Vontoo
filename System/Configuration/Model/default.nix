@@ -22,8 +22,26 @@ config = mkMerge [
        "amdgpu"
      ];
 
-     hardware.graphics.extraPackages = [
-       pkgs.amdvlk
+     boot.kernelParams = [
+       "radeon.si_support=0"
+       "amdgpu.si_support=1"
+       "radeon.cik_support=0"
+       "amdgpu.cik_support=1"
+     ];
+
+     environment.variables = {
+       ROC_ENABLE_PRE_VEGA = "1";
+     };
+
+     hardware.graphics.extraPackages = 
+     with pkgs; [
+       amdvlk
+       rocmPackages.clr.icd
+       driversi686Linux.amdvlk
+     ];
+
+     systemd.tmpfiles.rules = [
+       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
      ];
    })
 
@@ -36,12 +54,15 @@ config = mkMerge [
    })
 
    (mkIf config.intel_gpu.enable {
+     environment.variables.LIBVA_DRIVER_NAME = "iHD";
+
      boot.kernelModules = [
        "i915"
      ];
 
-     hardware.graphics.extraPackages = [
-       pkgs.intel-media-driver
+     hardware.graphics.extraPackages = with pkgs; [
+       libvdpau-va-gl
+       intel-media-driver
      ];
    })
  ];

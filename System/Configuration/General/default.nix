@@ -12,6 +12,8 @@
 let
  inherit (lib)
   mkIf;
+ inherit (lib.strings)
+  toLower;
 in {
  config = mkIf (config.general_configuration.enable) {
    documentation.nixos.enable      = false;
@@ -77,28 +79,27 @@ in {
    boot = {
      plymouth.enable = true;
 
-     supportedFilesystems = [
-       "ntfs"
-     ];
-
-     initrd.availableKernelModules = [
-       "vmd"
-       "ahci"
-       "ext4"
-       "nvme"
-       "sd_mod"
-       "usbhid"
-       "xhci_pci"
-       "sdhci_acpi"
-       "usb_storage"
-       "rtsx_usb_sdmmc"
-     ];
-
      kernelParams = [
        "quiet"
        "splash"
        "mitigations=off"
      ];
+
+     supportedFilesystems = [
+       "ntfs"
+     ];
+
+     initrd = {
+       includeDefaultModules = true;
+
+       availableKernelModules = [
+         "vmd"
+         "xfs"
+         "sdhci_acpi"
+         "usb_storage"
+         "rtsx_usb_sdmmc"
+       ];
+     };
 
      loader = {
        timeout = 5;
@@ -139,7 +140,7 @@ in {
        isNormalUser          = true;
        name                  = "${username}";
        initialHashedPassword = "${password}";
-       home                  = "/home/" + "${username}";
+       home                  = "/home/" + toLower("${username}");
 
        extraGroups = [
          "audio"

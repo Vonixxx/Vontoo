@@ -105,5 +105,17 @@ in {
        mailserver;
      }
    );
+
+   homeConfigurations."V_SteamDeck_Fedora" = home-manager.lib.homeManagerConfiguration {
+     pkgs = import nixpkgs {
+       config.allowUnfree = true;
+       localSystem.system = "x86_64-linux";
+     };
+
+     modules = [
+        arkenfox.hmModules.arkenfox
+        ./System_Foreign/default.nix
+     ];
+   };
  };
 }
