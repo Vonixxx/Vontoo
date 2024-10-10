@@ -10,7 +10,7 @@ let
  inherit (lib)
   mkIf;
 in {
- config = mkIf (config.gnome.enable) {
+ config = mkIf config.gnome.enable {
    programs.dconf.enable      = true;
    hardware.pulseaudio.enable = false;
 
@@ -29,7 +29,6 @@ in {
    };
 
    environment = with pkgs;
-                 with gnome;
                  with gnomeExtensions; {
      systemPackages = [
        amberol

@@ -1,7 +1,7 @@
 { ... }:
 
 {
- mail_server.enable = true;
+ programs.gamemode.enable = true;
 
  jovian = {
    steam = {

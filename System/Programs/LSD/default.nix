@@ -8,7 +8,7 @@ let
  inherit (lib)
   mkIf;
 in {
- config = mkIf (config.lsd.enable) {
+ config = mkIf config.lsd.enable {
    environment.shellAliases = {
      ls = "lsd";
    };

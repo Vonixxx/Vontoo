@@ -16,8 +16,8 @@
    ##########################
    # Community Repositories #
    ##########################
-   polymc.url       = "github:fn2006/PollyMC";
    disko.url        = "github:nix-community/disko";
+   nix-alien.url    = "github:thiagokokada/nix-alien";
    arkenfox.url     = "github:dwarfmaster/arkenfox-nixos";
    home-manager.url = "github:nix-community/home-manager";
    jovian.url       = "github:Jovian-Experiments/Jovian-NixOS";
@@ -27,9 +27,9 @@
  outputs = {
    disko
  , jovian
- , polymc
  , nixpkgs
  , arkenfox
+ , nix-alien
  , mailserver
  , home-manager
  , ...
@@ -81,8 +81,11 @@ let
 
    pkgs = import nixpkgs {
      config.allowUnfree = true;
-     overlays           = extraOverlays;
      localSystem.system = "x86_64-linux";
+
+     overlays = [ 
+      nix-alien.overlays.default
+     ] ++ extraOverlays;
    };
 
    modules = [
@@ -100,22 +103,21 @@ in {
       inherit
        pkgs
        jovian
-       polymc
        mkSystem
        mailserver;
      }
    );
 
-   homeConfigurations."V_SteamDeck_Fedora" = home-manager.lib.homeManagerConfiguration {
-     pkgs = import nixpkgs {
-       config.allowUnfree = true;
-       localSystem.system = "x86_64-linux";
-     };
-
+   homeConfigurations."V_SteamDeck_Foreign" = home-manager.lib.homeManagerConfiguration {
      modules = [
         arkenfox.hmModules.arkenfox
         ./System_Foreign/default.nix
      ];
+
+     pkgs = import nixpkgs {
+       config.allowUnfree = true;
+       localSystem.system = "x86_64-linux";
+     };
    };
  };
 }

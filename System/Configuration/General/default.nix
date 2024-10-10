@@ -15,7 +15,7 @@ let
  inherit (lib.strings)
   toLower;
 in {
- config = mkIf (config.general_configuration.enable) {
+ config = mkIf config.general_configuration.enable {
    documentation.nixos.enable      = false;
    system.stateVersion             = "24.11";
    powerManagement.cpuFreqGovernor = "ondemand";
@@ -25,6 +25,19 @@ in {
    environment.variables = {
      NIXOS_OZONE_WL = "1";
      BROWSER        = "firefox";
+   };
+
+   programs = {
+     nix-ld.enable = true;
+
+     nh = {
+       enable = true;
+  
+       clean = {
+         enable = true;
+         extraArgs = "-k 3 -K 7d";
+       };
+     };
    };
 
    security = {
@@ -116,12 +129,6 @@ in {
    };
 
    nix = {
-     gc = {
-       automatic = true;
-       dates     = "daily";
-       options   = "--delete-older-than 7d";
-     };
-
      settings = {
        auto-optimise-store = true;
 
@@ -140,7 +147,7 @@ in {
        isNormalUser          = true;
        name                  = "${username}";
        initialHashedPassword = "${password}";
-       home                  = "/home/" + toLower("${username}");
+       home                  = "/home/" + toLower"${username}";
 
        extraGroups = [
          "audio"

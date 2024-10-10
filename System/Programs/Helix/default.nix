@@ -9,7 +9,7 @@ let
  inherit (lib)
   mkIf;
 in {
- config = mkIf (config.helix.enable) {
+ config = mkIf config.helix.enable {
    home-manager.users."${username}".programs = {
      helix = {
        enable = true;

@@ -1,6 +1,5 @@
 { pkgs
 , jovian
-, polymc
 , mkSystem
 , mailserver
 , ...
@@ -24,7 +23,8 @@
 #                   <list> packages.
 #
 
-with pkgs; {
+with pkgs;
+with kdePackages; {
  U_Ofelia = mkSystem false
                      true
                      false
@@ -88,10 +88,12 @@ with pkgs; {
                        []
                        []
                        [
+                         ffmpeg
                          freecad
                          gimp
                          inkscape
                          krita
+                         kdenlive
                          obs-studio
                        ];
 
@@ -107,7 +109,9 @@ with pkgs; {
                      "Luca"
                      "/V/Lenovo"
                      "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
-                     []
+                     [
+                      mailserver.nixosModules.mailserver
+                     ]
                      []
                      [];
 
@@ -125,11 +129,9 @@ with pkgs; {
                         "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
                         [
                          jovian.nixosModules.jovian
-                         mailserver.nixosModules.mailserver
                         ]
                         [
                          jovian.overlays.default
-                         polymc.overlays.default
                         ]
                         [
                           asdf-vm
@@ -146,7 +148,6 @@ with pkgs; {
                           tldr
                           wget
                           qemu
-                          polymc
                           ps3iso-utils
                         ];
 }

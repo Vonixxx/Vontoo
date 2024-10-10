@@ -9,7 +9,7 @@ let
  inherit (lib)
   mkIf;
 in {
- config = mkIf (config.bat.enable) {
+ config = mkIf config.bat.enable {
    environment.shellAliases = {
      cat  = "bat";
      man  = "batman";

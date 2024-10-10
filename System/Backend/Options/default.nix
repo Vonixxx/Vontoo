@@ -116,11 +116,6 @@ in {
      default = intel_gpu;
    };
 
-   mail_server.enable = mkOption {
-     type    = bool;
-     default = false;
-   };
-
    general_configuration.enable = mkOption {
      type    = bool;
      default = true;

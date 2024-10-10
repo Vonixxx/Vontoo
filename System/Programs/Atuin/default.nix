@@ -8,7 +8,7 @@ let
  inherit (lib)
   mkIf;
 in {
- config = mkIf (config.atuin.enable) {
+ config = mkIf config.atuin.enable {
    home-manager.users."${username}".programs = {
      atuin = {
        enable               = true;

@@ -9,7 +9,7 @@ let
  inherit (lib)
   mkIf;
 in {
- config = mkIf (config.printing.enable) {
+ config = mkIf config.printing.enable {
    services = {
      saned.enable   = true;
      ipp-usb.enable = true;

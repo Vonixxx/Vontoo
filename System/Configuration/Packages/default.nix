@@ -25,7 +25,9 @@ in {
    game-devices-udev-rules
  ];
 
- environment.systemPackages = with pkgs; [
+ environment.systemPackages = 
+ with pkgs; [
+   nix-alien
    libreoffice-fresh
    update
  ] ++ userPackages;

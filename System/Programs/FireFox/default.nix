@@ -13,7 +13,7 @@ in {
    ./arkenfox.nix
  ];
 
- config = mkIf (config.firefox.enable) {
+ config = mkIf config.firefox.enable {
    home-manager.users."${username}" = {
      programs.firefox = {
        enable = true;

@@ -56,9 +56,9 @@ in {
        home.pointerCursor = {
          x11.enable = true;
          gtk.enable = true;
-         name       = cfgCursor.settings.name;
-         size       = cfgCursor.settings.size;
-         package    = cfgCursor.settings.package;
+         inherit (cfgCursor.settings) name;
+         inherit (cfgCursor.settings) size;
+         inherit (cfgCursor.settings) package;
        };
      };
    })

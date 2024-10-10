@@ -8,7 +8,7 @@ let
  inherit (lib)
   mkIf;
 in {
- config = mkIf (config.freetube.enable) {
+ config = mkIf config.freetube.enable {
    home-manager.users."${username}".programs = {
      freetube = {
        enable = true;

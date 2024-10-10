@@ -9,7 +9,7 @@ let
  inherit (lib)
   mkIf;
 in {
- config = mkIf (config.zsh.enable) {
+ config = mkIf config.zsh.enable {
    programs.zsh.enable    = true;
    users.defaultUserShell = pkgs.zsh;
 
