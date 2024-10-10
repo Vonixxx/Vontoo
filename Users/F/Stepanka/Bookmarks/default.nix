@@ -11,8 +11,8 @@
           toplevel_name = "Bookmarks";
          }
          {
-          name = "ChatGPT";
-          url  = "https://chat.openai.com";
+          name = "AI Chat";
+          url  = "https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1";
          }
          {
           name = "Tutanota";
