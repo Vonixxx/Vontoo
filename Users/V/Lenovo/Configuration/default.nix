@@ -37,26 +37,24 @@
        locations = {
          "/".return                  = "301 /home";
          "/home".index               = "main.html";
+         "/about/me".index           = "main.html";
+         "/about/contact".index      = "main.html";
+         "/education/videos".index   = "main.html";
          "/services/nutrition".index = "main.html";
-         "/about/me".index           = "main.html cooki.jpeg";
+         "/services/lifestyle".index = "main.html";
        };
      };
    };
  };
 
- environment.variables = {
-   GODADDY_API_SECRET = "SUmt29WwGrw9YZEL3q8pna";
-   GODADDY_API_KEY    = "3mM44UdBzbqpuE_TEKHABESo7ZuemuhPXsqBY";
- };
+ # mailserver = {
+ #   enable                                         = true;
+ #   certificateScheme                              = "acme-nginx";
+ #   fqdn                                           = "mail.vontoo.xyz";
+ #   loginAccounts."mail@vontoo.xyz".hashedPassword = "$2b$05$MK.0UE2j6V5jLqLxMFO93.i4UT2MAoaCYS3FyvLOmmZ4RhWTL8n9y";
 
- mailserver = {
-   enable                                         = true;
-   certificateScheme                              = "acme-nginx";
-   fqdn                                           = "mail.vontoo.xyz";
-   loginAccounts."mail@vontoo.xyz".hashedPassword = "$2b$05$MK.0UE2j6V5jLqLxMFO93.i4UT2MAoaCYS3FyvLOmmZ4RhWTL8n9y";
-
-   domains = [
-     "vontoo.xyz"
-   ];
- };
+ #   domains = [
+ #     "vontoo.xyz"
+ #   ];
+ # };
 }
