@@ -27,7 +27,7 @@ stdenv.mkDerivation {
     owner  = "BroomBear";
     domain = "codeberg.org";
     rev    = "af9e8df16e6ee822ef1de8784a7e66edd60b148f";
-    hash   = "sha256-wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww=";
+    hash   = "sha256-+RoqGjXiUCrg1I74eGxe/1xKXNJc66XyHFMjNri5Peo=";
   };
 
   nativeBuildInputs = [
