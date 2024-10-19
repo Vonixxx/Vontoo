@@ -12,6 +12,7 @@
    ./Programs/Git/default.nix
    ./Programs/LSD/default.nix
    ./Programs/ZSH/default.nix
+   ./Programs/Foot/default.nix
    ./Programs/Atuin/default.nix
    ./Programs/Helix/default.nix
    ./Programs/FireFox/default.nix

@@ -27,7 +27,6 @@ in {
 
  environment.systemPackages = 
  with pkgs; [
-   nix-alien
    libreoffice-fresh
    update
  ] ++ userPackages;

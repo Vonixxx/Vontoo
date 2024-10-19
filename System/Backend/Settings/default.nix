@@ -11,9 +11,10 @@ let
  inherit (builtins)
   toString;
 
- cfgFonts   = config.style.fonts;
- cfgCursor  = config.style.colors.cursor;
- cfgAdwaita = config.style.colors.adwaita;
+ cfgFonts      = config.style.fonts;
+ cfgCursor     = config.style.colors.cursor;
+ cfgAdwaita    = config.style.colors.adwaita;
+ cfgCatppuccin = config.style.colors.catppuccin;
 in {
  config = mkMerge [
    (mkIf cfgFonts.enable {
@@ -63,6 +64,20 @@ in {
      };
    })
 
+   (mkIf (cfgFonts.enable && config.foot.enable) {
+     home-manager.users."${username}".programs = {
+       foot = {
+         enable        = true;
+         server.enable = true;
+    
+         settings = {
+           csd.font  = "${cfgFonts.monospace.name}";
+           main.font = "${cfgFonts.monospace.name}:size=16";
+         };
+       };
+     };
+   })
+
    (mkIf (cfgFonts.enable && config.firefox.enable) {
      home-manager.users."${username}".programs.firefox.profiles.default.settings = {
        "font.name.serif.x-western"      = cfgFonts.serif.name;
@@ -83,17 +98,7 @@ in {
      };
    })
 
-   (mkIf (cfgAdwaita.enable && config.freetube.enable) {
-     home-manager.users."${username}" = {
-       programs.freetube.settings = {
-         mainColor = "Red";
-         secColor  = "Amber";
-         baseTheme = "black";
-       };
-     };
-   })
-
-   (mkIf (cfgAdwaita.enable && config.bat.enable) {
+   (mkIf (config.bat.enable) {
      home-manager.users."${username}" = {
        programs.bat.config = {
          style       = "full";
@@ -105,11 +110,40 @@ in {
      };
    })
 
+   (mkIf (cfgAdwaita.enable && config.freetube.enable) {
+     home-manager.users."${username}" = {
+       programs.freetube.settings = {
+         mainColor = "Red";
+         secColor  = "Amber";
+         baseTheme = "black";
+       };
+     };
+   })
+
+   (mkIf (cfgCatppuccin.enable && config.freetube.enable) {
+     home-manager.users."${username}" = {
+       programs.freetube.settings = {
+         baseTheme = "catppuccinMocha";
+         mainColor = "CatppuccinMochaRed";
+         secColor  = "CatppuccinMochaLavender";
+       };
+     };
+   })
+
    (mkIf (cfgAdwaita.enable && config.helix.enable) {
      home-manager.users."${username}" = {
        programs.helix.settings = {
          editor.true-color = true;
          theme             = "adwaita-dark";
+       };
+     };
+   })
+
+   (mkIf (cfgCatppuccin.enable && config.helix.enable) {
+     home-manager.users."${username}" = {
+       programs.helix.settings = {
+         editor.true-color = true;
+         theme             = "catppuccin_mocha";
        };
      };
    })
@@ -132,6 +166,21 @@ in {
            "{f1128560-8b23-46c1-aa6f-fb3e79f23cf3}" = {
              installation_mode = "normal_installed";
              install_url       = "https://addons.mozilla.org/firefox/downloads/latest/gnome-adwaita-gtk4-dark/latest.xpi";
+           };
+         };
+       };
+     };
+   })
+
+   (mkIf (cfgCatppuccin.enable && config.firefox.enable) {
+     home-manager.users."${username}" = {
+       programs.firefox = {
+         profiles.default.settings."ui.systemUsesDarkTheme" = 1;
+
+         policies.ExtensionSettings = {
+           "{8446b178-c865-4f5c-8ccc-1d7887811ae3}" = {
+             installation_mode = "normal_installed";
+             install_url       = "https://addons.mozilla.org/firefox/downloads/latest/catppuccin-mocha-lavender/latest.xpi";
            };
          };
        };

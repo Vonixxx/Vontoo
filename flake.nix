@@ -17,7 +17,6 @@
    # Community Repositories #
    ##########################
    disko.url        = "github:nix-community/disko";
-   nix-alien.url    = "github:thiagokokada/nix-alien";
    arkenfox.url     = "github:dwarfmaster/arkenfox-nixos";
    home-manager.url = "github:nix-community/home-manager";
    jovian.url       = "github:Jovian-Experiments/Jovian-NixOS";
@@ -29,7 +28,6 @@
  , jovian
  , nixpkgs
  , arkenfox
- , nix-alien
  , mailserver
  , home-manager
  , ...
@@ -81,11 +79,8 @@ let
 
    pkgs = import nixpkgs {
      config.allowUnfree = true;
+     overlays           = extraOverlays;
      localSystem.system = "x86_64-linux";
-
-     overlays = [ 
-      nix-alien.overlays.default
-     ] ++ extraOverlays;
    };
 
    modules = [

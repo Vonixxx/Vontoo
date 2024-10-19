@@ -66,6 +66,11 @@ in {
      default = false;
    };
 
+   foot.enable = mkOption {
+     type    = bool;
+     default = false;
+   };
+
    atuin.enable = mkOption {
      type    = bool;
      default = false;
@@ -123,6 +128,11 @@ in {
 
    style = {
      colors = {
+       catppuccin.enable = mkOption {
+         type    = bool;
+         default = false;
+       };
+
        adwaita.enable = mkOption {
          type    = bool;
          default = config.gnome.enable;

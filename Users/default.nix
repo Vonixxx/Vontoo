@@ -24,7 +24,19 @@
 #
 
 with pkgs;
-with kdePackages; {
+with kdePackages;
+
+let 
+ slstatus_custom = (pkgs.slstatus.overrideAttrs {
+    src = fetchgit {
+      rev  = "94501a405c2768014ff121d4d811e6b390cf36f2";
+      url  = "https://codeberg.org/BroomBear/SL_Status.git";
+      hash = "sha256-HxzBHz3XwmWKob3VyW+wPHUBcCDiWb+3SEYvsgcg7LE=";
+    };
+ });
+
+ dwl_custom = pkgs.callPackage ../System/Programs_Custom/DWL/default.nix {  };
+in {
  U_Ofelia = mkSystem false
                      true
                      false
@@ -113,7 +125,12 @@ with kdePackages; {
                       mailserver.nixosModules.mailserver
                      ]
                      []
-                     [];
+                     [
+                       curl
+                       efibootmgr
+                       pfetch-rs
+                       tldr
+                     ];
 
  V_SteamDeck = mkSystem false
                         false
@@ -135,19 +152,26 @@ with kdePackages; {
                         ]
                         [
                           asdf-vm
+                          alsa-utils
                           curl
                           du-dust
+                          dwl_custom
                           dolphin-emu
                           efibootmgr
                           ffmpeg
+                          mpvpaper
                           mediainfo
                           pcsx2
                           pfetch-rs
+                          pulseaudio
                           protontricks
+                          ps3iso-utils
+                          qemu
                           rpcs3
+                          slstatus_custom
                           tldr
                           wget
-                          qemu
-                          ps3iso-utils
+                          wlsunset
+                          wlr-randr
                         ];
 }

@@ -27,16 +27,12 @@ in {
      BROWSER        = "firefox";
    };
 
-   programs = {
-     nix-ld.enable = true;
+   programs.nh = {
+     enable = true;
 
-     nh = {
+     clean = {
        enable = true;
-  
-       clean = {
-         enable = true;
-         extraArgs = "-k 3 -K 7d";
-       };
+       extraArgs = "-k 3 -K 7d";
      };
    };
 
@@ -70,7 +66,6 @@ in {
      pipewire = {
        enable            = true;
        alsa.enable       = true;
-       jack.enable       = true;
        pulse.enable      = true;
        alsa.support32Bit = true;
      };

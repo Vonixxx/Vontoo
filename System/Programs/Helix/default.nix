@@ -8,14 +8,23 @@
 let
  inherit (lib)
   mkIf;
+
+ transparent = { };
+ lavender    = "#b4befe";
 in {
  config = mkIf config.helix.enable {
    home-manager.users."${username}".programs = {
      helix = {
        enable = true;
 
+       themes.catppuccin_mocha = {
+         inherits = "catppuccin_mocha";
+
+         "variable.other.member" = lavender;
+         "ui.background"         = transparent;
+       };
+
        settings.editor = {
-         cursorline              = true;
          color-modes             = true;
          cursorcolumn            = true;
          soft-wrap.enable        = true;
@@ -23,9 +32,9 @@ in {
          line-number             = "relative";
 
          whitespace.render = {
-           tab     = "all";
-           nbsp    = "all";
-           nnbsp   = "all";
+           tab   = "all";
+           nbsp  = "all";
+           nnbsp = "all";
          };
 
          cursor-shape = {
@@ -48,16 +57,6 @@ in {
            ];
          };
        };
-
-       extraPackages = with pkgs;
-                       with nodePackages_latest; [
-         bash-language-server
-         marksman
-         nil
-         ols
-         taplo
-         vscode-langservers-extracted
-       ];
      };
    };
  };
