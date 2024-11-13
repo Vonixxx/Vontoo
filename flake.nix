@@ -105,8 +105,8 @@ in {
 
    homeConfigurations."V_SteamDeck_Foreign" = home-manager.lib.homeManagerConfiguration {
      modules = [
-        arkenfox.hmModules.arkenfox
-        ./System_Foreign/default.nix
+       arkenfox.hmModules.arkenfox
+       ./System_Foreign/default.nix
      ];
 
      pkgs = import nixpkgs {

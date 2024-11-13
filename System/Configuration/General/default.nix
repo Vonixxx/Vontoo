@@ -113,7 +113,7 @@ in {
        timeout = 5;
 
        grub = {
-         configurationLimit    = 3;
+         configurationLimit    = 10;
          enable                = true;
          efiSupport            = true;
          copyKernels           = true;

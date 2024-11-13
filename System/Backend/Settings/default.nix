@@ -6,7 +6,7 @@
 
 let
  inherit (lib)
-  mkIf mkMerge;
+  mkIf mkForce mkMerge;
 
  inherit (builtins)
   toString;
@@ -123,9 +123,9 @@ in {
    (mkIf (cfgCatppuccin.enable && config.freetube.enable) {
      home-manager.users."${username}" = {
        programs.freetube.settings = {
-         baseTheme = "catppuccinMocha";
-         mainColor = "CatppuccinMochaRed";
-         secColor  = "CatppuccinMochaLavender";
+         baseTheme = mkForce "catppuccinMocha";
+         mainColor = mkForce "CatppuccinMochaRed";
+         secColor  = mkForce "CatppuccinMochaLavender";
        };
      };
    })
@@ -142,8 +142,8 @@ in {
    (mkIf (cfgCatppuccin.enable && config.helix.enable) {
      home-manager.users."${username}" = {
        programs.helix.settings = {
-         editor.true-color = true;
-         theme             = "catppuccin_mocha";
+         editor.true-color = mkForce true;
+         theme             = mkForce "catppuccin_mocha";
        };
      };
    })
@@ -180,7 +180,7 @@ in {
          policies.ExtensionSettings = {
            "{8446b178-c865-4f5c-8ccc-1d7887811ae3}" = {
              installation_mode = "normal_installed";
-             install_url       = "https://addons.mozilla.org/firefox/downloads/latest/catppuccin-mocha-lavender/latest.xpi";
+             install_url       = mkForce "https://addons.mozilla.org/firefox/downloads/latest/catppuccin-mocha-lavender/latest.xpi";
            };
          };
        };

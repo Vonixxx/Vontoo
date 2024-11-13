@@ -13,6 +13,7 @@
  environment.variables = {
    EDITOR  = "hx";
    VISUAL  = "hx";
+   BROWSER = "firefox";
    PF_INFO = "ascii title uptime pkgs kernel memory os host";
  };
 

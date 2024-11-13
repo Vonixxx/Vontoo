@@ -1,4 +1,5 @@
-{ fcft
+{ lib
+, fcft
 , libdrm
 , libX11
 , libxcb
@@ -20,15 +21,21 @@
 stdenv.mkDerivation {
   strictDeps        = true;
   __structuredAttrs = true;
-  name              = "DWL";
+  name              = "DWL_Custom";
+ 
+  passthru.providedSessions = [
+    "dwl"
+  ];
 
-  src = fetchFromGitea {
-    repo   = "DWL";
-    owner  = "BroomBear";
-    domain = "codeberg.org";
-    rev    = "af9e8df16e6ee822ef1de8784a7e66edd60b148f";
-    hash   = "sha256-+RoqGjXiUCrg1I74eGxe/1xKXNJc66XyHFMjNri5Peo=";
-  };
+  src = /home/luca/Repositories/DWL;
+
+  # src = fetchFromGitea {
+  #   repo   = "DWL";
+  #   owner  = "BroomBear";
+  #   domain = "codeberg.org";
+  #   rev    = "7b9f914164f5eb883b02df445debccdfaa20eb80";
+  #   hash   = "sha256-04UL86N9YlGbFBqwvkm6AXZeoBwrMh+XRgc4RhJ8pYc=";
+  # };
 
   nativeBuildInputs = [
     pkg-config

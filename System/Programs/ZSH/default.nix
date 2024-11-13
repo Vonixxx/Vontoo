@@ -32,12 +32,6 @@ in {
        enable         = true;
        initExtraFirst = "pfetch";
 
-       loginExtra = ''
-          if [[ $(tty) == /dev/tty1 ]]; then
-            exec slstatus -s | dwl -s "wlr-randr --output \"eDP-1\" --off && mpvpaper -o --loop-file=inf '*' /home/luca/Pictures/Home.mp4"
-          fi
-       '';
-
        prezto = {
          enable        = true;
          caseSensitive = false;
