@@ -8,21 +8,11 @@
 let
  inherit (lib)
   mkIf;
-
- transparent = { };
- lavender    = "#b4befe";
 in {
  config = mkIf config.helix.enable {
    home-manager.users."${username}".programs = {
      helix = {
        enable = true;
-
-       themes.catppuccin_mocha = {
-         inherits = "catppuccin_mocha";
-
-         "variable.other.member" = lavender;
-         "ui.background"         = transparent;
-       };
 
        settings.editor = {
          color-modes             = true;

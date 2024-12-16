@@ -1,5 +1,6 @@
 { pkgs
 , userPackages
+, latest_kernel
 , ...
 }:
 
@@ -20,6 +21,11 @@ let
     fi
  '';
 in {
+ boot.kernelPackages =
+ if !latest_kernel
+   then pkgs.linuxPackages
+   else pkgs.linuxPackages_latest;
+
  services.udev.packages = with pkgs; [
    android-udev-rules
    game-devices-udev-rules
@@ -27,6 +33,7 @@ in {
 
  environment.systemPackages = 
  with pkgs; [
+   brave
    libreoffice-fresh
    update
  ] ++ userPackages;

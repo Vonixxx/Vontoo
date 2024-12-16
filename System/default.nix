@@ -2,8 +2,9 @@
 
 {
  imports = [
-   ./UI/Gnome/default.nix
    ./UI/Style/default.nix
+   ./UI/Waybar/default.nix
+   ./UI/Hyprland/default.nix
 
    ./Backend/Options/default.nix
    ./Backend/Settings/default.nix
@@ -15,7 +16,6 @@
    ./Programs/Foot/default.nix
    ./Programs/Atuin/default.nix
    ./Programs/Helix/default.nix
-   ./Programs/FireFox/default.nix
    ./Programs/FreeTube/default.nix
    ./Programs/Printing/default.nix
 

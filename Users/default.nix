@@ -1,52 +1,32 @@
 { pkgs
-, jovian
 , mkSystem
 , mailserver
 , ...
 }:
 
 #
-# <user> = mkSystem <bool> toggle TLP.
-#                   <bool> toggle printing capabilities.
-#                   <bool> toggle AMD CPU settings.
-#                   <bool> toggle AMD GPU settings.
-#                   <bool> toggle Intel CPU settings.
-#                   <bool> toggle Intel GPU settings.
+# <user> = mkSystem <bool>   toggle TLP.
+#                   <bool>   toggle printing capabilities.
+#                   <bool>   toggle latest kernel.
+#                   <bool>   toggle AMD CPU settings.
+#                   <bool>   toggle AMD GPU settings.
+#                   <bool>   toggle Intel CPU settings.
+#                   <bool>   toggle Intel GPU settings.
 #                   <string> keyboard language.
 #                   <string> language locale.
 #                   <string> location, used to determine time.
 #                   <string> username.
 #                   <string> folder location for other user-specific configuration.
 #                   <string> password, encoded using `mkpasswd`.
-#                   <list> extra modules.
-#                   <list> overlays for nixpkgs.
-#                   <list> packages.
+#                   <list>   extra modules.
+#                   <list>   overlays for nixpkgs.
+#                   <list>   packages.
 #
 
 with pkgs;
 with kdePackages;
 
 let 
- sddm_catppuccin_custom = (pkgs.slstatus.overrideAttrs {
-    fontSize        = "12";
-    background      = null;
-    loginBackground = false;
-    flavor          = "mocha";
-    font            = "FiraCode Nerd Font";
- });
-
- launch_dwl = pkgs.writeShellScriptBin "launch_dwl" ''
-    exec slstatus -s | dwl -s "wlr-randr --output \"eDP-1\" --off && mpvpaper -o \"no-audio --loop-file=inf\" '*' /home/luca/Pictures/Lost_Cat.mp4"
- '';
-
- slstatus_custom = (pkgs.slstatus.overrideAttrs {
-    src = fetchgit {
-      rev  = "94501a405c2768014ff121d4d811e6b390cf36f2";
-      url  = "https://codeberg.org/BroomBear/SL_Status.git";
-      hash = "sha256-HxzBHz3XwmWKob3VyW+wPHUBcCDiWb+3SEYvsgcg7LE=";
-    };
- });
-
  raylib_custom = (pkgs.raylib.overrideAttrs {
     cmakeFlags = [
       "-DBUILD_EXAMPLES=OFF"
@@ -92,11 +72,10 @@ let
        runHook postInstall
     '';
  });
-
- dwl_custom = pkgs.callPackage ../System/Programs_Custom/DWL/default.nix {  };
 in {
  U_Ofelia = mkSystem false
                      true
+                     false
                      false
                      false
                      true
@@ -115,19 +94,21 @@ in {
                     true
                     false
                     false
+                    false
                     true
                     true
                     "cz"
                     "cs_CZ.UTF-8"
                     "Europe/Prague"
                     "Jarka"
-                    "/F/Jarka"
+                    null
                     "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
                     []
                     []
                     [];
 
  F_Libor = mkSystem false
+                    false
                     false
                     false
                     false
@@ -147,13 +128,14 @@ in {
                        true
                        false
                        false
+                       false
                        true
                        true
                        "us"
                        "en_GB.UTF-8"
                        "Europe/Prague"
                        "Bubinka"
-                       "/F/Stepanka"
+                       null
                        "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4"
                        []
                        []
@@ -168,6 +150,7 @@ in {
                        ];
 
  V_Lenovo = mkSystem false
+                     false
                      false
                      true
                      true
@@ -190,51 +173,38 @@ in {
                        tldr
                      ];
 
- V_SteamDeck = mkSystem false
-                        false
-                        false
-                        false
-                        false
-                        false
-                        "us"
-                        "en_GB.UTF-8"
-                        "Europe/Brussels"
-                        "Luca"
-                        "/V/SteamDeck"
-                        "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
-                        [
-                         jovian.nixosModules.jovian
-                        ]
-                        [
-                         jovian.overlays.default
-                        ]
-                        [
-                          asdf-vm
-                          alsa-utils
-                          blobdrop
-                          curl
-                          du-dust
-                          dwl_custom
-                          dolphin-emu
-                          efibootmgr
-                          ffmpeg
-                          launch_dwl
-                          mpvpaper
-                          mediainfo
-                          odin_custom
-                          pcsx2
-                          pfetch-rs
-                          pulseaudio
-                          protontricks
-                          ps3iso-utils
-                          qemu
-                          rpcs3
-                          slstatus_custom
-                          sddm_catppuccin_custom
-                          tldr
-                          trezor-suite
-                          wget
-                          wlsunset
-                          wlr-randr
-                        ];
+ V_WorkStation = mkSystem false
+                          false
+                          true
+                          false
+                          false
+                          false
+                          false
+                          "us"
+                          "en_GB.UTF-8"
+                          "Europe/Brussels"
+                          "Luca"
+                          "/V/Common"
+                          "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
+                          []
+                          []
+                          [
+                            alsa-utils
+                            bemenu
+                            curl
+                            du-dust
+                            efibootmgr
+                            ffmpeg
+                            mpvpaper
+                            mediainfo
+                            odin_custom
+                            pfetch-rs
+                            protontricks
+                            ps3iso-utils
+                            qemu
+                            tldr
+                            trezor-suite
+                            wget
+                            hyprsunset
+                          ];
 }

@@ -25,8 +25,8 @@ in {
          checkForUpdates         = false;
          checkForBlogPosts       = false;
          hideActiveSubscriptions = false;
-         defaultQuality          = "720";
          listType                = "list";
+         defaultQuality          = "1080";
        };
      };
    };

@@ -24,16 +24,7 @@ in {
 
    environment.variables = {
      NIXOS_OZONE_WL = "1";
-     BROWSER        = "firefox";
-   };
-
-   programs.nh = {
-     enable = true;
-
-     clean = {
-       enable = true;
-       extraArgs = "-k 3 -K 7d";
-     };
+     BROWSER        = "brave";
    };
 
    security = {
@@ -47,16 +38,6 @@ in {
      hostName              = "vontoo";
    };
 
-   hardware = {
-     uinput.enable                 = true;
-     enableRedistributableFirmware = true;
-
-     graphics = {
-       enable      = true;
-       enable32Bit = true;
-     };
-   };
-
    services = {
      tlp.enable         = tlp;
      fstrim.enable      = true;
@@ -68,6 +49,16 @@ in {
        alsa.enable       = true;
        pulse.enable      = true;
        alsa.support32Bit = true;
+     };
+   };
+
+   hardware = {
+     uinput.enable                 = true;
+     enableRedistributableFirmware = true;
+
+     graphics = {
+       enable      = true;
+       enable32Bit = true;
      };
    };
 
@@ -124,6 +115,12 @@ in {
    };
 
    nix = {
+     gc = {
+       options   = "-d";
+       automatic = true;
+       dates     = "weekly";
+     };
+
      settings = {
        auto-optimise-store = true;
 

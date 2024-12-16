@@ -17,17 +17,13 @@
    # Community Repositories #
    ##########################
    disko.url        = "github:nix-community/disko";
-   arkenfox.url     = "github:dwarfmaster/arkenfox-nixos";
    home-manager.url = "github:nix-community/home-manager";
-   jovian.url       = "github:Jovian-Experiments/Jovian-NixOS";
    mailserver.url   = "gitlab:simple-nixos-mailserver/nixos-mailserver";
  };
 
  outputs = {
    disko
- , jovian
  , nixpkgs
- , arkenfox
  , mailserver
  , home-manager
  , ...
@@ -42,6 +38,7 @@ let
  mkSystem =
  tlp:
  printing:
+ latest_kernel:
  amd_cpu:
  amd_gpu:
  intel_cpu:
@@ -66,7 +63,6 @@ let
      locale
      amd_cpu
      amd_gpu
-     arkenfox
      password
      printing
      timezone
@@ -74,7 +70,8 @@ let
      intel_cpu
      intel_gpu
      userPackages
-     extraOverlays;
+     extraOverlays
+     latest_kernel;
    };
 
    pkgs = import nixpkgs {
@@ -83,36 +80,28 @@ let
      localSystem.system = "x86_64-linux";
    };
 
-   modules = [
-    (./Users + profile)
-   ] ++ [
-    ./System
-    disko.nixosModules.disko
-    arkenfox.hmModules.arkenfox
-    home-manager.nixosModules.home-manager
-   ] ++ extraModules;
+   modules = (if profile == null
+     then [
+      ./System
+      disko.nixosModules.disko
+      home-manager.nixosModules.home-manager
+     ] ++ extraModules
+     else [
+       ./System
+       (./Users + profile)
+       disko.nixosModules.disko
+       home-manager.nixosModules.home-manager
+     ] ++ extraModules
+   );
  };
 in {
    nixosConfigurations = (
      import ./Users {
       inherit
        pkgs
-       jovian
        mkSystem
        mailserver;
      }
    );
-
-   homeConfigurations."V_SteamDeck_Foreign" = home-manager.lib.homeManagerConfiguration {
-     modules = [
-       arkenfox.hmModules.arkenfox
-       ./System_Foreign/default.nix
-     ];
-
-     pkgs = import nixpkgs {
-       config.allowUnfree = true;
-       localSystem.system = "x86_64-linux";
-     };
-   };
  };
 }

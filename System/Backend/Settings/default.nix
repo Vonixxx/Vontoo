@@ -5,16 +5,15 @@
 }:
 
 let
- inherit (lib)
-  mkIf mkForce mkMerge;
-
  inherit (builtins)
   toString;
 
- cfgFonts      = config.style.fonts;
- cfgCursor     = config.style.colors.cursor;
- cfgAdwaita    = config.style.colors.adwaita;
- cfgCatppuccin = config.style.colors.catppuccin;
+ inherit (lib)
+  mkIf mkForce mkMerge;
+
+ cfgFonts  = config.style.fonts;
+ cfgCursor = config.style.colors.cursor;
+ cfgTheme  = config.style.colors.catppuccin;
 in {
  config = mkMerge [
    (mkIf cfgFonts.enable {
@@ -67,9 +66,6 @@ in {
    (mkIf (cfgFonts.enable && config.foot.enable) {
      home-manager.users."${username}".programs = {
        foot = {
-         enable        = true;
-         server.enable = true;
-    
          settings = {
            csd.font  = "${cfgFonts.monospace.name}";
            main.font = "${cfgFonts.monospace.name}:size=16";
@@ -78,27 +74,113 @@ in {
      };
    })
 
-   (mkIf (cfgFonts.enable && config.firefox.enable) {
-     home-manager.users."${username}".programs.firefox.profiles.default.settings = {
-       "font.name.serif.x-western"      = cfgFonts.serif.name;
-       "font.name.monospace.x-western"  = cfgFonts.monospace.name;
-       "font.name.sans-serif.x-western" = cfgFonts.sansSerif.name;
+   (mkIf (cfgTheme.enable && config.zsh.enable) {
+     home-manager.users."${username}".programs = {
+       zsh.initExtra = ''
+          PROMPT="%F{#${cfgTheme.blue}}%B%n@%m%b %F{#${cfgTheme.red}}%~%f%F{#${cfgTheme.blue}} >%f "
+       '';
+     };
+   })
+   
+   (mkIf (cfgTheme.enable && config.waybar.enable) {
+     home-manager.users."${username}" = {
+       programs.waybar.style = ''
+          * {
+              font-size:   20px;
+              font-weight: bold; 
+              font-family: "JetBrains Mono Nerd Font";
+          }
+          
+          window#waybar {
+              border-radius: 10px;
+              background:    #${cfgTheme.crust}; 
+              border:        1px solid #${cfgTheme.surface0};
+          }
+          
+          tooltip {
+              border-radius: 10px;
+              background:    #${cfgTheme.crust}; 
+              border:        1px solid #${cfgTheme.surface0};
+          }
+          
+          #workspaces {
+              padding-right: 5px;
+              border-radius: 10px;
+              background:    #${cfgTheme.base};
+              border:        1px solid #${cfgTheme.surface0};
+          }
+          
+          #workspaces button {
+              color: #${cfgTheme.mauve};
+          }
+          
+          #workspaces button.active {
+              color: #${cfgTheme.mauve};
+          }
+          
+          #workspaces button:hover {
+              border:     none;
+              background: none;
+              box-shadow: none;
+              color:      #${cfgTheme.mauve};
+          }
+          
+          #custom-spacer {
+              opacity: 0.0;
+          }
+          
+          #clock {
+              color: #${cfgTheme.lavender};
+          }
+          
+          #pulseaudio {
+              padding-right: 12px;
+              color:         #${cfgTheme.lavender};
+          }
+          
+          #mpris {
+              animation-duration:        3s;
+              animation-name:            blink;
+              animation:                 repeat;
+              animation-timing-function: linear;
+              animation-iteration-count: infinite;
+              animation-direction:       alternate;
+              color:                     #${cfgTheme.text};
+          }
+          
+          @keyframes blink {
+              to {
+                  color: #6c7086;
+              }
+          }
+          
+          #network {
+              padding-right: 10px;
+              color:         #${cfgTheme.lavender};
+          }
+          
+          #pulseaudio-slider slider {
+              background: #${cfgTheme.lavender};
+          }
+          
+          #pulseaudio-slider trough {
+            min-height:    10px;
+            border-radius: 10px;
+            min-width:     100px;
+            color:         transparent;
+            background:    transparent;
+          }
+          
+          #pulseaudio-slider highlight {
+            border-radius: 10px;
+            color:         transparent;
+            background:    #${cfgTheme.lavender};
+          }
+       '';
      };
    })
 
-   (mkIf (cfgFonts.enable && config.gnome.enable) {
-     home-manager.users."${username}".dconf.settings = {
-       "org/gnome/desktop/interface" = {
-         font-hinting        = "full";
-         font-antialiasing   = "rgba";
-         monospace-font-name = "${cfgFonts.monospace.name} ${toString cfgFonts.size.terminal}";
-         font-name           = "${cfgFonts.sansSerif.name} ${toString cfgFonts.size.applications}";
-         document-font-name  = "${cfgFonts.serif.name}     ${toString cfgFonts.size.applications}";
-       };
-     };
-   })
-
-   (mkIf (config.bat.enable) {
+   (mkIf (cfgTheme.enable && config.bat.enable) {
      home-manager.users."${username}" = {
        programs.bat.config = {
          style       = "full";
@@ -110,17 +192,7 @@ in {
      };
    })
 
-   (mkIf (cfgAdwaita.enable && config.freetube.enable) {
-     home-manager.users."${username}" = {
-       programs.freetube.settings = {
-         mainColor = "Red";
-         secColor  = "Amber";
-         baseTheme = "black";
-       };
-     };
-   })
-
-   (mkIf (cfgCatppuccin.enable && config.freetube.enable) {
+   (mkIf (cfgTheme.enable && config.freetube.enable) {
      home-manager.users."${username}" = {
        programs.freetube.settings = {
          baseTheme = mkForce "catppuccinMocha";
@@ -130,59 +202,47 @@ in {
      };
    })
 
-   (mkIf (cfgAdwaita.enable && config.helix.enable) {
+   (mkIf (cfgTheme.enable && config.helix.enable) {
      home-manager.users."${username}" = {
-       programs.helix.settings = {
-         editor.true-color = true;
-         theme             = "adwaita-dark";
-       };
-     };
-   })
+       programs.helix = {
+         settings = {
+           editor.true-color = true;
+           theme             = "catppuccin_mocha";
+         };
 
-   (mkIf (cfgCatppuccin.enable && config.helix.enable) {
-     home-manager.users."${username}" = {
-       programs.helix.settings = {
-         editor.true-color = mkForce true;
-         theme             = mkForce "catppuccin_mocha";
-       };
-     };
-   })
-
-   (mkIf cfgAdwaita.enable {
-     home-manager.users."${username}" = {
-       dconf.settings."org/gnome/desktop/interface" = {
-         color-scheme = "prefer-dark";
-         cursor-theme = cfgCursor.settings.name;
-       };
-     };
-   })
-
-   (mkIf (cfgAdwaita.enable && config.firefox.enable) {
-     home-manager.users."${username}" = {
-       programs.firefox = {
-         profiles.default.settings."ui.systemUsesDarkTheme" = 1;
-
-         policies.ExtensionSettings = {
-           "{f1128560-8b23-46c1-aa6f-fb3e79f23cf3}" = {
-             installation_mode = "normal_installed";
-             install_url       = "https://addons.mozilla.org/firefox/downloads/latest/gnome-adwaita-gtk4-dark/latest.xpi";
-           };
+         themes.catppuccin_mocha = {
+           inherits = "catppuccin_mocha";
+  
+           "ui.background"         = {};
+           "variable.other.member" = "#${cfgTheme.lavender}";
          };
        };
      };
    })
-
-   (mkIf (cfgCatppuccin.enable && config.firefox.enable) {
-     home-manager.users."${username}" = {
-       programs.firefox = {
-         profiles.default.settings."ui.systemUsesDarkTheme" = 1;
-
-         policies.ExtensionSettings = {
-           "{8446b178-c865-4f5c-8ccc-1d7887811ae3}" = {
-             installation_mode = "normal_installed";
-             install_url       = mkForce "https://addons.mozilla.org/firefox/downloads/latest/catppuccin-mocha-lavender/latest.xpi";
-           };
-         };
+    
+   (mkIf (cfgTheme.enable && config.foot.enable) {
+     home-manager.users."${username}".programs = {
+       foot.settings.colors = {
+         alpha      = 0.9;
+         flash      = "${cfgTheme.red}";
+         background = "${cfgTheme.crust}";
+         foreground = "${cfgTheme.text}";
+         bright0    = "${cfgTheme.surface0}";
+         bright1    = "${cfgTheme.red}";
+         bright2    = "${cfgTheme.green}";
+         bright3    = "${cfgTheme.yellow}";
+         bright4    = "${cfgTheme.blue}";
+         bright5    = "${cfgTheme.pink}";
+         bright6    = "${cfgTheme.sky}";
+         bright7    = "${cfgTheme.text}";
+         regular0   = "${cfgTheme.surface0}";
+         regular1   = "${cfgTheme.red}";
+         regular2   = "${cfgTheme.green}";
+         regular3   = "${cfgTheme.yellow}";
+         regular4   = "${cfgTheme.blue}";
+         regular5   = "${cfgTheme.pink}";
+         regular6   = "${cfgTheme.sky}";
+         regular7   = "${cfgTheme.text}";
        };
      };
    })

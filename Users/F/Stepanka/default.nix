@@ -1,7 +1,0 @@
-{ ... }:
-
-{
- imports = [
-   ./Bookmarks/default.nix
- ];
-}

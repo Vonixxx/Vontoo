@@ -76,11 +76,6 @@ in {
      default = false;
    };
 
-   gnome.enable = mkOption {
-     type    = bool;
-     default = true;
-   };
-
    helix.enable = mkOption {
      type    = bool;
      default = false;
@@ -96,14 +91,19 @@ in {
      default = amd_gpu;
    };
 
-   firefox.enable = mkOption {
+   freetube.enable = mkOption {
      type    = bool;
      default = true;
    };
 
-   freetube.enable = mkOption {
+   hyprland.enable = mkOption {
      type    = bool;
      default = true;
+   };
+
+   waybar.enable = mkOption {
+     type    = bool;
+     default = config.hyprland.enable;
    };
 
    printing.enable = mkOption {
@@ -128,14 +128,71 @@ in {
 
    style = {
      colors = {
-       catppuccin.enable = mkOption {
-         type    = bool;
-         default = false;
-       };
+       catppuccin = {
+         enable = mkOption {
+           type    = bool;
+           default = true;
+         };
 
-       adwaita.enable = mkOption {
-         type    = bool;
-         default = config.gnome.enable;
+         base = mkOption { 
+           type    = str;
+           default = "1e1e2e";
+         };
+        
+         text = mkOption { 
+           type    = str;
+           default = "cdd6f4";
+         };
+        
+         mauve = mkOption { 
+           type    = str;
+           default = "cba6f7";
+         };
+        
+         surface0 = mkOption { 
+           type    = str;
+           default = "313244";
+         };
+        
+         crust = mkOption { 
+           type    = str;
+           default = "11111b";
+         };
+        
+         red = mkOption { 
+           type    = str;
+           default = "f38ba8";
+         };
+        
+         green = mkOption { 
+           type    = str;
+           default = "a6e3a1";
+         };
+        
+         yellow = mkOption { 
+           type    = str;
+           default = "f9e2af";
+         };
+        
+         blue = mkOption { 
+           type    = str;
+           default = "89b4fa";
+         };
+        
+         pink = mkOption { 
+           type    = str;
+           default = "f5c2ef";
+         };
+        
+         sky = mkOption { 
+           type    = str;
+           default = "89dceb";
+         };
+        
+         lavender = mkOption { 
+           type    = str;
+           default = "b4befe";
+         };
        };
 
        cursor = {
@@ -148,9 +205,9 @@ in {
            type = cursorSettings;
 
            default = {
-             size    = 16;
+             size    = 32;
+             name    = "Bibata-Modern-Ice";
              package = pkgs.bibata-cursors;
-             name    = "Bibata Modern Classic";
            };
          };
        };
@@ -168,22 +225,22 @@ in {
 
        size = {
          popups = mkOption {
-           default = 10;
+           default = 12;
            type    = ints.unsigned;
          };
 
          desktop = mkOption {
-           default = 10;
+           default = 12;
            type    = ints.unsigned;
          };
 
          terminal = mkOption {
-           default = 10;
+           default = 16;
            type    = ints.unsigned;
          };
 
          applications = mkOption {
-           default = 10;
+           default = 12;
            type    = ints.unsigned;
          };
        };
@@ -192,8 +249,8 @@ in {
          type = fontType;
 
          default = {
-           name    = "DejaVu Serif";
-           package = pkgs.dejavu_fonts;
+           name    = "FiraCode Nerd Font";
+           package = pkgs.nerd-fonts.fira-code;
          };
        };
 
@@ -201,8 +258,8 @@ in {
          type = fontType;
 
          default = {
-           name    = "DejaVu Sans";
-           package = pkgs.dejavu_fonts;
+           name    = "FiraCode Nerd Font";
+           package = pkgs.nerd-fonts.fira-code;
          };
        };
 
@@ -210,8 +267,8 @@ in {
          type = fontType;
 
          default = {
-           name    = "DejaVu Mono";
-           package = pkgs.dejavu_fonts;
+           name    = "Hack Nerd Font Propo";
+           package = pkgs.nerd-fonts.hack;
          };
        };
 
@@ -219,7 +276,7 @@ in {
          type = fontType;
 
          default = {
-           name    = "NotoColorEmoji";
+           name    = "Noto Color Emoji";
            package = pkgs.noto-fonts-color-emoji;
          };
        };

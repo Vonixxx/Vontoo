@@ -21,8 +21,8 @@ in {
          indicators           = true;
          layout               = "tree";
          size                 = "short";
-         color.when           = "never";
          sorting.dir-grouping = "first";
+         color.when           = "always";
          icons.when           = "always";
 
          recursion = {
