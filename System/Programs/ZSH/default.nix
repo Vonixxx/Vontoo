@@ -14,7 +14,9 @@ in {
    users.defaultUserShell = pkgs.zsh;
 
    environment = {
-     shells = [ pkgs.zsh ];
+     shells = [
+       pkgs.zsh
+     ];
 
      systemPackages = with pkgs; [
        gnutar
@@ -32,8 +34,8 @@ in {
        enable = true;
 
        initExtraFirst = ''
-          if uwsm check may-start && uwsm select; then
-            exec systemd-cat -t uwsm_start uwsm start default
+          if uwsm check may-start; then
+            exec uwsm start hyprland-uwsm.desktop
           fi
 
           pfetch

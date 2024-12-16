@@ -190,8 +190,8 @@ in {
                           []
                           [
                             alsa-utils
-                            bemenu
                             curl
+                            dolphin
                             du-dust
                             efibootmgr
                             ffmpeg

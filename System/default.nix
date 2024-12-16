@@ -16,6 +16,7 @@
    ./Programs/Foot/default.nix
    ./Programs/Atuin/default.nix
    ./Programs/Helix/default.nix
+   ./Programs/Bemenu/default.nix
    ./Programs/FreeTube/default.nix
    ./Programs/Printing/default.nix
 

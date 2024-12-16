@@ -1,4 +1,5 @@
-{ username
+{ pkgs
+, username
 , ...
 }:
 
@@ -8,6 +9,7 @@
  lsd.enable   = true;
  zsh.enable   = true;
  foot.enable  = true;
+ bemenu.enable  = true;
  atuin.enable = true;
  helix.enable = true;
 
@@ -18,9 +20,20 @@
  };
 
  home-manager.users."${username}" = {
-  config
- , ...
- }: {
+   qt = {
+     enable = true;
+
+     style = {
+       name    = "breeze-dark";
+       package = with pkgs; [
+         # libsForQt5.breeze-qt5
+         # libsForQt5.breeze-icons
+         kdePackages.breeze
+         kdePackages.breeze-icons
+       ];
+     };
+   };
+
    programs.git = {
      userName  = "Vonixxx";
      userEmail = "vonixxxwork@tuta.io";

@@ -96,6 +96,11 @@ in {
      default = true;
    };
 
+   bemenu.enable = mkOption {
+     type    = bool;
+     default = false;
+   };
+
    hyprland.enable = mkOption {
      type    = bool;
      default = true;

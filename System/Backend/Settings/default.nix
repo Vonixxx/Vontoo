@@ -82,6 +82,74 @@ in {
      };
    })
    
+   (mkIf (cfgTheme.enable && config.hyprland.enable) {
+     home-manager.users."${username}".wayland.windowManager = {
+       hyprland = {
+         extraConfig = ''
+            plugin {
+             hyprbars {
+              bar_padding                = 8
+              bar_button_padding         = 8
+              bar_height                 = 30
+              bar_text_size              = 12
+              bar_part_of_window         = true
+              bar_precedence_over_border = true
+              bar_text_font              = "FiraCode Nerd Font"
+              col.text                   = rgb(${cfgTheme.text})
+              bar_color                  = rgb(${cfgTheme.crust})
+  
+              hyprbars-button = rgb(${cfgTheme.red})   , 20 , 󰖭 , hyprctl dispatch killactive
+              hyprbars-button = rgb(${cfgTheme.green}) , 20 , 󰖯 , hyprctl dispatch fullscreen 1
+              hyprbars-button = rgb(${cfgTheme.blue})  , 20 , 󰖲 , hyprctl dispatch togglefloating
+             }
+            }
+         '';
+  
+         settings = {
+           misc = {
+             force_default_wallpaper = 0;
+             disable_hyprland_logo   = true;
+             animate_manual_resizes  = true;
+           };
+
+           decoration = {
+             rounding     = 10;
+             shadow.color = "rgb(${cfgTheme.base})";
+           };
+
+           general = {
+             gaps_out              = 10;
+             "col.inactive_border" = "rgb(${cfgTheme.crust})";
+             "col.active_border"   = "rgb(${cfgTheme.surface0})";
+           };
+    
+           env = [
+             "QT_STYLE_OVERRIDE , breeze-dark"
+             "XCURSOR_SIZE      , 24"
+             "HYPRCURSOR_SIZE   , 24"
+           ];
+         };
+       };
+     };
+   })
+
+   (mkIf (cfgTheme.enable && config.bemenu.enable) {
+    home-manager.users."${username}" = {
+      programs.bemenu.settings = {
+         border-radius = 10;
+         hf            = "#${cfgTheme.red}";
+         hb            = "#${cfgTheme.base}";
+         af            = "#${cfgTheme.text}";
+         ff            = "#${cfgTheme.text}";
+         nf            = "#${cfgTheme.text}";
+         ab            = "#${cfgTheme.crust}";
+         fb            = "#${cfgTheme.crust}";
+         nb            = "#${cfgTheme.crust}";
+         bdr           = "#${cfgTheme.surface0}";
+       };
+     };
+   })
+
    (mkIf (cfgTheme.enable && config.waybar.enable) {
      home-manager.users."${username}" = {
        programs.waybar.style = ''
