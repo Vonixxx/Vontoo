@@ -3,10 +3,12 @@
 
 ## Default Applications
 - Browser: Brave
-- Text Editor: KWrite
-  - Alternative: Helix
-- UX: Hyprland + Waybar
 - Terminal: Foot
+- Youtube: Freetube
+- UX: Hyprland + Waybar
+- Productivity: LibreOffice
+- Text Editor: Gnome Text Editor
+  - Alternative: Helix
 
 ## System Information
 
@@ -46,26 +48,28 @@ The `System` and `Users` folders each have a default.nix file at their base, the
 that lie within the subfolders, which then get imported back to flake.nix in order to instantiate the system. The structure
 is arbitrary and was chosen based on how intuitive it is to me.
 
-`Users` does not always contain a user-specific directory, this depends on the degree to which the given profile is customized. Most basic customizations can be readily achieved in the `default.nix` which lies at the base of the `Users` directory. 
+`Users` does not always contain a user-specific directory, this depends on the degree to which the given profile is customized. Most basic customizations can be readily achieved in `Users/default.nix`. 
+
+`System/UI/Style` contains the default values regarding the cursor, fonts and colors used in the system. Changing the values there will affect all apps which allow color customisations, the affected apps can be found in `System/Backend/Settings`.
 
 ### User-specific configurable options:
 
 ```
-<user> = mkSystem <bool> toggle TLP.
-                  <bool> toggle printing capabilities.
-                  <bool> toggle latest kernel.
-                  <bool> toggle AMD CPU settings.
-                  <bool> toggle AMD GPU settings.
-                  <bool> toggle Intel CPU settings.
-                  <bool> toggle Intel GPU settings.
-                  <string> keyboard language.
-                  <string> locale settings.
-                  <string> location, used to determine time.
-                  <string> username.
-                  <string> folder location for other user-specific configuration.
-                  <string> password, encoded using `mkpasswd`.
-                  <list> extra modules.
-                  <list> overlays for nixpkgs.
+<user> = mkSystem <bool> TLP
+                  <bool> printing capabilities
+                  <bool> latest kernel
+                  <bool> AMD CPU
+                  <bool> AMD GPU
+                  <bool> Intel CPU
+                  <bool> Intel GPU
+                  <string> keyboard language
+                  <string> locale settings
+                  <string> location, used to determine time
+                  <string> username
+                  <string> folder location for other user-specific configuration
+                  <string> password, encoded using `mkpasswd`
+                  <list> extra modules
+                  <list> overlays for nixpkgs
 ```
 
 ## Special Thanks

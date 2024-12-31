@@ -10,48 +10,34 @@ let
  inherit (lib)
   mkIf;
 
- terminal     = "foot";
  mod          = "SUPER";
- kill_session = "uwsm stop";
- menu         = "bemenu-run";
-
- mocha = {
-   blue     = "rgb(89b4fa)";
-   white    = "rgb(cdd6f4)";
-   green    = "rgb(a6e3a1)";
-   red      = "rgb(f38ba8)";
-   crust    = "rgb(171727)";
-   surface0 = "rgb(495068)";
-   base     = "rgba(30 , 30 , 46 , 1)";
- };
+ terminal     = "footclient";
+ kill_session = "loginctl terminate-user \"\"";
+ wallpaper    = "/home/luca/Pictures/Chill.mp4";
+ menu         = "source /home/luca/.nix-profile/etc/profile.d/hm-session-vars.sh && bemenu-run";
 in {
  config = mkIf config.hyprland.enable {
    programs.hyprland = {
      enable   = true;
      withUWSM = true;
    };
+
+   xdg.portal.extraPortals = with pkgs; [
+     xdg-desktop-portal-gtk
+   ];
   
    home-manager.users."${username}".wayland.windowManager = {
      hyprland = {
        enable         = true;
        systemd.enable = false;
   
-       plugins = with pkgs.hyprlandPlugins; [
-         hyprbars        
-       ];
-
        settings = {
          input.kb_layout = keymap;
-         monitor         = "HDMI-A-1 , 1920x1080@60 , 0x0 , 1";
-  
+         monitor         = ", preferred , auto , 1";
+
          master = {
            mfact      = 0.70;
            new_status = "master";
-         };
-  
-         general = {
-           resize_on_border = true;
-           layout           = "master";
          };
   
          bindm = [
@@ -59,6 +45,21 @@ in {
            "${mod} , mouse:273 , resizewindow"
          ];
 
+         exec-once = [
+           "waybar"
+           "mpvpaper '*' -o \"--loop-file=inf\" ${wallpaper}"
+         ];
+
+         windowrulev2 = [
+           "float, class:org.gnome.Calculator, title:Calculator"
+         ];
+  
+         general = {
+           extend_border_grab_area = 30;
+           resize_on_border        = true;
+           layout                  = "master";
+         };
+  
          bind = [
            "${mod}       , M     , exec            , ${kill_session}"
            "${mod}       , C     , killactive      ,                "
@@ -76,11 +77,6 @@ in {
            "${mod} SHIFT , 2     , movetoworkspace , 2              "
            "${mod} SHIFT , 3     , movetoworkspace , 3              "
            "${mod} SHIFT , 4     , movetoworkspace , 4              "
-         ];
-  
-         exec-once = [
-           "waybar"
-           "mpvpaper '*' -o \"--loop-file=inf\" /home/luca/Pictures/Moonlake.mp4"
          ];
        };
      };

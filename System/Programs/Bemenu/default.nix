@@ -15,7 +15,6 @@ in {
   
        settings = {
          list         = 5;
-         border       = 1;
          prompt       = "";
          center       = true;
          width-factor = 0.15;

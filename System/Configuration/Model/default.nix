@@ -63,6 +63,7 @@ config = mkMerge [
      hardware.graphics.extraPackages = with pkgs; [
        libvdpau-va-gl
        intel-media-driver
+       intel-vaapi-driver
      ];
    })
  ];

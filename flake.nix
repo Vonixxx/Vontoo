@@ -47,14 +47,15 @@ let
  locale:
  timezone:
  username:
- profile:
  password:
  extraModules:
  extraOverlays:
+ extraUserGroups:
+ extraKernelModules:
+ extraKernelParameters:
  userPackages:
+ userConfiguration:
  nixpkgs.lib.nixosSystem rec {
-   system = "x86_64-linux";
-
    specialArgs = {
      inherit
      tlp
@@ -71,28 +72,18 @@ let
      intel_gpu
      userPackages
      extraOverlays
-     latest_kernel;
+     latest_kernel
+     extraUserGroups
+     userConfiguration
+     extraKernelModules
+     extraKernelParameters;
    };
 
-   pkgs = import nixpkgs {
-     config.allowUnfree = true;
-     overlays           = extraOverlays;
-     localSystem.system = "x86_64-linux";
-   };
-
-   modules = (if profile == null
-     then [
-      ./System
-      disko.nixosModules.disko
-      home-manager.nixosModules.home-manager
-     ] ++ extraModules
-     else [
-       ./System
-       (./Users + profile)
-       disko.nixosModules.disko
-       home-manager.nixosModules.home-manager
-     ] ++ extraModules
-   );
+   modules = [
+     ./System
+     disko.nixosModules.disko
+     home-manager.nixosModules.home-manager
+   ] ++ extraModules;
  };
 in {
    nixosConfigurations = (

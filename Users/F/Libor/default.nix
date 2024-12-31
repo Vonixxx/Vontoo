@@ -1,7 +1,0 @@
-{ ... }:
-
-{
- imports = [
-   ./Configuration/default.nix
- ];
-}

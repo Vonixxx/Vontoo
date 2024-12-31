@@ -11,8 +11,7 @@ in {
  config = mkIf config.atuin.enable {
    home-manager.users."${username}".programs = {
      atuin = {
-       enable               = true;
-       enableZshIntegration = true;
+       enable = true;
 
        settings = {
          inline_height = 10;

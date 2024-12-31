@@ -1,5 +1,6 @@
 { pkgs
 , userPackages
+, extraOverlays
 , latest_kernel
 , ...
 }:
@@ -8,6 +9,7 @@ let
  inherit (pkgs)
   writeScriptBin;
 
+ catppuccin-plymouth-mocha = pkgs.catppuccin-plymouth.override { variant = "mocha"; };
  update = writeScriptBin "update" ''
     profile=$(zenity --entry \
      --title="System Update" \
@@ -21,12 +23,24 @@ let
     fi
  '';
 in {
- boot.kernelPackages =
- if !latest_kernel
-   then pkgs.linuxPackages
-   else pkgs.linuxPackages_latest;
+ nixpkgs = {
+   overlays     = extraOverlays;
+   hostPlatform = "x86_64-linux";
+ };
 
- services.udev.packages = with pkgs; [
+ boot = {
+   kernelPackages =
+   if !latest_kernel
+     then pkgs.linuxPackages
+     else pkgs.linuxPackages_latest;
+
+   plymouth.themePackages = [
+     catppuccin-plymouth-mocha
+   ];
+ };
+
+ services.udev.packages =
+ with pkgs; [
    android-udev-rules
    game-devices-udev-rules
  ];
@@ -34,11 +48,19 @@ in {
  environment.systemPackages = 
  with pkgs; [
    brave
+   celluloid
+   eog
+   gnome-calculator
+   gnome-text-editor
+   impala
    libreoffice-fresh
+   nautilus
+   system-config-printer
    update
  ] ++ userPackages;
 
- hardware.graphics.extraPackages = with pkgs; [
+ hardware.graphics.extraPackages =
+ with pkgs; [
    libvdpau-va-gl
    vaapiVdpau
  ];
