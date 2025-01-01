@@ -115,7 +115,9 @@ in {
   
        initrd = {
          includeDefaultModules = true;
-         kernelModules         = [] ++ extraKernelModules;
+
+         kernelModules = [
+         ] ++ extraKernelModules;
   
          availableKernelModules = [
            "vmd"
@@ -129,13 +131,10 @@ in {
        loader = {
          timeout = 5;
   
-         grub = {
-           configurationLimit    = 10;
-           enable                = true;
-           efiSupport            = true;
-           copyKernels           = true;
-           efiInstallAsRemovable = true;
-           device                = "nodev";
+         systemd-boot = {
+           configurationLimit = 10;
+           enable             = true;
+           memtest86.enable   = true;
          };
        };
      };

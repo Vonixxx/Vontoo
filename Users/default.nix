@@ -182,7 +182,7 @@ in {
                      "us"
                      "en_GB.UTF-8"
                      "Europe/Brussels"
-                     "Luca"
+                     "BroomBear"
                      "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
                      [
                       mailserver.nixosModules.mailserver
@@ -210,7 +210,7 @@ in {
                          PF_INFO = "ascii title uptime pkgs kernel memory os host";
                        };
                       
-                       home-manager.users."Luca" = {
+                       home-manager.users."BroomBear" = {
                          programs.git = {
                            userName  = "Vonixxx";
                            userEmail = "vonixxxwork@tuta.io";
@@ -228,7 +228,7 @@ in {
                           "us"
                           "en_GB.UTF-8"
                           "Europe/Brussels"
-                          "Luca"
+                          "BroomBear"
                           "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
                           []
                           [
@@ -305,7 +305,7 @@ in {
                               };
                             };
                            
-                            home-manager.users."Luca" = {
+                            home-manager.users."BroomBear" = {
                               programs.git = {
                                 userName  = "Vonixxx";
                                 userEmail = "vonixxxwork@tuta.io";
