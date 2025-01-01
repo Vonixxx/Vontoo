@@ -18,7 +18,6 @@
 #                   <string>        username
 #                   <string>        password, encoded using `mkpasswd`
 #                   <list>          extra modules
-#                   <list>          nixpkgs overlays
 #                   <list>          extra groups for the user
 #                   <list>          extra kernel modules
 #                   <list>          extra kernel parameters
@@ -99,20 +98,7 @@ in {
                      []
                      []
                      []
-                     []
-                     {
-                       home-manager.users."Ofelia" = {
-                         dconf.settings = {
-                           "org/gnome/desktop/interface" = {
-                             text-scaling-factor = 1.5;
-                           };
-                      
-                           "org/gnome/settings-daemon/plugins/color" = {
-                             night-light-enabled = false;
-                           };
-                         };
-                       };
-                     };
+                     {};
 
  F_Jarka = mkSystem false
                     true
@@ -126,7 +112,6 @@ in {
                     "Europe/Prague"
                     "Jarka"
                     "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
-                    []
                     []
                     []
                     []
@@ -146,7 +131,6 @@ in {
                     "Europe/Prague"
                     "Libor"
                     "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4"
-                    []
                     []
                     []
                     []
@@ -177,7 +161,6 @@ in {
                        []
                        []
                        []
-                       []
                        [
                          ffmpeg
                          freecad
@@ -204,7 +187,6 @@ in {
                      [
                       mailserver.nixosModules.mailserver
                      ]
-                     []
                      []
                      []
                      []
@@ -249,7 +231,6 @@ in {
                           "Luca"
                           "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
                           []
-                          []
                           [
                            "tss"
                            "libvirtd"
@@ -258,6 +239,7 @@ in {
                            "vfio"
                            "vfio_pci"
                            "vfio_iommu_type1"
+                           "vendor-reset"
                           ]
                           [
                            "iommu=pt"
@@ -291,6 +273,10 @@ in {
                             atuin.enable                 = true;
                             helix.enable                 = true;
                             programs.virt-manager.enable = true;
+
+                            boot.extraModulePackages = with pkgs; [
+                              linuxKernel.packages.linux_6_12.vendor-reset
+                            ];
 
                             security.tpm2 = {
                               enable                 = true;

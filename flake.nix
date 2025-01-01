@@ -30,9 +30,11 @@
  }:
 
 let
+ system = "x86_64-linux";
+
  pkgs = import nixpkgs {
+   inherit system;
    config.allowUnfree = true;
-   localSystem.system = "x86_64-linux";
  };
 
  mkSystem =
@@ -49,13 +51,14 @@ let
  username:
  password:
  extraModules:
- extraOverlays:
  extraUserGroups:
  extraKernelModules:
  extraKernelParameters:
  userPackages:
  userConfiguration:
  nixpkgs.lib.nixosSystem rec {
+   inherit system;
+
    specialArgs = {
      inherit
      tlp
@@ -71,7 +74,6 @@ let
      intel_cpu
      intel_gpu
      userPackages
-     extraOverlays
      latest_kernel
      extraUserGroups
      userConfiguration

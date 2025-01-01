@@ -15,6 +15,8 @@
 }:
 
 let
+ cfg = config;
+
  inherit (lib.strings)
   toLower;
 
@@ -22,7 +24,7 @@ let
   mkIf mkMerge;
 in {
  config = mkMerge [
-   (mkIf config.general_configuration.enable {
+   (mkIf cfg.general_configuration.enable {
      programs.dconf.enable           = true;
      documentation.nixos.enable      = false;
      system.stateVersion             = "24.11";
@@ -167,12 +169,21 @@ in {
          initialHashedPassword = "${password}";
          home                  = "/home/" + toLower"${username}";
   
-         extraGroups = [
-          "audio"
-          "video"
-          "wheel"
-          "network"
-         ] ++ extraUserGroups;
+         extraGroups = mkMerge [
+           [
+            "audio"
+            "video"
+            "wheel"
+            "network"
+           ] 
+
+           extraUserGroups
+
+           (mkIf cfg.printing.enable [
+            "lp"
+            "scanner"
+           ]) 
+         ];
        };
      };
    })

@@ -25,22 +25,6 @@
      lavender = "b4befe";
    };
 
-   # colors = {
-   #   gtk      = "light";
-   #   base     = "eff1f5";
-   #   text     = "4c4f69";
-   #   mauve    = "8839ef";
-   #   surface0 = "ccd0da";
-   #   crust    = "dce0e8";
-   #   red      = "d20f39";
-   #   green    = "40a02b";
-   #   yellow   = "df8e1d";
-   #   blue     = "1e66f5";
-   #   pink     = "ea76cb";
-   #   sky      = "04a5e5";
-   #   lavender = "7287fd";
-   # };
-
    cursor.settings = {
      size    = 32;
      name    = "Bibata-Modern-Ice";

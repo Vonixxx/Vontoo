@@ -23,11 +23,6 @@ let
     fi
  '';
 in {
- nixpkgs = {
-   overlays     = extraOverlays;
-   hostPlatform = "x86_64-linux";
- };
-
  boot = {
    kernelPackages =
    if !latest_kernel

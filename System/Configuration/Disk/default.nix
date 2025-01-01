@@ -2,14 +2,16 @@
 , ...
 }:
 
-{
+let
+ GiB = 1024 * 1024 * 1024;
+in {
  zramSwap = {
    enable    = true;
-   memoryMax = 4294967296;
+   memoryMax = 2 * GiB;
  };
 
- disko.devices = {
-   disk.main = {
+ disko.devices.disk = {
+   main = {
      type = "disk";
      inherit device;
 
@@ -18,31 +20,11 @@
 
        partitions = {
          root = {
-           size = "40G";
+           size = "100%";
 
            content = {
              mountpoint = "/";
              format     = "xfs";
-             type       = "filesystem";
-           };
-         };
-
-         nix = {
-           size = "80G";
-
-           content = {
-             format     = "xfs";
-             mountpoint = "/nix";
-             type       = "filesystem";
-           };
-         };
-
-         home = {
-           size = "100%";
-
-           content = {
-             format     = "xfs";
-             mountpoint = "/home";
              type       = "filesystem";
            };
          };
