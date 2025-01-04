@@ -1,7 +1,9 @@
-{ pkgs
+{ lib
+, pkgs
+, config
+, argumentsCLI
+, latestKernel
 , userPackages
-, extraOverlays
-, latest_kernel
 , ...
 }:
 
@@ -9,7 +11,19 @@ let
  inherit (pkgs)
   writeScriptBin;
 
- catppuccin-plymouth-mocha = pkgs.catppuccin-plymouth.override { variant = "mocha"; };
+ inherit (lib)
+  mkIf mkMerge importJSON;
+
+ catppuccin-plymouth-mocha =
+ pkgs.catppuccin-plymouth.override {
+   variant = "mocha";
+ };
+
+ cfg  = config;
+ args = importJSON argumentsCLI.outPath;
+
+ vendorResetUDEV = pkgs.callPackage ../../../Users/Dependencies/V/WorkStation/default.nix {};
+
  update = writeScriptBin "update" ''
     profile=$(zenity --entry \
      --title="System Update" \
@@ -23,40 +37,57 @@ let
     fi
  '';
 in {
- boot = {
-   kernelPackages =
-   if !latest_kernel
-     then pkgs.linuxPackages
-     else pkgs.linuxPackages_latest;
-
-   plymouth.themePackages = [
-     catppuccin-plymouth-mocha
-   ];
- };
-
  services.udev.packages =
  with pkgs; [
    android-udev-rules
    game-devices-udev-rules
+   vendorResetUDEV
  ];
 
  environment.systemPackages = 
- with pkgs; [
-   brave
-   celluloid
-   eog
-   gnome-calculator
-   gnome-text-editor
-   impala
-   libreoffice-fresh
-   nautilus
-   system-config-printer
-   update
- ] ++ userPackages;
+ with pkgs; mkMerge [
+   userPackages
+
+   [
+    brave
+    celluloid
+    eog
+    gnome-calculator
+    gnome-text-editor
+    impala
+    libreoffice-fresh
+    nautilus
+    system-config-printer
+    update
+   ]
+ ];
+
+ boot = {
+   plymouth.themePackages = [
+     catppuccin-plymouth-mocha
+   ];
+
+   kernelPackages =
+   if !latestKernel
+     then pkgs.linuxPackages
+     else pkgs.linuxPackages_latest;
+ };
 
  hardware.graphics.extraPackages =
- with pkgs; [
-   libvdpau-va-gl
-   vaapiVdpau
+ with pkgs; mkMerge [
+   [
+    libvdpau-va-gl
+    vaapiVdpau
+   ]
+
+   (mkIf (args.gpuAMD == "true") [
+     amdvlk
+     # rocmPackages.clr.icd
+   ]) 
+
+   (mkIf (args.gpuIntel == "true") [
+     intel-media-driver
+     intel-vaapi-driver
+   ]) 
  ];
 }

@@ -8,13 +8,8 @@
 # <user> = mkSystem <bool>          toggle TLP
 #                   <bool>          toggle printing capabilities
 #                   <bool>          toggle latest kernel
-#                   <bool>          toggle AMD CPU settings
-#                   <bool>          toggle AMD GPU settings
-#                   <bool>          toggle Intel CPU settings
-#                   <bool>          toggle Intel GPU settings
 #                   <string>        keyboard language
 #                   <string>        language locale
-#                   <string>        location, used to determine time
 #                   <string>        username
 #                   <string>        password, encoded using `mkpasswd`
 #                   <list>          extra modules
@@ -84,13 +79,8 @@ in {
  U_Ofelia = mkSystem false
                      true
                      false
-                     false
-                     false
-                     true
-                     true
                      "be"
                      "en_GB.UTF-8"
-                     "Europe/Brussels"
                      "Ofelia"
                      "$y$j9T$Bt3YhGYQoALhjeZY7MauX/$jlIcH1JuGjKz2UqTj7CEtwIbNNr8hRpqgRU7CEi0CBA"
                      []
@@ -103,13 +93,8 @@ in {
  F_Jarka = mkSystem false
                     true
                     false
-                    false
-                    false
-                    true
-                    true
                     "cz"
                     "cs_CZ.UTF-8"
-                    "Europe/Prague"
                     "Jarka"
                     "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
                     []
@@ -122,13 +107,8 @@ in {
  F_Libor = mkSystem false
                     false
                     false
-                    false
-                    false
-                    true
-                    true
                     "cz"
                     "cs_CZ.UTF-8"
-                    "Europe/Prague"
                     "Libor"
                     "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4"
                     []
@@ -148,13 +128,8 @@ in {
  F_Stepanka = mkSystem true
                        true
                        false
-                       false
-                       false
-                       true
-                       true
                        "us"
                        "en_GB.UTF-8"
-                       "Europe/Prague"
                        "Bubinka"
                        "$y$j9T$YQnrV6FSbngHwY4Y/xCR7/$b5I3pMtjPHb8YQdjXwuEZLFna9Nj2h7eT6uRP4P7n.4"
                        []
@@ -175,13 +150,8 @@ in {
  V_Lenovo = mkSystem false
                      false
                      false
-                     true
-                     true
-                     false
-                     false
                      "us"
                      "en_GB.UTF-8"
-                     "Europe/Brussels"
                      "BroomBear"
                      "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
                      [
@@ -221,25 +191,17 @@ in {
  V_WorkStation = mkSystem false
                           false
                           true
-                          false
-                          false
-                          false
-                          false
                           "us"
                           "en_GB.UTF-8"
-                          "Europe/Brussels"
                           "BroomBear"
                           "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
                           []
-                          [
-                           "tss"
-                           "libvirtd"
-                          ]
+                          []
                           [
                            "vfio"
                            "vfio_pci"
-                           "vfio_iommu_type1"
                            "vendor-reset"
+                           "vfio_iommu_type1"
                           ]
                           [
                            "iommu=pt"
@@ -266,51 +228,24 @@ in {
                             soulseekqt
                           ]
                           {
-                            bat.enable                   = true;
-                            git.enable                   = true;
-                            lsd.enable                   = true;
-                            zsh.enable                   = true;
-                            atuin.enable                 = true;
-                            helix.enable                 = true;
-                            programs.virt-manager.enable = true;
+                            bat.enable            = true;
+                            git.enable            = true;
+                            lsd.enable            = true;
+                            zsh.enable            = true;
+                            atuin.enable          = true;
+                            helix.enable          = true;
+                            virtualisation.enable = true;
 
-                            boot.extraModulePackages = with pkgs; [
-                              linuxKernel.packages.linux_6_12.vendor-reset
-                            ];
-
-                            security.tpm2 = {
-                              enable                 = true;
-                              abrmd.enable           = true;
-                              pkcs11.enable          = true;
-                              tctiEnvironment.enable = true;
-                            };
-                         
-                            virtualisation = {
-                              spiceUSBRedirection.enable = true;
-                         
-                              libvirtd = {
-                                enable = true;
-                         
-                                qemu = {
-                                  swtpm.enable = true;
-                                  package      = pkgs.qemu_kvm;
-                         
-                                  ovmf.packages = [
-                                    (pkgs.OVMFFull.override {
-                                      secureBoot = true;
-                                      tpmSupport = true;
-                                    }).fd
-                                  ];
-                                };
-                              };
-                            };
-                           
                             home-manager.users."BroomBear" = {
                               programs.git = {
                                 userName  = "Vonixxx";
                                 userEmail = "vonixxxwork@tuta.io";
                               };
                             };
+                           
+                            boot.extraModulePackages = [
+                              pkgs.linuxKernel.packages.linux_6_12.vendor-reset
+                            ];
                            
                             environment.variables = {
                               EDITOR  = mkForce "hx";

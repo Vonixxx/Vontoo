@@ -5,8 +5,8 @@
 , keymap
 , locale
 , password
-, timezone
 , username
+, argumentsCLI
 , extraUserGroups
 , userConfiguration
 , extraKernelModules
@@ -15,22 +15,54 @@
 }:
 
 let
- cfg = config;
+ inherit (lib)
+  mkIf mkMerge;
 
  inherit (lib.strings)
   toLower;
 
- inherit (lib)
-  mkIf mkMerge;
+ inherit (lib.asserts)
+  assertMsg;
+
+ inherit (lib.trivial)
+  importJSON;
+
+ cfg  = config;
+ args = importJSON argumentsCLI.outPath;
+
+ fetchHardware = ''
+    nixos-generate-config --show-hardware-config | grep boot.initrd.availableKernelModules | awk -F '[][]' '{gsub(/"/, "", $2); gsub(/^[ \t]+|[ \t]+$/, "", $2); print $2}'
+ '';
+
+ fetchGPUAMD = ''
+    lspci | grep -q "AMD" && echo "true" || echo "false"
+ '';
+
+ fetchGPUIntel = ''
+    lspci | grep -q "Intel" && echo "true" || echo "false"
+ '';
+
+ fetchCPUAMD = ''
+    grep -q "AMD" /proc/cpuinfo && echo "true" || echo "false"
+ '';
+
+ fetchCPUIntel = ''
+    grep -q "Intel" /proc/cpuinfo && echo "true" || echo "false"
+ '';
+
+ systemUpdate = ''
+    nix run github:nikolaiser/purga -- -i argumentsCLI -a hardware="$(${fetchHardware})" -a cpuAMD=$(${fetchCPUAMD}) -a cpuIntel=$(${fetchCPUIntel}) -a gpuIntel=$(${fetchGPUIntel}) -a gpuAMD=$(${fetchGPUAMD}) -- sudo nixos-rebuild switch --flake "./#V_WorkStation"
+ '';
 in {
  config = mkMerge [
+   userConfiguration
+
    (mkIf cfg.general_configuration.enable {
      programs.dconf.enable           = true;
      documentation.nixos.enable      = false;
      system.stateVersion             = "24.11";
      powerManagement.cpuFreqGovernor = "ondemand";
      i18n.defaultLocale              = "${locale}";
-     time.timeZone                   = "${timezone}";
   
      networking = {
        wireless.iwd.enable = true;
@@ -44,11 +76,12 @@ in {
      };
   
      services = {
-       tlp.enable         = tlp;
-       gvfs.enable        = true;
-       fstrim.enable      = true;
-       logind.lidSwitch   = "poweroff";
-       xserver.xkb.layout = "${keymap}";
+       tlp.enable                 = tlp;
+       gvfs.enable                = true;
+       fstrim.enable              = true;
+       automatic-timezoned.enable = true;
+       logind.lidSwitch           = "poweroff";
+       xserver.xkb.layout         = "${keymap}";
   
        pipewire = {
          enable            = true;
@@ -66,13 +99,39 @@ in {
          enable      = true;
          enable32Bit = true;
        };
+
+       cpu = mkMerge [ 
+         (mkIf (args.cpuAMD == "true") {
+           amd.updateMicrocode = true;
+         })
+
+         (mkIf (args.cpuIntel == "true") {
+           intel.updateMicrocode = true;
+         })
+       ];
      };
   
-     environment.variables = {
-       NIXOS_OZONE_WL = "1";
-       BROWSER        = "brave";
-       EDITOR         = "gnome-text-editor";
-       VISUAL         = "gnome-text-editor";
+     environment = {
+       shellAliases = {
+         update = systemUpdate;
+       };
+
+       variables = mkMerge [
+         (mkIf (args.gpuAMD == "true") {
+           ROC_ENABLE_PRE_VEGA = "1";
+         })
+  
+         (mkIf (args.gpuIntel == "true") {
+           LIBVA_DRIVER_NAME = "iHD";
+         })
+  
+         {
+          NIXOS_OZONE_WL = "1";
+          BROWSER        = "brave";
+          EDITOR         = "gnome-text-editor";
+          VISUAL         = "gnome-text-editor";
+         }
+       ];
      };
   
      home-manager = {
@@ -98,14 +157,43 @@ in {
      };
   
      boot = {
-       kernelParams = [
-        "quiet"
-        "splash"
-        "mitigations=off"
-       ] ++ extraKernelParameters;
-  
        supportedFilesystems = [
          "ntfs"
+       ];
+
+       kernelModules = mkMerge [
+         (mkIf (args.gpuAMD == "true") [
+           "amdgpu"
+         ]) 
+
+         (mkIf (args.cpuAMD == "true") [
+           "kvm-amd"
+         ]) 
+
+         (mkIf (args.gpuIntel == "true") [
+           "i915"
+         ]) 
+
+         (mkIf (args.cpuIntel == "true") [
+           "kvm-intel"
+         ]) 
+       ];
+
+       kernelParams = mkMerge [
+         extraKernelParameters
+
+         [
+          "quiet"
+          "splash"
+          "mitigations=off"
+         ]
+
+         (mkIf (args.gpuAMD == "true") [
+           "radeon.si_support=0"
+           "amdgpu.si_support=1"
+           "radeon.cik_support=0"
+           "amdgpu.cik_support=1"
+         ]) 
        ];
   
        plymouth = {
@@ -114,17 +202,11 @@ in {
        };
   
        initrd = {
-         includeDefaultModules = true;
+         includeDefaultModules = false;
+         kernelModules         = extraKernelModules;
 
-         kernelModules = [
-         ] ++ extraKernelModules;
-  
          availableKernelModules = [
-           "vmd"
-           "xfs"
-           "sdhci_acpi"
-           "usb_storage"
-           "rtsx_usb_sdmmc"
+           args.hardware
          ];
        };
   
@@ -173,20 +255,22 @@ in {
             "audio"
             "video"
             "wheel"
-            "network"
            ] 
 
            extraUserGroups
 
            (mkIf cfg.printing.enable [
-            "lp"
-            "scanner"
+             "lp"
+             "scanner"
+           ]) 
+
+           (mkIf cfg.virtualisation.enable [
+             "tss"
+             "libvirtd"
            ]) 
          ];
        };
      };
    })
-
-   userConfiguration
  ];
 }

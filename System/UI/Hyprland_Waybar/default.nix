@@ -7,18 +7,20 @@
 }:
 
 let
+ cfg = config;
+
  inherit (lib)
   mkIf mkMerge;
 
  mod          = "SUPER";
+ cfgStyle     = cfg.style;
  terminal     = "footclient";
  kill_session = "loginctl terminate-user \"\"";
- wallpaper    = "/home/luca/Pictures/Chill.mp4";
- menu         = "source /home/luca/.nix-profile/etc/profile.d/hm-session-vars.sh && bemenu-run";
+ menu         = "source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh && bemenu-run";
 in {
  config =
  mkMerge [ 
-   (mkIf config.hyprland.enable {
+   (mkIf cfg.hyprland.enable {
      programs.hyprland = {
        enable   = true;
        withUWSM = true;
@@ -32,7 +34,7 @@ in {
    {
     home-manager.users.${username} =
     mkMerge [
-      (mkIf config.waybar.enable {
+      (mkIf cfg.waybar.enable {
         programs.waybar = {
           enable = true;
      
@@ -440,7 +442,7 @@ in {
         };
       })
 
-      (mkIf config.hyprland.enable {
+      (mkIf cfg.hyprland.enable {
         wayland.windowManager.hyprland = {
           enable         = true;
           systemd.enable = false;
@@ -464,15 +466,12 @@ in {
               layout                  = "master";
             };
    
-            exec-once = [
-              "waybar"
-              "mpvpaper '*' -o \"--loop-file=inf\" ${wallpaper}"
-            ];
-   
             windowrulev2 = [
               "float , class:org.gnome.Calculator , title:Calculator"
             ];
      
+            bindr = [ "${mod}       , S     , exec            , pkill waybar"];
+            bindo = [ "${mod}       , S     , exec            , waybar"];
             bind = [
               "${mod}       , M     , exec            , ${kill_session}"
               "${mod}       , C     , killactive      ,                "
@@ -490,6 +489,10 @@ in {
               "${mod} SHIFT , 2     , movetoworkspace , 2              "
               "${mod} SHIFT , 3     , movetoworkspace , 3              "
               "${mod} SHIFT , 4     , movetoworkspace , 4              "
+            ];
+
+            exec-once = [
+              "mpvpaper '*' -o \"--loop-file=inf\" ${cfgStyle.wallpaper}"
             ];
           };
         };

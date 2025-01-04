@@ -1,12 +1,8 @@
 { lib
 , pkgs
 , config
-, amd_cpu
-, amd_gpu
 , printing
 , username
-, intel_cpu
-, intel_gpu
 , ...
 }:
 
@@ -49,10 +45,10 @@ let
  };
 
  cfg       = config;
- cfgStyle  = config.style;
- cfgFonts  = config.style.fonts;
- cfgCursor = config.style.cursor;
- cfgTheme  = config.style.colors;
+ cfgStyle  = cfg.style;
+ cfgFonts  = cfg.style.fonts;
+ cfgCursor = cfg.style.cursor;
+ cfgTheme  = cfg.style.colors;
 in {
  options = {
    bat.enable = mkOption {
@@ -90,19 +86,14 @@ in {
      default = false;
    };
 
-   amd_cpu.enable = mkOption {
-     type    = bool;
-     default = amd_cpu;
-   };
-
-   amd_gpu.enable = mkOption {
-     type    = bool;
-     default = amd_gpu;
-   };
-
    freetube.enable = mkOption {
      type    = bool;
      default = true;
+   };
+
+   virtualisation.enable = mkOption {
+     type    = bool;
+     default = false;
    };
 
    bemenu.enable = mkOption {
@@ -117,22 +108,12 @@ in {
 
    waybar.enable = mkOption {
      type    = bool;
-     default = config.hyprland.enable;
+     default = cfg.hyprland.enable;
    };
 
    printing.enable = mkOption {
      type    = bool;
      default = printing;
-   };
-
-   intel_cpu.enable = mkOption {
-     type    = bool;
-     default = intel_cpu;
-   };
-
-   intel_gpu.enable = mkOption {
-     type    = bool;
-     default = intel_gpu;
    };
 
    general_configuration.enable = mkOption {
@@ -164,6 +145,11 @@ in {
      border_thickness = mkOption {
        default = 1;
        type    = ints.unsigned;
+     };
+
+     wallpaper = mkOption {
+       type    = str;
+       default = "${cfg.users.users.${username}.home}/Pictures/Chill.mp4";
      };
 
      colors = {
@@ -437,16 +423,12 @@ in {
 
          (mkIf cfg.hyprland.enable {
            wayland.windowManager.hyprland = {
+             settings.monitor = ", preferred , auto , ${toString(cfgStyle.scale)}";
+
              plugins =
              with pkgs.hyprlandPlugins; [
                hyprbars        
              ];
-      
-             settings.monitor = ''
-                ,preferred
-                ,auto
-                ,${toString(cfgStyle.scale)}
-             '';
       
              settings = {
                misc = {
@@ -634,6 +616,7 @@ in {
                 }
                 
                 tooltip {
+                    color:         #${cfgTheme.text};
                     background:    #${cfgTheme.crust}; 
                     border-radius: ${toString(cfgStyle.rounding)}px;
                     border:        ${toString(cfgStyle.border_thickness)}px solid #${cfgTheme.surface0};

@@ -9,7 +9,6 @@
    ./UI/Hyprland_Waybar/default.nix
 
    ./Configuration/Disk/default.nix
-   ./Configuration/Model/default.nix
    ./Configuration/General/default.nix
    ./Configuration/Packages/default.nix
  ];

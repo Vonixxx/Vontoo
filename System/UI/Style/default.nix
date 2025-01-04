@@ -1,4 +1,6 @@
 { pkgs
+, config
+, username
 , ...
 }:
 
@@ -8,6 +10,7 @@
    gaps             = 5;
    rounding         = 5;
    bar_position     = "top";
+   wallpaper        = "${config.users.users.${username}.home}/Pictures/Chill.mp4";
 
    colors = {
      gtk      = "dark";

@@ -92,6 +92,37 @@ in {
      };
    })
 
+   (mkIf cfg.virtualisation.enable {
+     programs.virt-manager.enable = true;
+
+     security.tpm2 = {
+       enable                 = true;
+       abrmd.enable           = true;
+       pkcs11.enable          = true;
+       tctiEnvironment.enable = true;
+     };
+  
+     virtualisation = {
+       spiceUSBRedirection.enable = true;
+  
+       libvirtd = {
+         enable = true;
+  
+         qemu = {
+           swtpm.enable = true;
+           package      = pkgs.qemu_kvm;
+  
+           ovmf.packages = [
+             (pkgs.OVMFFull.override {
+               secureBoot = true;
+               tpmSupport = true;
+             }).fd
+           ];
+         };
+       };
+     };
+   })
+
    {
     home-manager.users.${username}.programs =
     mkMerge [

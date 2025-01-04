@@ -19,12 +19,18 @@
    disko.url        = "github:nix-community/disko";
    home-manager.url = "github:nix-community/home-manager";
    mailserver.url   = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+
+   argumentsCLI = {
+     flake = false;
+     url   = "file+file:///dev/null";
+   };
  };
 
  outputs = {
    disko
  , nixpkgs
  , mailserver
+ , argumentsCLI
  , home-manager
  , ...
  }:
@@ -40,14 +46,9 @@ let
  mkSystem =
  tlp:
  printing:
- latest_kernel:
- amd_cpu:
- amd_gpu:
- intel_cpu:
- intel_gpu:
+ latestKernel:
  keymap:
  locale:
- timezone:
  username:
  password:
  extraModules:
@@ -65,16 +66,12 @@ let
      pkgs
      keymap
      locale
-     amd_cpu
-     amd_gpu
      password
      printing
-     timezone
      username
-     intel_cpu
-     intel_gpu
+     argumentsCLI
+     latestKernel
      userPackages
-     latest_kernel
      extraUserGroups
      userConfiguration
      extraKernelModules
