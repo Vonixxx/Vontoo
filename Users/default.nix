@@ -12,7 +12,7 @@
 #                   <string>        language locale
 #                   <string>        username
 #                   <string>        password, encoded using `mkpasswd`
-#                   <list>          extra modules
+#                   <list>          extra NixOS modules
 #                   <list>          extra groups for the user
 #                   <list>          extra kernel modules
 #                   <list>          extra kernel parameters
@@ -88,7 +88,9 @@ in {
                      []
                      []
                      []
-                     {};
+                     {
+                       style.scale = mkForce 2;
+                     };
 
  F_Jarka = mkSystem false
                     true

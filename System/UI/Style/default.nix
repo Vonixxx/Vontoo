@@ -4,13 +4,16 @@
 , ...
 }:
 
-{
+let
+ home = config.users.users.${username}.home;
+in {
  style = {
-   border_thickness = 1;
    gaps             = 5;
+   scale            = 1;
    rounding         = 5;
+   border_thickness = 1;
    bar_position     = "top";
-   wallpaper        = "${config.users.users.${username}.home}/Pictures/Chill.mp4";
+   wallpaper        = "${home}/Pictures/Chill.mp4";
 
    colors = {
      gtk      = "dark";

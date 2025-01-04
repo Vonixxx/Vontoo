@@ -454,7 +454,15 @@ in {
               mfact      = 0.70;
               new_status = "master";
             };
-     
+
+            bindo = [
+              "${mod} , S , exec , waybar"
+            ];
+
+            bindr = [
+              "${mod} , S , exec , pkill waybar"
+            ];
+
             bindm = [
               "${mod} , mouse:272 , movewindow  "
               "${mod} , mouse:273 , resizewindow"
@@ -469,9 +477,7 @@ in {
             windowrulev2 = [
               "float , class:org.gnome.Calculator , title:Calculator"
             ];
-     
-            bindr = [ "${mod}       , S     , exec            , pkill waybar"];
-            bindo = [ "${mod}       , S     , exec            , waybar"];
+
             bind = [
               "${mod}       , M     , exec            , ${kill_session}"
               "${mod}       , C     , killactive      ,                "

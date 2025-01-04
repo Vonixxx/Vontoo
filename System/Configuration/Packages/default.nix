@@ -80,12 +80,12 @@ in {
     vaapiVdpau
    ]
 
-   (mkIf (args.gpuAMD == "true") [
+   (mkIf (args.gpu == "AMD") [
      amdvlk
      # rocmPackages.clr.icd
    ]) 
 
-   (mkIf (args.gpuIntel == "true") [
+   (mkIf (args.gpu == "Intel") [
      intel-media-driver
      intel-vaapi-driver
    ]) 

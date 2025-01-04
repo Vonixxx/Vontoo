@@ -31,27 +31,35 @@ let
  args = importJSON argumentsCLI.outPath;
 
  fetchHardware = ''
-    nixos-generate-config --show-hardware-config | grep boot.initrd.availableKernelModules | awk -F '[][]' '{gsub(/"/, "", $2); gsub(/^[ \t]+|[ \t]+$/, "", $2); print $2}'
+    nixos-generate-config --show-hardware-config | \
+    grep boot.initrd.availableKernelModules | \
+    awk -F '[][]' '{gsub(/"/, "", $2); gsub(/^[ \t]+|[ \t]+$/, "", $2); print $2}'
  '';
 
- fetchGPUAMD = ''
-    lspci | grep -q "AMD" && echo "true" || echo "false"
+ fetchGPU = ''
+    (lspci | grep -q "Intel" && echo "Intel") || (lspci | grep -q "AMD" && echo "AMD")
  '';
 
- fetchGPUIntel = ''
-    lspci | grep -q "Intel" && echo "true" || echo "false"
+ fetchCPU = ''
+    (grep -q "AMD" /proc/cpuinfo && echo "AMD") || (grep -q "Intel" /proc/cpuinfo && echo "Intel")
  '';
 
- fetchCPUAMD = ''
-    grep -q "AMD" /proc/cpuinfo && echo "true" || echo "false"
- '';
-
- fetchCPUIntel = ''
-    grep -q "Intel" /proc/cpuinfo && echo "true" || echo "false"
+ systemCheck = ''
+    nix run github:nikolaiser/purga -- \
+    -i argumentsCLI \
+    -a cpu=$(${fetchCPU}) \
+    -a gpu=$(${fetchGPU}) \
+    -a hardware="$(${fetchHardware})" -- \
+    nix flake check
  '';
 
  systemUpdate = ''
-    nix run github:nikolaiser/purga -- -i argumentsCLI -a hardware="$(${fetchHardware})" -a cpuAMD=$(${fetchCPUAMD}) -a cpuIntel=$(${fetchCPUIntel}) -a gpuIntel=$(${fetchGPUIntel}) -a gpuAMD=$(${fetchGPUAMD}) -- sudo nixos-rebuild switch --flake "./#V_WorkStation"
+    nix run github:nikolaiser/purga -- \
+    -i argumentsCLI \
+    -a cpu=$(${fetchCPU}) \
+    -a gpu=$(${fetchGPU}) \
+    -a hardware="$(${fetchHardware})" -- \
+    sudo nixos-rebuild switch --flake "./#V_WorkStation"
  '';
 in {
  config = mkMerge [
@@ -101,11 +109,11 @@ in {
        };
 
        cpu = mkMerge [ 
-         (mkIf (args.cpuAMD == "true") {
+         (mkIf (args.cpu == "AMD") {
            amd.updateMicrocode = true;
          })
 
-         (mkIf (args.cpuIntel == "true") {
+         (mkIf (args.cpu == "Intel") {
            intel.updateMicrocode = true;
          })
        ];
@@ -113,15 +121,16 @@ in {
   
      environment = {
        shellAliases = {
+         check  = systemCheck;
          update = systemUpdate;
        };
 
        variables = mkMerge [
-         (mkIf (args.gpuAMD == "true") {
+         (mkIf (args.gpu == "AMD") {
            ROC_ENABLE_PRE_VEGA = "1";
          })
   
-         (mkIf (args.gpuIntel == "true") {
+         (mkIf (args.gpu == "Intel") {
            LIBVA_DRIVER_NAME = "iHD";
          })
   
@@ -162,19 +171,19 @@ in {
        ];
 
        kernelModules = mkMerge [
-         (mkIf (args.gpuAMD == "true") [
+         (mkIf (args.gpu == "AMD") [
            "amdgpu"
          ]) 
 
-         (mkIf (args.cpuAMD == "true") [
+         (mkIf (args.cpu == "AMD") [
            "kvm-amd"
          ]) 
 
-         (mkIf (args.gpuIntel == "true") [
+         (mkIf (args.gpu == "Intel") [
            "i915"
          ]) 
 
-         (mkIf (args.cpuIntel == "true") [
+         (mkIf (args.cpu == "Intel") [
            "kvm-intel"
          ]) 
        ];
@@ -188,7 +197,7 @@ in {
           "mitigations=off"
          ]
 
-         (mkIf (args.gpuAMD == "true") [
+         (mkIf (args.gpu == "AMD") [
            "radeon.si_support=0"
            "amdgpu.si_support=1"
            "radeon.cik_support=0"
@@ -201,15 +210,6 @@ in {
          theme  = "catppuccin-mocha";
        };
   
-       initrd = {
-         includeDefaultModules = false;
-         kernelModules         = extraKernelModules;
-
-         availableKernelModules = [
-           args.hardware
-         ];
-       };
-  
        loader = {
          timeout = 5;
   
@@ -218,6 +218,15 @@ in {
            enable             = true;
            memtest86.enable   = true;
          };
+       };
+  
+       initrd = {
+         includeDefaultModules = false;
+         kernelModules         = extraKernelModules;
+
+         availableKernelModules = [
+           args.hardware
+         ];
        };
      };
   
