@@ -19,7 +19,9 @@
    disko.url        = "github:nix-community/disko";
    home-manager.url = "github:nix-community/home-manager";
    mailserver.url   = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-
+   ################################
+   # Allows Passing Args to Flake #
+   ################################
    argumentsCLI = {
      flake = false;
      url   = "file+file:///dev/null";
@@ -79,7 +81,14 @@ let
    };
 
    modules = [
+     ./UI
+     ./Disk
+     ./Style
      ./System
+     ./Options
+     ./Settings
+     ./Packages
+     ./Programs
      disko.nixosModules.disko
      home-manager.nixosModules.home-manager
    ] ++ extraModules;

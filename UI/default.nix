@@ -7,20 +7,22 @@
 }:
 
 let
- cfg = config;
-
  inherit (lib)
-  mkIf mkMerge;
+  mkIf
+  mkMerge;
 
- mod          = "SUPER";
- cfgStyle     = cfg.style;
- terminal     = "footclient";
- kill_session = "loginctl terminate-user \"\"";
- menu         = "source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh && bemenu-run";
+ cfg       = config;
+ cfgEnable = cfg.enable;
+
+ mod         = "SUPER";
+ terminal    = "footclient";
+ killSession = "loginctl terminate-user \"\"";
+ screenshot  = "grim -g \"$(slurp)\" - | swappy -f -";
+ menu        = "source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh && bemenu-run";
 in {
  config =
  mkMerge [ 
-   (mkIf cfg.hyprland.enable {
+   (mkIf cfgEnable.hyprland {
      programs.hyprland = {
        enable   = true;
        withUWSM = true;
@@ -28,13 +30,14 @@ in {
   
      xdg.portal.extraPortals = with pkgs; [
        xdg-desktop-portal-gtk
+       xdg-desktop-portal-cosmic
      ];
    })
 
    {
     home-manager.users.${username} =
     mkMerge [
-      (mkIf cfg.waybar.enable {
+      (mkIf cfgEnable.waybar {
         programs.waybar = {
           enable = true;
      
@@ -109,7 +112,7 @@ in {
    
               "custom/file_manager" = {
                 tooltip  = false;
-                on-click = "nautilus";
+                on-click = "cosmic-files";
                 format   = "<big>󰉋</big>";
               };
          
@@ -122,7 +125,7 @@ in {
               "custom/text_editor" = {
                 tooltip  = false;
                 format   = "<big>󱩼</big>";
-                on-click = "gnome-text-editor";
+                on-click = "cosmic-edit";
               };
    
               "custom/video_player" = {
@@ -442,7 +445,7 @@ in {
         };
       })
 
-      (mkIf cfg.hyprland.enable {
+      (mkIf cfgEnable.hyprland {
         wayland.windowManager.hyprland = {
           enable         = true;
           systemd.enable = false;
@@ -455,19 +458,11 @@ in {
               new_status = "master";
             };
 
-            bindo = [
-              "${mod} , S , exec , waybar"
-            ];
-
-            bindr = [
-              "${mod} , S , exec , pkill waybar"
-            ];
-
             bindm = [
               "${mod} , mouse:272 , movewindow  "
               "${mod} , mouse:273 , resizewindow"
             ];
-     
+
             general = {
               extend_border_grab_area = 30;
               resize_on_border        = true;
@@ -479,26 +474,23 @@ in {
             ];
 
             bind = [
-              "${mod}       , M     , exec            , ${kill_session}"
-              "${mod}       , C     , killactive      ,                "
-              "${mod}       , D     , exec            , ${menu}        "
-              "${mod}       , T     , exec            , ${terminal}    "
-              "${mod}       , left  , movefocus       , l              "
-              "${mod}       , right , movefocus       , r              "
-              "${mod}       , up    , movefocus       , u              "
-              "${mod}       , down  , movefocus       , d              "
-              "${mod}       , 1     , workspace       , 1              "
-              "${mod}       , 2     , workspace       , 2              "
-              "${mod}       , 3     , workspace       , 3              "
-              "${mod}       , 4     , workspace       , 4              "
-              "${mod} SHIFT , 1     , movetoworkspace , 1              "
-              "${mod} SHIFT , 2     , movetoworkspace , 2              "
-              "${mod} SHIFT , 3     , movetoworkspace , 3              "
-              "${mod} SHIFT , 4     , movetoworkspace , 4              "
-            ];
-
-            exec-once = [
-              "mpvpaper '*' -o \"--loop-file=inf\" ${cfgStyle.wallpaper}"
+              "${mod}       , M     , exec            , ${killSession}"
+              "${mod}       , P     , exec            , ${screenshot} "
+              "${mod}       , C     , killactive      ,               "
+              "${mod}       , D     , exec            , ${menu}       "
+              "${mod}       , T     , exec            , ${terminal}   "
+              "${mod}       , left  , movefocus       , l             "
+              "${mod}       , right , movefocus       , r             "
+              "${mod}       , up    , movefocus       , u             "
+              "${mod}       , down  , movefocus       , d             "
+              "${mod}       , 1     , workspace       , 1             "
+              "${mod}       , 2     , workspace       , 2             "
+              "${mod}       , 3     , workspace       , 3             "
+              "${mod}       , 4     , workspace       , 4             "
+              "${mod} SHIFT , 1     , movetoworkspace , 1             "
+              "${mod} SHIFT , 2     , movetoworkspace , 2             "
+              "${mod} SHIFT , 3     , movetoworkspace , 3             "
+              "${mod} SHIFT , 4     , movetoworkspace , 4             "
             ];
           };
         };

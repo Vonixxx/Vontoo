@@ -8,11 +8,13 @@
 }:
 
 let
+ inherit (lib)
+  mkIf
+  mkMerge
+  importJSON;
+
  inherit (pkgs)
   writeScriptBin;
-
- inherit (lib)
-  mkIf mkMerge importJSON;
 
  catppuccin-plymouth-mocha =
  pkgs.catppuccin-plymouth.override {
@@ -22,7 +24,7 @@ let
  cfg  = config;
  args = importJSON argumentsCLI.outPath;
 
- vendorResetUDEV = pkgs.callPackage ../../../Users/Dependencies/V/WorkStation/default.nix {};
+ vendorResetUDEV = pkgs.callPackage ../Users/Dependencies/V/WorkStation/default.nix {};
 
  update = writeScriptBin "update" ''
     profile=$(zenity --entry \
@@ -50,15 +52,21 @@ in {
 
    [
     brave
+    chromium
     celluloid
+    cosmic-edit
+    cosmic-files
     eog
+    evince
+    grim
     gnome-calculator
-    gnome-text-editor
     impala
     libreoffice-fresh
-    nautilus
+    slurp
+    swappy
     system-config-printer
     update
+    wl-clipboard
    ]
  ];
 

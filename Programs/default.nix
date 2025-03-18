@@ -6,14 +6,22 @@
 }:
 
 let
- cfg = config;
+ cfg       = config;
+ cfgEnable = cfg.enable;
 
  inherit (lib)
-  mkIf mkMerge;
+  mkIf
+  mkMerge;
 in {
  config =
  mkMerge [ 
-   (mkIf cfg.bat.enable {
+   (mkIf cfgEnable.lsd {
+     environment.shellAliases = {
+       ls = "lsd";
+     };
+   })
+
+   (mkIf cfgEnable.bat {
      environment.shellAliases = {
        cat  = "bat";
        man  = "batman";
@@ -21,13 +29,7 @@ in {
      };
    })
 
-   (mkIf cfg.lsd.enable {
-     environment.shellAliases = {
-       ls = "lsd";
-     };
-   })
-
-   (mkIf cfg.zsh.enable {
+   (mkIf cfgEnable.zsh {
      programs.zsh.enable    = true;
      users.defaultUserShell = pkgs.zsh;
   
@@ -48,7 +50,7 @@ in {
      };
    })
 
-   (mkIf cfg.printing.enable {
+   (mkIf cfgEnable.printing {
      services = {
        saned.enable   = true;
        ipp-usb.enable = true;
@@ -92,7 +94,7 @@ in {
      };
    })
 
-   (mkIf cfg.virtualisation.enable {
+   (mkIf cfgEnable.virtualisation {
      programs.virt-manager.enable = true;
 
      security.tpm2 = {
@@ -126,12 +128,27 @@ in {
    {
     home-manager.users.${username}.programs =
     mkMerge [
-      (mkIf cfg.git.enable {
-        git.enable                  = true;
-        git-credential-oauth.enable = true;
+      (mkIf cfgEnable.foot {
+        foot = {
+          enable        = true;
+          server.enable = true;
+        };
       })
- 
-      (mkIf cfg.bat.enable {
+
+      (mkIf cfgEnable.bemenu {
+        bemenu = {
+          enable = true;
+     
+          settings = {
+            list         = 5;
+            prompt       = "";
+            center       = true;
+            width-factor = 0.15;
+          };
+        };
+      })
+
+      (mkIf cfgEnable.bat {
         bat = {
           enable = true;
      
@@ -143,7 +160,12 @@ in {
         };
       })
 
-      (mkIf cfg.lsd.enable {
+      (mkIf cfgEnable.git {
+        git.enable                  = true;
+        git-credential-oauth.enable = true;
+      })
+ 
+      (mkIf cfgEnable.lsd {
         lsd = {
           enable = true;
    
@@ -163,11 +185,11 @@ in {
         };
       })
 
-      (mkIf (cfg.zsh.enable && cfg.atuin.enable) {
+      (mkIf (cfgEnable.zsh && cfgEnable.atuin) {
         atuin.enableZshIntegration = true;
       })
 
-      (mkIf cfg.zsh.enable {
+      (mkIf cfgEnable.zsh {
         zsh = {
           enable = true;
    
@@ -207,14 +229,7 @@ in {
         };
       })
 
-      (mkIf cfg.foot.enable {
-        foot = {
-          enable        = true;
-          server.enable = true;
-        };
-      })
-
-      (mkIf cfg.atuin.enable {
+      (mkIf cfgEnable.atuin {
         atuin = {
           enable = true;
    
@@ -227,7 +242,7 @@ in {
         };
       })
 
-      (mkIf cfg.helix.enable {
+      (mkIf cfgEnable.helix {
         helix = {
           enable = true;
    
@@ -267,23 +282,10 @@ in {
         };
       })
 
-      (mkIf cfg.bemenu.enable {
-        bemenu = {
-          enable = true;
-     
-          settings = {
-            list         = 5;
-            prompt       = "";
-            center       = true;
-            width-factor = 0.15;
-          };
-        };
-      })
-
-      (mkIf cfg.freetube.enable {
+      (mkIf cfgEnable.freetube {
         freetube = {
           enable = true;
-   
+
           settings = {
             useRssFeeds             = true;
             hideHeaderLogo          = true;

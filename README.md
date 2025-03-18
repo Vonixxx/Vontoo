@@ -18,15 +18,17 @@
 ```
 flake.nix
 │
+├/Options
+│ 
 ├/Users
 │ │ 
 │ └/Dependencies
 │
 └/System
   │ 
-  ├/Backend
-  │ 
   ├/Programs
+  │ 
+  ├/Settings
   │  
   ├/Configuration
   │ ├/Disk
@@ -34,15 +36,16 @@ flake.nix
   │ └/Packages
   │
   └/UI
-    ├/Style
     └/Hyprland_WayBar
 ```
 
-The `System` and `Users` directories each have a `default.nix` file at their base which serve the role of importing all the files that lie within their subdirectories. All of it then gets imported to flake.nix in order to instantiate the system.
+`Options` defines custom options which toggle certain programs and enable customisation of both fonts colors used throughout the system, as well as the cursor.
 
-`Users/Dependencies` serves the role of hosting user-specific files, or .nix modules. Most customisation is to be done in `Users`
+`` defines custom options which toggle certain programs and enable customisation of both fonts colors used throughout the system, as well as the cursor.
 
-`System/UI/Style` contains the default values regarding the cursor, fonts and colors used in the system. Changing the values there will affect all apps which allow color customisations, the affected apps can be found in `System/Backend`.
+`Users` is used for user-specific configuration.
+
+`System` contains all needed settings for a functional system.
 
 User-specific hardware options are automatically configured.
 
