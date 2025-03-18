@@ -115,9 +115,7 @@ in {
                            "vfio-pci.ids=1002:731f,1002:ab38"
                           ]
                           [
-                            alsa-utils
                             curl
-                            chromium
                             du-dust
                             efibootmgr
                             ffmpeg
@@ -131,7 +129,6 @@ in {
                             trezor-suite
                             telegram-desktop
                             wget
-                            hyprsunset
                           ]
                           {
                             enable = {

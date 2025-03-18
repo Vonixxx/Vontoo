@@ -51,6 +51,7 @@ in {
    userPackages
 
    [
+    alsa-utils
     brave
     chromium
     celluloid
@@ -60,6 +61,7 @@ in {
     evince
     grim
     gnome-calculator
+    hyprsunset
     impala
     libreoffice-fresh
     slurp
