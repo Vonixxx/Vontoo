@@ -141,23 +141,11 @@ in {
                               virtualisation = mkForce true;
                             };
 
-                            home-manager.users."BroomBear" = {
-                              programs.git = {
+                            home-manager.users."BroomBear".programs = {
+                              git = {
                                 userName  = "Vonixxx";
                                 userEmail = "vonixxxwork@tuta.io";
                               };
-
-                              # wayland.windowManager.hyprland = {
-                              #   settings = {
-                              #     bindo = [
-                              #       "SUPER , S , exec , waybar"
-                              #     ];
-                      
-                              #     bindr = [
-                              #       "SUPER , S , exec , pkill waybar"
-                              #     ];
-                              #   };
-                              # };
                             };
                            
                             boot.extraModulePackages = [
