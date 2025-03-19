@@ -90,6 +90,7 @@ in {
                      []
                      {
                        style.general.scale = mkForce 2;
+                       enable.laptop       = mkForce true;
                      };
 
  V_WorkStation = mkSystem false
@@ -147,7 +148,10 @@ in {
                               };
 
                               wayland.windowManager.hyprland = {
-                                settings = {
+                                settings =
+                                let
+                                 mod = "SUPER";
+                                in {
                                   bindo = [
                                     "${mod} , S , exec , waybar"
                                   ];

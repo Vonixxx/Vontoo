@@ -56,6 +56,8 @@ in {
                 "custom/spacer"
                 "group/temperature"
                 "custom/spacer"
+                "backlight/slider"
+                "custom/spacer"
                 "group/audio"
               ];
      
@@ -74,7 +76,14 @@ in {
                 format  = "|";
                 tooltip = false;
               };
-   
+
+              "backlight/slider" = {
+                min         = 0;
+                max         = 100;
+                orientation = "horizontal";
+                device      = "intel_backlight";
+              };   
+
               "custom/launcher" = {
                 tooltip  = false;
                 format   = "<big>󰻀</big>";
@@ -158,6 +167,12 @@ in {
                 format   = "<big>󰈬</big>";
               };
    
+              "custom/pdf" = {
+                tooltip  = false;
+                on-click = "evince";
+                format   = "<big>󰈦</big>";
+              };
+
               "custom/web" = {
                 tooltip  = false;
                 on-click = "brave";
@@ -247,7 +262,7 @@ in {
                 ];
    
                 drawer = {
-                  click-to-reveal          = true;
+                  click-to-reveal          = false;
                   transition-left-to-right = false;
                 };
               };
@@ -266,7 +281,7 @@ in {
                 ];
    
                 drawer = {
-                  click-to-reveal          = true;
+                  click-to-reveal          = false;
                   transition-left-to-right = false;
                 };
               };
@@ -282,12 +297,14 @@ in {
                   "custom/spacer"
                   "custom/calculator"
                   "custom/spacer"
+                  "custom/pdf"
+                  "custom/spacer"
                   "custom/office"
                   "custom/spacer"
                 ];
    
                 drawer = {
-                  click-to-reveal          = true;
+                  click-to-reveal          = false;
                   transition-left-to-right = false;
                 };
               };
@@ -302,7 +319,7 @@ in {
                 ];
    
                 drawer = {
-                  click-to-reveal          = true;
+                  click-to-reveal          = false;
                   transition-left-to-right = false;
                 };
               };

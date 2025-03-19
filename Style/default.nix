@@ -150,6 +150,7 @@ in {
                };
    
                exec-once = [
+                 "waybar"
                  "mpvpaper '*' -o \"--loop-file=inf\" ${cfgStyle.wallpaper}"
                ];
              };
@@ -254,167 +255,193 @@ in {
                                  else cfgStyle.gaps;
              };
     
-             style = ''
-                * {
-                    font-weight: bold; 
-                    font-family: ${cfgFonts.serif.name};
-                    font-size:   ${toString(cfgFonts.size.bar)};
-                }
-                
-                window#waybar {
-                    background:    #${cfgColors.crust}; 
-                    border-radius: ${toString(cfgStyle.rounding)}px;
-                    border:        ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.surface0};
-                }
-                
-                #custom-spacer {
-                    opacity: 0.0;
-                }
-
-                #custom-powermenu {
-                  padding-right: 3px;
-                }
-      
-                #custom-temperature {
-                  padding-right: 4px;
-                }
-      
-                #custom-launcher {
-                    padding-right: 2px;
-                }
-
-                #network,
-                #custom-printing {
-                    padding-right: 8px;
-                } 
-                
-                #custom-web,
-                #custom-clock,
-                #custom-reboot,
-                #custom-office,
-                #custom-youtube,
-                #custom-poweroff,
-                #custom-terminal,
-                #custom-hibernate,
-                #custom-calculator,
-                #custom-text_editor,
-                #custom-image_viewer {
-                    padding-right: 5px;
-                }
-                
-                #pulseaudio {
-                    padding-right: 13px;
-                }
-
-                #custom-file_manager,
-                #custom-video_player {
-                    padding-right: 10px;
-                }
-                
-                #custom-temperature_warm,
-                #custom-temperature_warmest,
-                #custom-temperature_standard {
-                    padding-right: 7px; 
-                }
-                
-                tooltip {
-                    color:         #${cfgColors.text};
-                    background:    #${cfgColors.crust}; 
-                    border-radius: ${toString(cfgStyle.rounding)}px;
-                    border:        ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.surface0};
-                }
-                
-                #workspaces {
-                    border-radius: 10px;
-                    background:    #${cfgColors.base};
-                    border:        ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.surface0};
-                }
+             style = mkMerge [
+               ''
+                 * {
+                     font-weight: bold; 
+                     font-family: ${cfgFonts.serif.name};
+                     font-size:   ${toString(cfgFonts.size.bar)};
+                 }
+                  
+                 window#waybar {
+                     background:    #${cfgColors.crust}; 
+                     border-radius: ${toString(cfgStyle.rounding)}px;
+                     border:        ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.surface0};
+                 }
+                 
+                 #custom-spacer {
+                     opacity: 0.0;
+                 }
  
-                #workspaces button {
-                    color: #${cfgColors.mauve};
-                }
-
-                #workspaces button.urgent {
-                    color:  #${cfgColors.red};
-                    border: ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.red};
-                }
-                
-                #workspaces button.active {
-                    color:  #${cfgColors.peach};
-                    border: ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.peach};
-                }
-                
-                #workspaces button:hover {
-                    background: none;
-                    box-shadow: none;
-                    color:      #${cfgColors.peach};
-                    border:     ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.peach};
-                }
+                 #custom-powermenu {
+                   padding-right: 3px;
+                 }
+       
+                 #custom-temperature {
+                   padding-right: 4px;
+                 }
+       
+                 #custom-launcher {
+                     padding-right: 2px;
+                 }
  
-                #custom-poweroff {
-                    color: #${cfgColors.red};
-                }
-      
-                #custom-hibernate {
-                    color: #${cfgColors.blue};
-                }
-      
-                #custom-media,
-                #custom-system,
-                #custom-leisure,
-                #custom-powermenu,
-                #custom-productivity {
-                    color: #${cfgColors.peach};
-                }
+                 #network,
+                 #custom-printing {
+                     padding-right: 8px;
+                 } 
+                 
+                 #custom-pdf,
+                 #custom-web,
+                 #custom-clock,
+                 #custom-reboot,
+                 #custom-office,
+                 #custom-youtube,
+                 #custom-poweroff,
+                 #custom-terminal,
+                 #custom-hibernate,
+                 #custom-calculator,
+                 #custom-text_editor,
+                 #custom-image_viewer {
+                     padding-right: 5px;
+                 }
+                 
+                 #pulseaudio {
+                     padding-right: 13px;
+                 }
+ 
+                 #custom-file_manager {
+                     padding-right: 5px;
+                 }
+                 #custom-video_player {
+                     padding-right: 10px;
+                 }
+                 
+                 #custom-temperature_warm,
+                 #custom-temperature_warmest,
+                 #custom-temperature_standard {
+                     padding-right: 7px; 
+                 }
+                 
+                 tooltip {
+                     color:         #${cfgColors.text};
+                     background:    #${cfgColors.crust}; 
+                     border-radius: ${toString(cfgStyle.rounding)}px;
+                     border:        ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.surface0};
+                 }
+                 
+                 #workspaces {
+                     border-radius: 10px;
+                     background:    #${cfgColors.base};
+                     border:        ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.surface0};
+                 }
+  
+                 #workspaces button {
+                     color: #${cfgColors.mauve};
+                 }
+ 
+                 #workspaces button.urgent {
+                     color:  #${cfgColors.red};
+                     border: ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.red};
+                 }
+                 
+                 #workspaces button.active {
+                     color:  #${cfgColors.peach};
+                     border: ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.peach};
+                 }
+                 
+                 #workspaces button:hover {
+                     background: none;
+                     box-shadow: none;
+                     color:      #${cfgColors.peach};
+                     border:     ${toString(cfgStyle.borderThickness)}px solid #${cfgColors.peach};
+                 }
+  
+                 #custom-poweroff {
+                     color: #${cfgColors.red};
+                 }
+       
+                 #custom-hibernate {
+                     color: #${cfgColors.blue};
+                 }
+       
+                 #custom-media,
+                 #custom-system,
+                 #custom-leisure,
+                 #custom-powermenu,
+                 #custom-productivity {
+                     color: #${cfgColors.peach};
+                 }
+ 
+                 #custom-reboot { 
+                     color: #${cfgColors.yellow};
+                 }
+       
+                 #clock,
+                 #custom-temperature_warm,
+                 #custom-temperature_warmest,
+                 #custom-temperature_standard {
+                     color: #${cfgColors.flamingo};
+                 }
+       
+                 #network,
+                 #custom-pdf,
+                 #custom-web,
+                 #pulseaudio,
+                 #custom-tray,
+                 #custom-clock,
+                 #custom-office,
+                 #custom-youtube,
+                 #custom-launcher,
+                 #custom-printing, 
+                 #custom-terminal,
+                 #custom-calculator,
+                 #custom-temperature,
+                 #custom-text_editor,
+                 #custom-file_manager,
+                 #custom-image_viewer, 
+                 #custom-video_player { 
+                     color: #${cfgColors.lavender};
+                 }
+       
+                 #pulseaudio-slider trough {
+                     background: transparent;
+                 }
+ 
+                 #pulseaudio-slider slider {
+                     background: #${cfgColors.flamingo};
+                 }
+                 
+                 #pulseaudio-slider highlight {
+                     background: #${cfgColors.flamingo};
+                 }
+ 
+                 #pulseaudio-slider {
+                     min-height:    10px;
+                     min-width:     100px;
+                     border-radius: ${toString(cfgStyle.rounding)}px;
+                 }
+               ''
 
-                #custom-reboot { 
-                    color: #${cfgColors.yellow};
-                }
-      
-                #clock,
-                #custom-temperature_warm,
-                #custom-temperature_warmest,
-                #custom-temperature_standard {
-                    color: #${cfgColors.flamingo};
-                }
-      
-                #network,
-                #custom-web,
-                #pulseaudio,
-                #custom-tray,
-                #custom-clock,
-                #custom-office,
-                #custom-youtube,
-                #custom-launcher,
-                #custom-printing, 
-                #custom-terminal,
-                #custom-calculator,
-                #custom-temperature,
-                #custom-text_editor,
-                #custom-file_manager,
-                #custom-image_viewer, 
-                #custom-video_player { 
-                    color: #${cfgColors.lavender};
-                }
-      
-                #pulseaudio-slider trough {
-                    background: transparent;
-                }
-
-                #pulseaudio-slider slider {
-                    background: #${cfgColors.flamingo};
-                }
-                
-                #pulseaudio-slider highlight {
-                    background: #${cfgColors.flamingo};
-                }
-
-                #pulseaudio-slider {
-                    min-height:    10px;
-                    min-width:     100px;
-                    border-radius: ${toString(cfgStyle.rounding)}px;
-                }
-             '';
+               (mkIf cfgEnable.laptop ''
+                  #backlight-slider trough {
+                      background: transparent;
+                  }
+  
+                  #backlight-slider slider {
+                      background: #${cfgColors.flamingo};
+                  }
+                  
+                  #backlight-slider highlight {
+                      background: #${cfgColors.flamingo};
+                  }
+  
+                  #backlight-slider {
+                      min-height:    10px;
+                      min-width:     100px;
+                      border-radius: ${toString(cfgStyle.rounding)}px;
+                  }
+               '')
+             ];
            };
          })
       ]))

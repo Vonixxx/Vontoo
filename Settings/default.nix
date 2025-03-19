@@ -25,6 +25,7 @@ in {
    lsd                  = false;
    atuin                = false;
    helix                = false;
+   laptop               = false;
    virtualisation       = false;
    printing             = printing;
  };

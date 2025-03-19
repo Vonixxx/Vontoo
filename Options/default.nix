@@ -80,6 +80,10 @@ in {
        type = bool;
      };
 
+     laptop = mkOption {
+       type = bool;
+     };
+
      colors = mkOption {
        type = bool;
      };
