@@ -148,10 +148,7 @@ in {
                               };
 
                               wayland.windowManager.hyprland = {
-                                settings =
-                                let
-                                 mod = "SUPER";
-                                in {
+                                settings = {
                                   bindo = [
                                     "SUPER , S , exec , waybar"
                                   ];
