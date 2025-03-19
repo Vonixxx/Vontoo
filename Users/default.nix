@@ -153,11 +153,11 @@ in {
                                  mod = "SUPER";
                                 in {
                                   bindo = [
-                                    "${mod} , S , exec , waybar"
+                                    "SUPER , S , exec , waybar"
                                   ];
                       
                                   bindr = [
-                                    "${mod} , S , exec , pkill waybar"
+                                    "SUPER , S , exec , pkill waybar"
                                   ];
                                 };
                               };
