@@ -147,17 +147,17 @@ in {
                                 userEmail = "vonixxxwork@tuta.io";
                               };
 
-                              wayland.windowManager.hyprland = {
-                                settings = {
-                                  bindo = [
-                                    "SUPER , S , exec , waybar"
-                                  ];
+                              # wayland.windowManager.hyprland = {
+                              #   settings = {
+                              #     bindo = [
+                              #       "SUPER , S , exec , waybar"
+                              #     ];
                       
-                                  bindr = [
-                                    "SUPER , S , exec , pkill waybar"
-                                  ];
-                                };
-                              };
+                              #     bindr = [
+                              #       "SUPER , S , exec , pkill waybar"
+                              #     ];
+                              #   };
+                              # };
                             };
                            
                             boot.extraModulePackages = [
