@@ -45,20 +45,25 @@ in {
             mainBar = {
               layer = "top";
      
-              modules-left = [
-                "custom/spacer"
-                "group/poweroptions"
-                "custom/spacer"
-                "custom/spacer"
-                "network"
-                "custom/spacer"
-                "group/clock"
-                "custom/spacer"
-                "group/temperature"
-                "custom/spacer"
-                "backlight/slider"
-                "custom/spacer"
-                "group/audio"
+              modules-left = mkMerge [
+                [
+                  "custom/spacer"
+                  "group/poweroptions"
+                  "custom/spacer"
+                  "custom/spacer"
+                  "network"
+                  "custom/spacer"
+                  "group/clock"
+                  "custom/spacer"
+                  "group/temperature"
+                  "custom/spacer"
+                  "group/audio"
+                ]
+
+                (mkIf cfgEnable.laptop [ 
+                  "custom/spacer"
+                  "backlight/slider"
+                ])
               ];
      
               modules-center = [
