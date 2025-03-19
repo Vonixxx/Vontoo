@@ -93,7 +93,7 @@ in {
                        enable.laptop       = mkForce true;
                      };
 
- V_WorkStation = mkSystem false
+ BroomBear = mkSystem false
                           false
                           true
                           "us"

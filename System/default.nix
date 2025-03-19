@@ -58,7 +58,7 @@ let
     -a cpu=$(${fetchCPU}) \
     -a gpu=$(${fetchGPU}) \
     -a hardware="$(${fetchHardware})" -- \
-    sudo nixos-rebuild boot --flake github:Vonixxx/Vontoo\#V_WorkStation
+    sudo nixos-rebuild boot --flake github:Vonixxx/Vontoo\#${username}
  '';
 
  systemUpdateRealtime = ''
@@ -67,7 +67,7 @@ let
     -a cpu=$(${fetchCPU}) \
     -a gpu=$(${fetchGPU}) \
     -a hardware="$(${fetchHardware})" -- \
-    sudo nixos-rebuild switch --flake github:Vonixxx/Vontoo\#V_WorkStation
+    sudo nixos-rebuild switch --flake github:Vonixxx/Vontoo\#${username}
  '';
 in {
  config = mkMerge [
