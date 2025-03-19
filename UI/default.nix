@@ -480,6 +480,14 @@ in {
               new_status = "master";
             };
 
+            bindo = [
+              "SUPER , S , exec , waybar"
+            ];
+
+            bindr = [
+              "SUPER , S , exec , pkill waybar"
+            ];
+
             bindm = [
               "${mod} , mouse:272 , movewindow  "
               "${mod} , mouse:273 , resizewindow"
