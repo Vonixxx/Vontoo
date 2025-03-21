@@ -2,7 +2,6 @@
 , pkgs
 , config
 , argumentsCLI
-, latestKernel
 , userPackages
 , ...
 }:
@@ -58,6 +57,10 @@ in {
  mkMerge [
    userPackages
 
+   (mkIf cfgEnable.printing [
+     system-config-printer
+   ])
+
    [
     alsa-utils
     brave
@@ -76,7 +79,6 @@ in {
     plasma-workspace-wallpapers
     slurp
     swappy
-    system-config-printer
     update
     wl-clipboard
    ]
@@ -89,7 +91,7 @@ in {
     ];
 
     kernelPackages =
-    if !latestKernel
+    if !cfgEnable.latestKernel
       then pkgs.linuxPackages
       else pkgs.linuxPackages_latest;
    }

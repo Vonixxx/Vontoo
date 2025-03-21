@@ -57,6 +57,10 @@ in {
        type = bool;
      };
   
+     tlp = mkOption {
+       type = bool;
+     };
+
      zsh = mkOption {
        type = bool;
      };
@@ -109,6 +113,14 @@ in {
        type = bool;
      };
   
+     autologin = mkOption {
+       type = bool;
+     };
+
+     latestKernel = mkOption {
+       type = bool;
+     };
+
      virtualisation = mkOption {
        type = bool;
      };

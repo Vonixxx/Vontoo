@@ -5,19 +5,17 @@
 }:
 
 #
-# <user> = mkSystem <bool>          toggle TLP
-#                   <bool>          toggle printing capabilities
-#                   <bool>          toggle latest kernel
-#                   <string>        keyboard language
-#                   <string>        language locale
-#                   <string>        username
-#                   <string>        password, encoded using `mkpasswd -m sha-256 'password'`
-#                   <list>          extra NixOS modules
-#                   <list>          extra groups for the user
-#                   <list>          extra kernel modules
-#                   <list>          extra kernel parameters
-#                   <list>          packages
-#                   <attribute set> user-specific configuration
+# <user> =
+# mkSystem <string>        keyboard language
+#          <string>        language locale
+#          <string>        username
+#          <string>        password, encoded using `mkpasswd -m sha-256 'password'`
+#          <list>          extra NixOS modules
+#          <list>          extra groups for the user
+#          <list>          extra kernel modules
+#          <list>          extra kernel parameters
+#          <list>          packages
+#          <attribute set> user-specific configuration
 #
 
 with pkgs;
@@ -31,10 +29,7 @@ let
   runCommandNoCC;
 in {
  U_Ofelia =
- mkSystem false
-          true
-          false
-          "be"
+ mkSystem "be"
           "en_GB.UTF-8"
           "Ofelia"
           "$y$j9T$Twyoxr/IUWR8f9v4m6d81.$8a0XA0h3fzroWoLznLUYpZ7unoEEG3E30YUhkqoH2m1"
@@ -49,10 +44,7 @@ in {
           };
 
  BroomBear =
- mkSystem false
-          false
-          true
-          "us"
+ mkSystem "us"
           "en_GB.UTF-8"
           "BroomBear"
           "$y$j9T$eDooCqRrtgj05orlhUujQ1$RDV9aOlJZkKZI6wtkpR.YD00ELzIlNZbDWY8IiDIxfB"
@@ -98,7 +90,9 @@ in {
               lsd            = mkForce true;
               atuin          = mkForce true;
               helix          = mkForce true;
+              latestKernel   = mkForce true;
               virtualisation = mkForce true;
+              printing       = mkForce false;
             };
 
             home-manager.users."BroomBear".programs = {

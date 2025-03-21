@@ -46,9 +46,6 @@ let
  };
 
  mkSystem =
- tlp:
- printing:
- latestKernel:
  keymap:
  locale:
  username:
@@ -64,15 +61,12 @@ let
 
    specialArgs = {
      inherit
-     tlp
      pkgs
      keymap
      locale
      password
-     printing
      username
      argumentsCLI
-     latestKernel
      userPackages
      extraUserGroups
      userConfiguration

@@ -19,14 +19,17 @@ in {
    waybar               = true;
    freetube             = true;
    hyprland             = true;
+   printing             = true;
+   autologin            = true;
    generalConfiguration = true;
    bat                  = false;
    lsd                  = false;
+   tlp                  = false;
    atuin                = false;
    helix                = false;
    laptop               = false;
+   latestKernel         = false;
    virtualisation       = false;
-   printing             = printing;
  };
 
  style = {

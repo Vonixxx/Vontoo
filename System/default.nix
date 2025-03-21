@@ -1,5 +1,4 @@
 { lib
-, tlp
 , pkgs
 , config
 , keymap
@@ -76,10 +75,14 @@ in {
    (mkIf cfgEnable.generalConfiguration {
      programs.dconf.enable           = true;
      documentation.nixos.enable      = false;
-     console.keyMap                  = keymap;
      i18n.defaultLocale              = locale;
      system.stateVersion             = "24.11";
      powerManagement.cpuFreqGovernor = "ondemand";
+
+     console = {
+       earlySetup = true;
+       keyMap     = keymap;
+     };
 
      networking = {
        wireless.iwd.enable = true;
@@ -104,12 +107,12 @@ in {
      '';
   
      services = {
-       tlp.enable                 = tlp;
-       gvfs.enable                = true;
-       fstrim.enable              = true;
-       tzupdate.enable            = true;
-       xserver.xkb.layout         = keymap;
-       logind.lidSwitch           = "poweroff";
+       gvfs.enable        = true;
+       fstrim.enable      = true;
+       tzupdate.enable    = true;
+       xserver.xkb.layout = keymap;
+       logind.lidSwitch   = "poweroff";
+       tlp.enable         = cfgEnable.tlp;
   
        pipewire = {
          enable            = true;
@@ -117,6 +120,16 @@ in {
          pulse.enable      = true;
          alsa.support32Bit = true;
        };
+
+       getty = mkMerge [
+         {
+          greetingLine = "<<< Welcome to Vontoo! (\m) - \l >>>";
+         }
+
+         (mkIf cfgEnable.autologin {
+           autologinUser = "${username}";
+         })
+       ];
      };
   
      hardware = {

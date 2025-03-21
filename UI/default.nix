@@ -147,12 +147,6 @@ in {
                 format   = "<big>󰋩</big>";
               };
    
-              "custom/printing" = {
-                tooltip  = false;
-                format   = "<big>󰐪</big>";
-                on-click = "system-config-printer";
-              };
-   
               "custom/calculator" = {
                 tooltip  = false;
                 format   = "<big>󰪚</big>";
@@ -268,14 +262,18 @@ in {
               "group/system" = {
                 orientation = "horizontal";
    
-                modules = [
-                  "custom/system"
-                  "custom/file_manager"
-                  "custom/spacer"
-                  "custom/printing"
-                  "custom/spacer"
-                  "custom/terminal"
-                  "custom/spacer"
+                modules = mkMerge [
+                  [
+                   "custom/system"
+                   "custom/file_manager"
+                   "custom/spacer"
+                   "custom/terminal"
+                   "custom/spacer"
+                  ]
+                  (mkIf cfgEnable.printing [
+                    "custom/printing"
+                    "custom/spacer"
+                  ])
                 ];
    
                 drawer = {
@@ -467,6 +465,12 @@ in {
                 };
               };
      
+              "custom/printing" = {
+                tooltip  = false;
+                format   = "<big>󰐪</big>";
+                on-click = "system-config-printer";
+              };
+
               "pulseaudio/slider" = {
                 min         = 0;
                 scroll-step = 1;
@@ -510,7 +514,7 @@ in {
             };
    
             windowrule = [
-              "float , initialClass:(org.gnome.Calculator)"
+              "float , initialClass:(org.gnome.Calculator)" # Broken.
             ];
 
             bind = [
