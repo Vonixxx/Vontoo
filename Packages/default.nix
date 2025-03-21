@@ -14,6 +14,7 @@ let
   importJSON;
 
  inherit (pkgs)
+  callPackage
   writeScriptBin;
 
  catppuccin-plymouth-mocha =
@@ -21,10 +22,10 @@ let
    variant = "mocha";
  };
 
- cfg  = config;
- args = importJSON argumentsCLI.outPath;
-
- vendorResetUDEV = pkgs.callPackage ../Users/Dependencies/V/WorkStation/default.nix {};
+ cfg             = config;
+ cfgEnable       = cfg.enable;
+ args            = importJSON argumentsCLI.outPath;
+ vendorResetUDEV = callPackage ../Users/Dependencies/V/WorkStation/default.nix {};
 
  update = writeScriptBin "update" ''
     profile=$(zenity --entry \
@@ -40,14 +41,21 @@ let
  '';
 in {
  services.udev.packages =
- with pkgs; [
-   android-udev-rules
-   game-devices-udev-rules
-   vendorResetUDEV
+ with pkgs; mkMerge [
+   [
+    android-udev-rules
+    game-devices-udev-rules
+   ]
+
+   (mkIf cfgEnable.virtualisation [
+     vendorResetUDEV
+   ])
  ];
 
  environment.systemPackages = 
- with pkgs; mkMerge [
+ with pkgs;
+ with kdePackages;
+ mkMerge [
    userPackages
 
    [
@@ -64,6 +72,8 @@ in {
     hyprsunset
     impala
     libreoffice-fresh
+    pfetch-rs
+    plasma-workspace-wallpapers
     slurp
     swappy
     system-config-printer
@@ -72,16 +82,24 @@ in {
    ]
  ];
 
- boot = {
-   plymouth.themePackages = [
-     catppuccin-plymouth-mocha
-   ];
+ boot = mkMerge [
+   {
+    plymouth.themePackages = [
+      catppuccin-plymouth-mocha
+    ];
 
-   kernelPackages =
-   if !latestKernel
-     then pkgs.linuxPackages
-     else pkgs.linuxPackages_latest;
- };
+    kernelPackages =
+    if !latestKernel
+      then pkgs.linuxPackages
+      else pkgs.linuxPackages_latest;
+   }
+
+   (mkIf cfgEnable.virtualisation {
+     extraModulePackages = [
+       pkgs.linuxKernel.packages.linux_6_13.vendor-reset
+     ];
+   })
+ ];
 
  hardware.graphics.extraPackages =
  with pkgs; mkMerge [

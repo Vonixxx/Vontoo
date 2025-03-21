@@ -43,7 +43,7 @@ in {
      
           settings = {
             mainBar = {
-              layer = "top";
+              layer = "bottom";
      
               modules-left = mkMerge [
                 [
@@ -81,13 +81,6 @@ in {
                 format  = "|";
                 tooltip = false;
               };
-
-              "backlight/slider" = {
-                min         = 0;
-                max         = 100;
-                orientation = "horizontal";
-                device      = "intel_backlight";
-              };   
 
               "custom/launcher" = {
                 tooltip  = false;
@@ -441,6 +434,24 @@ in {
                 ];
               };
      
+              backlight = {
+                device = "intel_backlight";
+                format = "<big>{icon}</big>";
+
+                format-icons = [
+                  "󰃞"
+                  "󰃟"
+                  "󰃠"
+                ];
+              };   
+
+              "backlight/slider" = {
+                min         = 0;
+                scroll-step = 1;
+                max         = 100;
+                device      = "intel_backlight";
+              };   
+
               pulseaudio = {
                 scroll-step    = 5;
                 format-muted   = "󰖁";
@@ -460,7 +471,6 @@ in {
                 min         = 0;
                 scroll-step = 1;
                 max         = 100;
-                device      = "pulseaudio";
               };
             };
           };
@@ -499,28 +509,31 @@ in {
               layout                  = "master";
             };
    
-            windowrulev2 = [
-              "float , class:org.gnome.Calculator , title:Calculator"
+            windowrule = [
+              "float , initialClass:(org.gnome.Calculator)"
             ];
 
             bind = [
-              "${mod}       , M     , exec            , ${killSession}"
-              "${mod}       , P     , exec            , ${screenshot} "
-              "${mod}       , C     , killactive      ,               "
-              "${mod}       , D     , exec            , ${menu}       "
-              "${mod}       , T     , exec            , ${terminal}   "
-              "${mod}       , left  , movefocus       , l             "
-              "${mod}       , right , movefocus       , r             "
-              "${mod}       , up    , movefocus       , u             "
-              "${mod}       , down  , movefocus       , d             "
-              "${mod}       , 1     , workspace       , 1             "
-              "${mod}       , 2     , workspace       , 2             "
-              "${mod}       , 3     , workspace       , 3             "
-              "${mod}       , 4     , workspace       , 4             "
-              "${mod} SHIFT , 1     , movetoworkspace , 1             "
-              "${mod} SHIFT , 2     , movetoworkspace , 2             "
-              "${mod} SHIFT , 3     , movetoworkspace , 3             "
-              "${mod} SHIFT , 4     , movetoworkspace , 4             "
+              "${mod}       , M                    , exec            , ${killSession}                                "
+              "${mod}       , P                    , exec            , ${screenshot}                                 "
+              "${mod}       , D                    , exec            , ${menu}                                       "
+              "${mod}       , T                    , exec            , ${terminal}                                   "
+              "             , XF86AudioLowerVolume , exec            , wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-     "
+              "             , XF86AudioMute        , exec            , wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle    "
+              "             , XF86AudioRaiseVolume , exec            , wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+              "${mod}       , C                    , killactive      ,                                               "
+              "${mod}       , left                 , movefocus       , l                                             "
+              "${mod}       , right                , movefocus       , r                                             "
+              "${mod}       , up                   , movefocus       , u                                             "
+              "${mod}       , down                 , movefocus       , d                                             "
+              "${mod}       , 1                    , workspace       , 1                                             "
+              "${mod}       , 2                    , workspace       , 2                                             "
+              "${mod}       , 3                    , workspace       , 3                                             "
+              "${mod}       , 4                    , workspace       , 4                                             "
+              "${mod} SHIFT , 1                    , movetoworkspace , 1                                             "
+              "${mod} SHIFT , 2                    , movetoworkspace , 2                                             "
+              "${mod} SHIFT , 3                    , movetoworkspace , 3                                             "
+              "${mod} SHIFT , 4                    , movetoworkspace , 4                                             "
             ];
           };
         };

@@ -76,20 +76,11 @@ in {
    (mkIf cfgEnable.generalConfiguration {
      programs.dconf.enable           = true;
      documentation.nixos.enable      = false;
+     console.keyMap                  = keymap;
+     i18n.defaultLocale              = locale;
      system.stateVersion             = "24.11";
      powerManagement.cpuFreqGovernor = "ondemand";
-     i18n.defaultLocale              = "${locale}";
-     systemd.sleep.extraConfig = ''
-        AllowSuspend=yes
-        AllowHibernation=no
-        AllowHybridSleep=no
-        HibernateDelaySec=30min
-        SuspendEstimationSec=60min
-        AllowSuspendThenHibernate=no
-        HibernateMode=platform shutdown
-        SuspendState=mem standby freeze
-     '';
-  
+
      networking = {
        wireless.iwd.enable = true;
        hostName            = "vontoo";
@@ -101,11 +92,22 @@ in {
        sudo.wheelNeedsPassword = false;
      };
   
+     systemd.sleep.extraConfig = ''
+        AllowSuspend=yes
+        AllowHibernation=no
+        AllowHybridSleep=no
+        HibernateDelaySec=30min
+        SuspendEstimationSec=60min
+        AllowSuspendThenHibernate=no
+        HibernateMode=platform shutdown
+        SuspendState=mem standby freeze
+     '';
+  
      services = {
        tlp.enable                 = tlp;
        gvfs.enable                = true;
        fstrim.enable              = true;
-       automatic-timezoned.enable = true;
+       tzupdate.enable            = true;
        xserver.xkb.layout         = keymap;
        logind.lidSwitch           = "poweroff";
   
@@ -159,6 +161,7 @@ in {
           GTK_THEME      = "Adwaita:dark";
           EDITOR         = "gnome-text-editor";
           VISUAL         = "gnome-text-editor";
+          PF_INFO        = "ascii title uptime pkgs kernel memory os host";
          }
        ];
      };
@@ -186,6 +189,8 @@ in {
      };
   
      boot = {
+       plymouth.enable = true;
+
        supportedFilesystems = [
          "ntfs"
        ];
@@ -224,11 +229,6 @@ in {
            "amdgpu.cik_support=1"
          ]) 
        ];
-  
-       plymouth = {
-         enable = true;
-         theme  = "catppuccin-mocha";
-       };
   
        loader = {
          timeout = 5;

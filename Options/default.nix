@@ -11,6 +11,7 @@ let
   bool
   ints
   listOf
+  nullOr
   package
   submodule;
 
@@ -120,7 +121,7 @@ in {
    style = {
      general = {
        wallpaper = mkOption {
-         type = str;
+         type = nullOr str;
        };
 
        gaps = mkOption {
@@ -169,6 +170,10 @@ in {
          type = str;
        };
       
+       teal = mkOption { 
+         type = str;
+       };
+
        text = mkOption { 
          type = str;
        };
@@ -188,7 +193,7 @@ in {
        peach = mkOption { 
          type = str;
        };
-      
+
        yellow = mkOption { 
          type = str;
        };
@@ -201,7 +206,15 @@ in {
          type = str;
        };
 
+       sapphire = mkOption { 
+         type = str;
+       };
+      
        surface0 = mkOption { 
+         type = str;
+       };
+
+       rosewater = mkOption { 
          type = str;
        };
      };

@@ -23,7 +23,34 @@ let
 in {
  config =
  mkMerge [
+   (mkIf cfgEnable.colors {
+     boot.plymouth.theme = "catppuccin-mocha";
+   })
+
    (mkIf cfgEnable.fonts {
+     console = {
+       font = "solar24x32";
+
+       colors = [
+         cfgColors.crust
+         cfgColors.red
+         cfgColors.green
+         cfgColors.yellow
+         cfgColors.blue
+         cfgColors.mauve
+         cfgColors.teal
+         cfgColors.text
+         cfgColors.crust
+         cfgColors.red
+         cfgColors.green
+         cfgColors.yellow
+         cfgColors.blue
+         cfgColors.mauve
+         cfgColors.teal
+         cfgColors.lavender
+       ];
+     };
+
      fonts = {
        packages = [
          cfgFonts.emoji.package
@@ -90,6 +117,18 @@ in {
          })
       ]))
 
+      (mkIf (cfgStyle.wallpaper == null) {
+        services.wpaperd = {
+          enable = true;
+        
+          settings.default = {
+            duration = "10m";
+            mode     = "center";
+            path     = "${pkgs.kdePackages.plasma-workspace-wallpapers}/";
+          };
+        };
+      }) 
+
       (mkIf cfgEnable.colors (mkMerge [
          {
           dconf.settings."org/gnome/desktop/interface" = {
@@ -149,9 +188,15 @@ in {
                  "col.active_border"   = "rgb(${cfgColors.surface0})";
                };
    
-               exec-once = [
-                 "waybar"
-                 "mpvpaper '*' -o \"--loop-file=inf\" ${cfgStyle.wallpaper}"
+               exec-once = mkMerge [
+                 [
+                  "waybar"
+                  "systemctl start tzupdate"
+                 ]
+
+                 (mkIf (cfgStyle.wallpaper != null) [
+                   "mpvpaper '*' -o \"--loop-file=inf\" ${cfgStyle.wallpaper}"
+                 ])
                ];
              };
  
@@ -423,6 +468,10 @@ in {
                ''
 
                (mkIf cfgEnable.laptop ''
+                  #backlight { 
+                      color: #${cfgColors.lavender};
+                  }
+
                   #backlight-slider trough {
                       background: transparent;
                   }

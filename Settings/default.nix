@@ -6,8 +6,7 @@
 }:
 
 let
- cfg  = config;
- home = cfg.users.users.${username}.home;
+ cfg = config;
 in {
  enable = {
    git                  = true;
@@ -32,21 +31,24 @@ in {
 
  style = {
    colors = {
-     gtk      = "dark";
-     red      = "f38ba8";
-     sky      = "89dceb";
-     base     = "1e1e2e";
-     blue     = "89b4fa";
-     pink     = "f5c2e7";
-     mauve    = "cba6f7";
-     text     = "cdd6f4";
-     crust    = "11111b";
-     green    = "a6e3a1";
-     peach    = "fab387";
-     yellow   = "f9e2af";
-     flamingo = "f2cdcd";
-     lavender = "b4befe";
-     surface0 = "313244";
+     gtk       = "dark";
+     red       = "f38ba8";
+     sky       = "89dceb";
+     base      = "1e1e2e";
+     blue      = "89b4fa";
+     pink      = "f5c2e7";
+     teal      = "94e2d5";
+     text      = "cdd6f4";
+     crust     = "11111b";
+     green     = "a6e3a1";
+     mauve     = "cba6f7";
+     peach     = "fab387";
+     yellow    = "f9e2af";
+     flamingo  = "f2cdcd";
+     lavender  = "b4befe";
+     sapphire  = "74c7ec";
+     surface0  = "313244";
+     rosewater = "f5e0dc";
    };
 
    cursor = {
@@ -56,12 +58,12 @@ in {
    };
 
    general = {
-     gaps             = 5;
-     scale            = 1;
-     rounding         = 5;
-     borderThickness  = 1;
-     barPosition      = "top";
-     wallpaper        = "${home}/Pictures/Chill.mp4";
+     gaps            = 5;
+     scale           = 1;
+     rounding        = 5;
+     borderThickness = 1;
+     wallpaper       = null;
+     barPosition     = "top";
    };
 
    fonts = {
