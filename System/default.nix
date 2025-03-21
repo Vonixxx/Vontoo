@@ -81,7 +81,7 @@ in {
 
      console = {
        earlySetup = true;
-       keyMap     = keymap;
+       # keyMap     = keymap;
      };
 
      networking = {
